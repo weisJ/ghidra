@@ -16,11 +16,12 @@
  */
 package ghidra.framework.task.gui.taskview;
 
-import ghidra.util.layout.VerticalLayout;
-
 import java.awt.*;
 
 import javax.swing.*;
+
+import docking.border.GhidraBorderFactory;
+import ghidra.util.layout.VerticalLayout;
 
 // This component is basically a JPanel that implements the Scrollable interface needed for the 
 // TaskViewer.
@@ -32,7 +33,7 @@ public class TaskViewerComponent extends JPanel implements Scrollable {
 	public TaskViewerComponent() {
 		super(new VerticalLayout(0));
 		setBackground(Color.WHITE);
-		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 20, 20));
 	}
 
 	@Override

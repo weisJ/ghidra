@@ -29,6 +29,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.list.GListCellRenderer;
 import ghidra.program.model.listing.Program;
 
@@ -115,7 +116,7 @@ class ProgramListPanel extends JPanel {
 		initListModel();
 		programList = new JList<>(listModel);
 		programList.setBackground(BACKGROUND_COLOR);
-		programList.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+		programList.setBorder(GhidraBorderFactory.createEmptyBorder(5, 0, 0, 0));
 		programList.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -130,7 +131,7 @@ class ProgramListPanel extends JPanel {
 		JScrollPane sp = new JScrollPane();
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		sp.setBorder(BorderFactory.createEmptyBorder());
+		sp.setBorder(GhidraBorderFactory.createEmptyBorder());
 
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
@@ -146,9 +147,9 @@ class ProgramListPanel extends JPanel {
 		add(programList, BorderLayout.CENTER);
 
 		// add some padding around the panel
-		Border innerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-		Border outerBorder = BorderFactory.createLineBorder(Color.BLACK);
-		Border compoundBorder = BorderFactory.createCompoundBorder(outerBorder, innerBorder);
+		Border innerBorder = GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5);
+		Border outerBorder = GhidraBorderFactory.createLineBorder(Color.BLACK);
+		Border compoundBorder = GhidraBorderFactory.createCompoundBorder(outerBorder, innerBorder);
 		setBorder(compoundBorder);
 
 		setBackground(BACKGROUND_COLOR);
@@ -157,7 +158,7 @@ class ProgramListPanel extends JPanel {
 	private JTextField createFilterField() {
 		JTextField newFilterField = new JTextField(20);
 		newFilterField.setBackground(BACKGROUND_COLOR);
-		newFilterField.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+		newFilterField.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 5, 0));
 
 		newFilterField.getDocument().addDocumentListener(new DocumentListener() {
 			@Override

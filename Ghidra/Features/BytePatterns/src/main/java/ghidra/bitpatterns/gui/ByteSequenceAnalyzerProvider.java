@@ -19,13 +19,18 @@ import java.awt.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.Border;
 
-import docking.*;
+import docking.ActionContext;
+import docking.DialogComponentProvider;
+import docking.DockingWindowManager;
 import docking.action.DockingAction;
 import docking.action.MenuData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.table.GFilterTable;
-import ghidra.bitpatterns.info.*;
+import ghidra.bitpatterns.info.ByteSequenceRowObject;
+import ghidra.bitpatterns.info.ContextRegisterFilter;
+import ghidra.bitpatterns.info.PatternType;
 import ghidra.util.HelpLocation;
 import ghidra.util.bytesearch.DittedBitSequence;
 import resources.ResourceManager;
@@ -102,18 +107,18 @@ public abstract class ByteSequenceAnalyzerProvider extends DialogComponentProvid
 		JPanel panel = new JPanel(new BorderLayout());
 		mergedSeqTextField = new JTextField(60);
 		mergedSeqTextField.setEditable(false);
-		TitledBorder lubBorder = new TitledBorder("Merged Selections");
+		Border lubBorder = GhidraBorderFactory.createTitledBorder("Merged Selections");
 		mergedSeqTextField.setBorder(lubBorder);
 
 		bitsOfCheckField = new JTextField(5);
 		bitsOfCheckField.setEditable(false);
-		TitledBorder bitsOfCheckBorder = new TitledBorder("Bits of Check");
+		Border bitsOfCheckBorder = GhidraBorderFactory.createTitledBorder("Bits of Check");
 		bitsOfCheckField.setBorder(bitsOfCheckBorder);
 
 		noteField = new JTextField(60);
 		noteField.setText(note);
 		noteField.setEditable(true);
-		TitledBorder noteBorder = new TitledBorder("Note");
+		Border noteBorder = GhidraBorderFactory.createTitledBorder("Note");
 		noteField.setBorder(noteBorder);
 
 		panel.add(mergedSeqTextField, BorderLayout.NORTH);

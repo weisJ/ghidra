@@ -15,12 +15,15 @@
  */
 package ghidra.app.plugin.core.script;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 
 import javax.swing.*;
 
-import docking.*;
+import docking.DialogComponentProvider;
+import docking.DockingWindowManager;
+import docking.KeyEntryListener;
+import docking.KeyEntryTextField;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GLabel;
 import ghidra.framework.plugintool.Plugin;
 import ghidra.util.HelpLocation;
@@ -41,7 +44,7 @@ class KeyBindingInputDialog extends DialogComponentProvider implements KeyEntryL
 			currentKeyStroke == null ? "" : KeyEntryTextField.parseKeyStroke(currentKeyStroke));
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(new GLabel(scriptName), BorderLayout.NORTH);
 		panel.add(kbField, BorderLayout.CENTER);
 

@@ -18,15 +18,18 @@ package docking.options.editor;
 import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyEditor;
-import java.util.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.MultiLineLabel;
@@ -35,8 +38,13 @@ import docking.widgets.label.GIconLabel;
 import docking.widgets.tree.GTree;
 import docking.widgets.tree.GTreeNode;
 import docking.widgets.tree.internal.DefaultGTreeDataTransformer;
-import ghidra.framework.options.*;
-import ghidra.util.*;
+import ghidra.framework.options.CustomOptionsEditor;
+import ghidra.framework.options.EditorStateFactory;
+import ghidra.framework.options.Options;
+import ghidra.framework.options.OptionsEditor;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.bean.opteditor.OptionsVetoException;
 import ghidra.util.layout.MiddleLayout;
 import ghidra.util.task.SwingUpdateManager;
@@ -249,7 +257,7 @@ public class OptionsPanel extends JPanel {
 		label.setName("DefaultInfo");
 
 		JPanel labelPanel = new JPanel();
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 0, 0));
 		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));

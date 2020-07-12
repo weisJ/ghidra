@@ -18,13 +18,16 @@ package docking;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.*;
 
 import org.jdom.Element;
 
+import docking.border.GhidraBorderFactory;
 import generic.util.WindowUtilities;
 import ghidra.framework.OperatingSystem;
 import ghidra.framework.Platform;
@@ -79,7 +82,7 @@ class RootNode extends WindowNode {
 		c.setLayout(new BorderLayout());
 
 		childPanel = new JPanel(new BorderLayout());
-		childPanel.setBorder(BorderFactory.createEmptyBorder(3, 0, 0, 0));
+		childPanel.setBorder(GhidraBorderFactory.createEmptyBorder(3, 0, 0, 0));
 		c.add(childPanel, BorderLayout.CENTER);
 
 		if (mgr.hasStatusBar()) {

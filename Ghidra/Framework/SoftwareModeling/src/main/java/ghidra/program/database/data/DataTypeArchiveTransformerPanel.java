@@ -23,12 +23,15 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.label.GHtmlLabel;
 import docking.widgets.label.GLabel;
 import ghidra.framework.preferences.Preferences;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
 
 public class DataTypeArchiveTransformerPanel extends JPanel {
@@ -65,7 +68,7 @@ public class DataTypeArchiveTransformerPanel extends JPanel {
 			"<HTML>Specify the files for converting a new data type archive (.gdt)<BR>" +
 				"to match the IDs of data types in an old data type archive.<BR>" +
 				"The result will be saved to the destination archive.</HTML>");
-		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
+		label.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 8, 0));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		add(label, BorderLayout.NORTH);
 	}

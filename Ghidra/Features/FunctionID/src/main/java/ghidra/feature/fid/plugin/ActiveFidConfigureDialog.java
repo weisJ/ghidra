@@ -23,6 +23,7 @@ import java.util.List;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import ghidra.feature.fid.db.FidFile;
 import ghidra.util.HelpLocation;
@@ -58,7 +59,7 @@ public class ActiveFidConfigureDialog extends DialogComponentProvider {
 
 	private JComponent buildMainPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(buildCheckboxPanelScroller(), BorderLayout.CENTER);
 		panel.add(buildButtonPanel(), BorderLayout.SOUTH);
 		return panel;
@@ -90,7 +91,7 @@ public class ActiveFidConfigureDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new VerticalLayout(5));
 		panel.setOpaque(true);
 		panel.setBackground(Color.WHITE);
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		for (FidFile fidFile : fidFiles) {
 			GCheckBox checkbox = new GCheckBox(fidFile.getName(), fidFile.isActive());
 			checkbox.setToolTipText(fidFile.getPath());

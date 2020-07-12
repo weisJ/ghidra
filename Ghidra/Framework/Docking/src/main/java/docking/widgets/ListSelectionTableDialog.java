@@ -15,9 +15,11 @@
  */
 package docking.widgets;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,11 @@ import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
-import docking.widgets.table.*;
+import docking.border.GhidraBorderFactory;
+import docking.widgets.table.AbstractGTableModel;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableFilterPanel;
+import docking.widgets.table.RowObjectTableModel;
 
 public class ListSelectionTableDialog<T> extends DialogComponentProvider {
 
@@ -72,7 +78,7 @@ public class ListSelectionTableDialog<T> extends DialogComponentProvider {
 
 	private JComponent build() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 20, 20));
 		gTable = new GTable();
 		gTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane scroll = new JScrollPane(gTable);

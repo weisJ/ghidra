@@ -16,16 +16,19 @@
 package ghidra.framework.main;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.list.ListPanel;
@@ -35,7 +38,9 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Modal dialog to display a list of domain objects that have changed.
@@ -192,7 +197,7 @@ public class SaveDataDialog extends DialogComponentProvider {
 		// Layout Main Panel
 		parentPanel.add(buttonPanel, BorderLayout.EAST);
 		parentPanel.add(listPanel, BorderLayout.CENTER);
-		parentPanel.setBorder(new TitledBorder("Data"));
+		parentPanel.setBorder(GhidraBorderFactory.createTitledBorder("Data"));
 
 		panel.add(parentPanel, BorderLayout.CENTER);
 		return panel;

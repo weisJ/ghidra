@@ -7,17 +7,27 @@ apply plugin: 'eclipse'
 eclipse.project.name = 'Framework Docking'
 
 dependencies {
-	compile project(':Generic')
-	compile 'net.java.dev.timingframework:timingframework:1.0'
-	
-	// Only include this debug version of the jh library if necessary.
-	//compile name:'jh2.with.debug'
-	compile 'javax.help:javahelp:2.0.05'
-	
-	
-	// include code from src/test in Generic
-	testCompile project(path: ':Generic', configuration: 'testArtifacts')
-	compileOnly "junit:junit:4.12"
+    compile project(':Generic')
+    compile 'net.java.dev.timingframework:timingframework:1.0'
+
+    // Only include this debug version of the jh library if necessary.
+    //compile name:'jh2.with.debug'
+    compile 'javax.help:javahelp:2.0.05'
+
+    compile 'com.github.weisj:darklaf-core:2.4.0'
+    compile 'com.github.weisj:darklaf-theme:2.4.0'
+    compile 'com.github.weisj:darklaf-windows:2.4.0'
+    compile 'com.github.weisj:darklaf-macos:2.4.0'
+    compile 'com.github.weisj:darklaf-platform-base:2.4.0'
+    compile 'com.github.weisj:darklaf-utils:2.4.0'
+    compile 'com.github.weisj:darklaf-native-utils:2.4.0'
+    compile 'com.github.weisj:darklaf-property-loader:2.4.0'
+    compile 'com.formdev:svgSalamander:1.1.2.1'
+    compile 'net.java.dev.jna:jna:5.5.0'
+
+    // include code from src/test in Generic
+    testCompile project(path: ':Generic', configuration: 'testArtifacts')
+    compileOnly "junit:junit:4.12"
 }
 
 // For Java 9, we must explicitly export references to the internal classes we are using.

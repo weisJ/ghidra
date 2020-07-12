@@ -16,7 +16,10 @@
 package ghidra.app.plugin.core.totd;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.*;
@@ -24,6 +27,7 @@ import javax.swing.border.Border;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GLabel;
 import resources.ResourceManager;
@@ -55,7 +59,7 @@ class TipOfTheDayDialog extends DialogComponentProvider {
 		tipArea.setFont(new Font("dialog", Font.PLAIN, 12));
 		tipArea.setWrapStyleWord(true);
 		tipArea.setLineWrap(true);
-		tipArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		tipArea.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JScrollPane tipScroll = new JScrollPane(tipArea);
 		tipScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -93,8 +97,9 @@ class TipOfTheDayDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel(new BorderLayout());
 		Border panelBorder =
-			BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10),
-				BorderFactory.createLineBorder(Color.BLACK));
+			GhidraBorderFactory.createCompoundBorder(
+				GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10),
+				GhidraBorderFactory.createLineBorder(Color.BLACK));
 		panel.setBorder(panelBorder);
 		panel.setBackground(Color.WHITE);
 
@@ -105,7 +110,7 @@ class TipOfTheDayDialog extends DialogComponentProvider {
 		panel.add(tipScroll, BorderLayout.CENTER);
 
 		JPanel panel2 = new JPanel(new BorderLayout(5, 5));
-		panel2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel2.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel2.add(panel, BorderLayout.CENTER);
 		panel2.add(showTipsCheckbox, BorderLayout.SOUTH);
 

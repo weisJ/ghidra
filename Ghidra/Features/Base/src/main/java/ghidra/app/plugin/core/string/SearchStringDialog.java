@@ -22,9 +22,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
@@ -115,7 +115,7 @@ public class SearchStringDialog extends DialogComponentProvider {
 	 */
 	private JComponent buildWorkPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 20, 20));
 		panel.add(buildLeftPanel(), BorderLayout.WEST);
 		panel.add(Box.createHorizontalStrut(10), BorderLayout.CENTER);
 		panel.add(buildRightPanel(), BorderLayout.EAST);
@@ -265,7 +265,7 @@ public class SearchStringDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(BorderFactory.createTitledBorder("Memory Block Types"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Memory Block Types"));
 
 		ButtonGroup memoryBlockGroup = new ButtonGroup();
 		loadedBlocksRB = new GRadioButton("Loaded Blocks", true);
@@ -295,7 +295,7 @@ public class SearchStringDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(new TitledBorder("Selection Scope"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Selection Scope"));
 
 		searchSelectionRB = new GRadioButton("Search Selection");
 		searchAllRB = new GRadioButton("Search All");

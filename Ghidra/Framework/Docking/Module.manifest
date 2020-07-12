@@ -1,2 +1,12 @@
 MODULE FILE LICENSE: lib/timingframework-1.0.jar BSD
 MODULE FILE LICENSE: lib/javahelp-2.0.05.jar GPL 2 With Classpath Exception
+MODULE FILE LICENSE: lib/darklaf-core-2.4.0.jar MIT
+MODULE FILE LICENSE: lib/darklaf-theme-2.4.0.jar MIT
+MODULE FILE LICENSE: lib/darklaf-windows-2.4.0.jar MIT
+MODULE FILE LICENSE: lib/darklaf-macos-2.4.0.jar MIT
+MODULE FILE LICENSE: lib/darklaf-platform-base-2.4.0.jar MIT
+MODULE FILE LICENSE: lib/darklaf-utils-2.4.0.jar MIT
+MODULE FILE LICENSE: lib/darklaf-native-utils-2.4.0.jar MIT
+MODULE FILE LICENSE: lib/darklaf-property-loader-2.4.0.jar MIT
+MODULE FILE LICENSE: lib/svgSalamander-1.1.2.1.jar MIT
+MODULE FILE LICENSE: lib/jna-5.5.0.jar MIT

@@ -16,25 +16,26 @@
  */
 package ghidra.app.nav;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
+
 public class DecoratorPanel extends JPanel {
-    
+
 	public DecoratorPanel(JComponent component, boolean isConnected) {
 		setLayout(new BorderLayout());
 		add(component);
-		setConnnected( isConnected );
+		setConnnected(isConnected);
 	}
-	
-	public void setConnnected( boolean isConnected ) {
-		if ( !isConnected ) {
-			setBorder( BorderFactory.createLineBorder( Color.ORANGE, 2 ) );
+
+	public void setConnnected(boolean isConnected) {
+		if (!isConnected) {
+			setBorder(GhidraBorderFactory.createLineBorder(Color.ORANGE, 2));
 		}
 		else {
-			setBorder( BorderFactory.createEmptyBorder() );
+			setBorder(GhidraBorderFactory.createEmptyBorder());
 		}
 	}
 

@@ -15,7 +15,7 @@
  */
 package docking.widgets;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 import javax.swing.*;
@@ -23,6 +23,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GLabel;
@@ -111,7 +112,7 @@ public class FindDialog extends DialogComponentProvider {
 		textPanel.add(comboBox);
 		mainPanel.add(textPanel, BorderLayout.NORTH);
 		mainPanel.add(buildFormatPanel(), BorderLayout.SOUTH);
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return mainPanel;
 	}
@@ -123,7 +124,7 @@ public class FindDialog extends DialogComponentProvider {
 
 	private JPanel buildFormatPanel() {
 		JPanel formatPanel = new JPanel();
-		formatPanel.setBorder(BorderFactory.createTitledBorder("Format"));
+		formatPanel.setBorder(GhidraBorderFactory.createTitledBorder("Format"));
 		formatPanel.setLayout(new BoxLayout(formatPanel, BoxLayout.Y_AXIS));
 		formatPanel.add(stringRadioButton);
 		formatPanel.add(regexRadioButton);

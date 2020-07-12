@@ -17,10 +17,10 @@ package docking.widgets;
 
 import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
+import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDHtmlLabel;
 
 /**
@@ -54,10 +54,10 @@ public abstract class AbstractGCellRenderer extends GDHtmlLabel {
 	private boolean instanceAlternateRowColors = true;
 
 	public AbstractGCellRenderer() {
-		noFocusBorder = BorderFactory.createEmptyBorder(0, 5, 0, 5);
-		Border innerBorder = BorderFactory.createEmptyBorder(0, 4, 0, 4);
-		Border outerBorder = BorderFactory.createLineBorder(Color.YELLOW, 1);
-		focusBorder = BorderFactory.createCompoundBorder(outerBorder, innerBorder);
+		noFocusBorder = GhidraBorderFactory.createEmptyBorder(0, 5, 0, 5);
+		Border innerBorder = GhidraBorderFactory.createEmptyBorder(0, 4, 0, 4);
+		Border outerBorder = GhidraBorderFactory.createLineBorder(Color.YELLOW, 1);
+		focusBorder = GhidraBorderFactory.createCompoundBorder(outerBorder, innerBorder);
 		setBorder(noFocusBorder);
 
 		// disable HTML rendering

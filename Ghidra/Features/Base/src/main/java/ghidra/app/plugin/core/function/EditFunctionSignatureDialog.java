@@ -15,13 +15,14 @@
  */
 package ghidra.app.plugin.core.function;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.util.List;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GDLabel;
@@ -110,7 +111,7 @@ public class EditFunctionSignatureDialog extends DialogComponentProvider {
 	private JPanel buildMainPanel() {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 2));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(2, 5, 2, 2));
 		mainPanel.add(buildSignaturePanel());
 		mainPanel.add(buildAttributePanel());
 
@@ -135,7 +136,7 @@ public class EditFunctionSignatureDialog extends DialogComponentProvider {
 		signaturePanel.add(signatureLabel);
 		signaturePanel.add(signatureField);
 
-		signaturePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		signaturePanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return signaturePanel;
 	}
@@ -152,7 +153,7 @@ public class EditFunctionSignatureDialog extends DialogComponentProvider {
 	private JPanel buildAttributePanel() {
 		JPanel attributePanel = new JPanel();
 		attributePanel.setLayout(new BoxLayout(attributePanel, BoxLayout.X_AXIS));
-		attributePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		attributePanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		installCallingConventionWidget(attributePanel);
 		installInlineWidget(attributePanel);
@@ -222,7 +223,7 @@ public class EditFunctionSignatureDialog extends DialogComponentProvider {
 		callFixupPanel.add(callFixupComboBox);
 
 		callFixupPanel.add(Box.createGlue());
-		callFixupPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		callFixupPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return callFixupPanel;
 	}

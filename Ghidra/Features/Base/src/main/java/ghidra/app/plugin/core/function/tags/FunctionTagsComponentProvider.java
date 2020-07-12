@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GLabel;
 import docking.widgets.textfield.HintTextField;
 import ghidra.app.cmd.function.CreateFunctionTagCmd;
@@ -32,9 +33,15 @@ import ghidra.framework.model.DomainObjectChangedEvent;
 import ghidra.framework.model.DomainObjectListener;
 import ghidra.framework.plugintool.ComponentProviderAdapter;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
-import ghidra.program.util.*;
-import ghidra.util.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionTag;
+import ghidra.program.model.listing.Program;
+import ghidra.program.util.ChangeManager;
+import ghidra.program.util.FunctionLocation;
+import ghidra.program.util.ProgramLocation;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 
 /**
  * Displays all the function tags in the database and identifies which ones have
@@ -207,9 +214,9 @@ public class FunctionTagsComponentProvider extends ComponentProviderAdapter
 		targetPanel = new TargetTagsPanel(this, tool, "Assigned To Function");
 		allFunctionsPanel = new AllFunctionsPanel(program, this, "Functions with Selected Tag");
 		buttonPanel = new FunctionTagButtonPanel(sourcePanel, targetPanel);
-		sourcePanel.setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
-		targetPanel.setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
-		allFunctionsPanel.setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
+		sourcePanel.setBorder(GhidraBorderFactory.createLineBorder(BORDER_COLOR));
+		targetPanel.setBorder(GhidraBorderFactory.createLineBorder(BORDER_COLOR));
+		allFunctionsPanel.setBorder(GhidraBorderFactory.createLineBorder(BORDER_COLOR));
 
 		// If we don't set this, then the splitter won't be able to shrink the
 		// target panels below the size required by its header, which can be large 

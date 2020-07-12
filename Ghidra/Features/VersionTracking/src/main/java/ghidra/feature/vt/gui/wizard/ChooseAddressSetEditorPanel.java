@@ -15,15 +15,20 @@
  */
 package ghidra.feature.vt.gui.wizard;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GLabel;
 import docking.widgets.list.GList;
@@ -95,7 +100,8 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 			}
 		}
 
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), name));
+		setBorder(
+			GhidraBorderFactory.createTitledBorder(GhidraBorderFactory.createEtchedBorder(), name));
 
 		add(createChooseSourcePanel(), BorderLayout.NORTH);
 		add(createRangeListPanel(), BorderLayout.CENTER);
@@ -246,7 +252,7 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 		JScrollPane scrollPane = new JScrollPane(list);
 
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 0, 0));
 		panel.add(headerPanel, BorderLayout.NORTH);
 		panel.add(scrollPane, BorderLayout.CENTER);
 		panel.add(createRemoveRangePanel(), BorderLayout.SOUTH);

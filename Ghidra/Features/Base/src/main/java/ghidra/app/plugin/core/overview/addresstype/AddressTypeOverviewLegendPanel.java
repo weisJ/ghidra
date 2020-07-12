@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GLabel;
 import ghidra.util.layout.PairLayout;
 
@@ -34,7 +35,7 @@ public class AddressTypeOverviewLegendPanel extends JPanel {
 	public AddressTypeOverviewLegendPanel(AddressTypeOverviewColorService colorService) {
 		this.colorService = colorService;
 		setLayout(new PairLayout(4, 10));
-		setBorder(BorderFactory.createEmptyBorder(4, 20, 4, 30));
+		setBorder(GhidraBorderFactory.createEmptyBorder(4, 20, 4, 30));
 		buildLegend();
 	}
 

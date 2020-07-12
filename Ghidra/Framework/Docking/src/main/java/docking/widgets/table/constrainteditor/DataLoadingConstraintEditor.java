@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
 import docking.DisabledComponentLayerFactory;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDHtmlLabel;
 import docking.widgets.table.constraint.ColumnConstraint;
@@ -112,7 +113,7 @@ public abstract class DataLoadingConstraintEditor<T> extends AbstractColumnConst
 		}
 
 		JPanel buttonPanel = new JPanel(new ColumnLayout(2, 2, 1));
-		buttonPanel.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
+		buttonPanel.setBorder(GhidraBorderFactory.createEmptyBorder(2, 0, 2, 0));
 		buttonPanel.add(reloadDataButton);
 
 		JPanel panel = new JPanel(new BorderLayout());

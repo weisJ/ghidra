@@ -22,13 +22,16 @@
 package ghidra.app.plugin.core.bookmark;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Arrays;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GIconLabel;
@@ -208,7 +211,7 @@ public class CreateBookmarkDialog extends DialogComponentProvider {
 			new Dimension(icon.getIconWidth() + 20, icon.getIconHeight() + 20));
 
 		JPanel selectionPanel = new JPanel();
-		selectionPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		selectionPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 0, 0, 0));
 		selectionPanel.add(selectionCB);
 
 		JPanel workPanel = new JPanel(new BorderLayout());

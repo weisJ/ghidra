@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.label;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,6 +24,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.app.util.HelpTopics;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.listing.Program;
@@ -73,7 +74,7 @@ public class LabelHistoryInputDialog extends DialogComponentProvider {
 
 	private JPanel buildMainPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder("Enter Symbol Name"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Enter Symbol Name"));
 
 		inputField = new JTextField(25);
 		setFocusComponent(inputField);
@@ -102,7 +103,7 @@ public class LabelHistoryInputDialog extends DialogComponentProvider {
 
 		panel.add(inputField, BorderLayout.CENTER);
 		JPanel outerPanel = new JPanel(new BorderLayout());
-		outerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 0, 5));
 		outerPanel.add(panel, BorderLayout.CENTER);
 		return outerPanel;
 	}

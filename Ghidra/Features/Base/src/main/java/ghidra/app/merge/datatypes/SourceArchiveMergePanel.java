@@ -15,13 +15,13 @@
  */
 package ghidra.app.merge.datatypes;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.MultiLineLabel;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
@@ -185,7 +185,7 @@ class SourceArchiveMergePanel extends JPanel {
 				"that will result from this check-in.");
 
 		JPanel labelPanel = new JPanel();
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 0, 0));
 		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));

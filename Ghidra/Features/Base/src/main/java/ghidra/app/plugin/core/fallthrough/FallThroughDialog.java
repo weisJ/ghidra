@@ -21,11 +21,11 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GDLabel;
 import ghidra.app.util.AddressInput;
@@ -159,7 +159,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 
 	private JPanel create() {
 		JPanel panel = new JPanel(new BorderLayout(0, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 0, 0, 0));
 		addrField = new AddressInput();
 		addrField.setAddressFactory(model.getProgram().getAddressFactory());
 		addrField.addChangeListener(new ChangeListener() {
@@ -181,7 +181,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 
 	private JPanel createAddressPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder("Fallthrough Address"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Fallthrough Address"));
 
 		panel.add(addrField, BorderLayout.NORTH);
 		panel.add(createRadioButtonPanel(), BorderLayout.CENTER);
@@ -190,7 +190,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 
 	private JPanel createHomePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(new TitledBorder("Home"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Home"));
 
 		addressLabel = new GDLabel("01001000");
 

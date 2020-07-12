@@ -18,19 +18,24 @@ package docking;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.border.Border;
 
 import org.jdesktop.animation.timing.Animator;
 
+import docking.border.GhidraBorderFactory;
 import docking.util.AnimationUtils;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDLabel;
 import generic.util.WindowUtilities;
-import ghidra.util.*;
+import ghidra.util.DateUtils;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.SystemUtilities;
 import ghidra.util.layout.HorizontalLayout;
 import ghidra.util.layout.MiddleLayout;
 
@@ -40,11 +45,12 @@ import ghidra.util.layout.MiddleLayout;
  */
 public class StatusBar extends JPanel {
 
-	private static final Border STATUS_BORDER = BorderFactory.createCompoundBorder(
-		BorderFactory.createLoweredBevelBorder(), BorderFactory.createEmptyBorder(1, 2, 1, 2));
+	private static final Border STATUS_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createLoweredBevelBorder(),
+		GhidraBorderFactory.createEmptyBorder(1, 2, 1, 2));
 
-	private static final Border STATUS_ITEM_BORDER = BorderFactory.createCompoundBorder(
-		BorderFactory.createEmptyBorder(0, 3, 0, 0), STATUS_BORDER);
+	private static final Border STATUS_ITEM_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createEmptyBorder(0, 3, 0, 0), STATUS_BORDER);
 
 	private static final int STATUS_BAR_GAP = 3;
 	private static final int MESSAGE_QUEUE_MAX_SIZE = 10;
@@ -71,7 +77,7 @@ public class StatusBar extends JPanel {
 		super(new BorderLayout());
 
 		int borderPadding = STATUS_BAR_GAP;
-		setBorder(BorderFactory.createEmptyBorder(borderPadding, 0, 0, 0));
+		setBorder(GhidraBorderFactory.createEmptyBorder(borderPadding, 0, 0, 0));
 
 		homeButtonPanel = new JPanel(new BorderLayout());
 		add(homeButtonPanel, BorderLayout.WEST);

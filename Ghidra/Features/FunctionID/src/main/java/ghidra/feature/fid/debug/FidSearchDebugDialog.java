@@ -20,6 +20,7 @@ import java.io.IOException;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.feature.fid.db.FidFileManager;
 import ghidra.feature.fid.db.FidQueryService;
@@ -87,7 +88,7 @@ public class FidSearchDebugDialog extends DialogComponentProvider {
 
 	private JComponent buildPanel() {
 		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.setLayout(new PairLayout(5, 5));
 
 		panel.add(getPreparedLabel("Function ID: "));

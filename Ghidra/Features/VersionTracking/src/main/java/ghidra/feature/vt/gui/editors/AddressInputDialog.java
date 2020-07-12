@@ -15,15 +15,15 @@
  */
 package ghidra.feature.vt.gui.editors;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.table.TableCellEditor;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.feature.vt.api.main.VTMarkupItem;
 import ghidra.feature.vt.api.main.VTMarkupItemDestinationAddressEditStatus;
@@ -52,7 +52,7 @@ public class AddressInputDialog extends AbstractCellEditor implements TableCellE
 		address = editableAddress.getAddress();
 
 		JLabel label = new GDLabel();
-		label.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		label.setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 		label.setText(editableAddress.getDisplayString());
 
 		VTMarkupItem markupItem = editableAddress.getMarkupItem();

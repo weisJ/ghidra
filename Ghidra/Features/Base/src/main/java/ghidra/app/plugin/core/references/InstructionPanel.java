@@ -18,36 +18,52 @@ package ghidra.app.plugin.core.references;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.dnd.*;
-import java.awt.event.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import docking.action.DockingAction;
 import docking.actions.KeyBindingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.dnd.DropTgtAdapter;
 import docking.dnd.Droppable;
 import docking.widgets.label.GDLabel;
-import ghidra.app.util.*;
+import ghidra.app.util.SelectionTransferData;
+import ghidra.app.util.SelectionTransferable;
+import ghidra.app.util.SymbolInspector;
 import ghidra.app.util.viewer.field.BrowserCodeUnitFormat;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.Memory;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
 
 class InstructionPanel extends JPanel implements ChangeListener {
 
 	private static final int ETCHED_BORDER_THICKNESS = 2;
 
-	private static final Border ETCHED_BORDER = new EtchedBorder(Color.BLACK, Color.GRAY);
-	private static final Border EMPTY_BORDER = new EmptyBorder(ETCHED_BORDER_THICKNESS,
-		ETCHED_BORDER_THICKNESS, ETCHED_BORDER_THICKNESS, ETCHED_BORDER_THICKNESS);
+	private static Border createEtchedBorder() {
+		return GhidraBorderFactory.createEtchedBorder(Color.BLACK, Color.GRAY);
+	}
+
+	private static Border createEmptyBorder() {
+		return GhidraBorderFactory.createEmptyBorder(ETCHED_BORDER_THICKNESS,
+			ETCHED_BORDER_THICKNESS, ETCHED_BORDER_THICKNESS, ETCHED_BORDER_THICKNESS);
+	}
 
 	private final static Color UNLOCKED_LABEL_COLOR = Color.blue;
 	private final static Color NOT_IN_MEMORY_COLOR = Color.red;
@@ -102,8 +118,9 @@ class InstructionPanel extends JPanel implements ChangeListener {
 				updateLabels(getLabelIndex((JLabel) targetComp), -1);
 
 				try {
-					Object data = e.getTransferable().getTransferData(
-						SelectionTransferable.localProgramSelectionFlavor);
+					Object data = e.getTransferable()
+							.getTransferData(
+								SelectionTransferable.localProgramSelectionFlavor);
 					AddressSetView view = ((SelectionTransferData) data).getAddressSet();
 					if (memory.contains(view)) {
 						return true;
@@ -212,9 +229,10 @@ class InstructionPanel extends JPanel implements ChangeListener {
 	 */
 	private void create(int topPad, int leftPad, int bottomPad, int rightPad) {
 		setLayout(new BorderLayout());
-		//setBorder(new EmptyBorder(topPad, leftPad, bottomPad, rightPad));
+		//setBorder(GhidraBorderFactory.createEmptyBorder(topPad, leftPad, bottomPad, rightPad));
 
-		Border border = new TitledBorder(new EtchedBorder(), "Source");
+		Border border = GhidraBorderFactory
+				.createTitledBorder(GhidraBorderFactory.createEmptyBorder(), "Source");
 		setBorder(border);
 
 		addressLabel = new GDLabel("FFFFFFFF"); // use a default
@@ -306,7 +324,7 @@ class InstructionPanel extends JPanel implements ChangeListener {
 		activeSubIndex = subIndex;
 		for (JLabel operandLabel : operandLabels) {
 			operandLabel.setText("");
-			operandLabel.setBorder(EMPTY_BORDER);
+			operandLabel.setBorder(createEmptyBorder());
 			operandLabel.setBackground(getParent().getBackground());
 		}
 		if (currentCodeUnit != null) {
@@ -324,7 +342,7 @@ class InstructionPanel extends JPanel implements ChangeListener {
 		}
 		else {
 			mnemonicLabel.setText("");
-			mnemonicLabel.setBorder(EMPTY_BORDER);
+			mnemonicLabel.setBorder(createEmptyBorder());
 			mnemonicLabel.setBackground(getParent().getBackground());
 		}
 		innerPanel.invalidate();
@@ -373,13 +391,13 @@ class InstructionPanel extends JPanel implements ChangeListener {
 		operandLabels[opIndex].setForeground(getOperandColor(opIndex));
 
 		if (activeIndex == opIndex) {
-			operandLabels[opIndex].setBorder(ETCHED_BORDER);
+			operandLabels[opIndex].setBorder(createEtchedBorder());
 			operandLabels[opIndex].setBackground(EditReferencesProvider.HIGHLIGHT_COLOR);
 			operandLabels[opIndex].setOpaque(true);
 		}
 		else {
 			operandLabels[opIndex].setBackground(getParent().getBackground());
-			operandLabels[opIndex].setBorder(EMPTY_BORDER);
+			operandLabels[opIndex].setBorder(createEmptyBorder());
 			operandLabels[opIndex].setOpaque(false);
 		}
 	}
@@ -394,12 +412,12 @@ class InstructionPanel extends JPanel implements ChangeListener {
 
 		if (activeIndex == ReferenceManager.MNEMONIC) {
 			mnemonicLabel.setBackground(EditReferencesProvider.HIGHLIGHT_COLOR);
-			mnemonicLabel.setBorder(ETCHED_BORDER);
+			mnemonicLabel.setBorder(createEtchedBorder());
 			mnemonicLabel.setOpaque(true);
 		}
 		else {
 			mnemonicLabel.setBackground(getParent().getBackground());
-			mnemonicLabel.setBorder(EMPTY_BORDER);
+			mnemonicLabel.setBorder(createEmptyBorder());
 			mnemonicLabel.setOpaque(false);
 		}
 	}

@@ -15,10 +15,15 @@
  */
 package ghidra.framework;
 
-import java.awt.Taskbar;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.lang.reflect.Field;
 
+import javax.swing.*;
+
+import com.github.weisj.darklaf.DarkLafInfo;
+
+import com.github.weisj.darklaf.LafManager;
+import com.github.weisj.darklaf.platform.windows.ui.WindowsTitlePane;
 import docking.DockingErrorDisplay;
 import docking.DockingWindowManager;
 import docking.framework.ApplicationInformationDisplayFactory;
@@ -44,7 +49,8 @@ public class GhidraApplicationConfiguration extends HeadlessGhidraApplicationCon
 
 	@Override
 	protected void initializeApplication() {
-
+//		LafManager.setDecorationsEnabled(false);
+		UIManager.installLookAndFeel(new DarkLafInfo());
 		DockingWindowsLookAndFeelUtils.loadFromPreferences();
 
 		platformSpecificFixups();

@@ -15,11 +15,13 @@
  */
 package ghidra.framework.main;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-import javax.swing.BorderFactory;
-import javax.swing.JToolBar;
+import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.framework.model.*;
 
 /**
@@ -39,7 +41,7 @@ class ProjectToolBar extends JToolBar implements ToolChestChangeListener {
 		toolButtonMap = new HashMap<>(TYPICAL_NUM_TOOLS);
 
 		// remove the default etched border
-		setBorder(BorderFactory.createTitledBorder("Tool Chest"));
+		setBorder(GhidraBorderFactory.createTitledBorder("Tool Chest"));
 
 		setActiveProject(plugin.getActiveProject());
 

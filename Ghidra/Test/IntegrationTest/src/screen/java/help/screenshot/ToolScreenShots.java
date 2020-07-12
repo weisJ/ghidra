@@ -134,9 +134,9 @@ public class ToolScreenShots extends GhidraScreenShotGenerator {
 		setWindowSize(tool.getToolFrame(), 1100, 500);
 		tool.executeBackgroundCommand(new DummyBackgroundCommand(), program);
 
-		Border inner = BorderFactory.createRaisedBevelBorder();
-		Border outer = BorderFactory.createLineBorder(Color.BLACK);
-		statusBar.setBorder(BorderFactory.createCompoundBorder(outer, inner));
+		Border inner = GhidraBorderFactory.createRaisedBevelBorder();
+		Border outer = GhidraBorderFactory.createLineBorder(Color.BLACK);
+		statusBar.setBorder(GhidraBorderFactory.createCompoundBorder(outer, inner));
 		captureComponent(statusBar);
 		program.endTransaction(id, false);
 		padImage(Color.WHITE, topBottomMargin, leftRightMargin, leftRightMargin, topBottomMargin);

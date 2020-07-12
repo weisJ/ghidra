@@ -15,7 +15,7 @@
  */
 package ghidra.bitpatterns.gui;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +23,7 @@ import javax.swing.*;
 
 import org.apache.commons.collections4.list.LazyList;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GLabel;
 import docking.widgets.table.AbstractSortedTableModel;
 import docking.widgets.table.GTable;
@@ -61,7 +62,7 @@ public class AlignmentPanelBuilder extends ContextRegisterFilterablePanelBuilder
 	public JPanel buildAlignmentPanel() {
 		alignmentTable = createAlignmentTable(null, 0);
 		mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		alignmentTable.setColumnHeaderPopupEnabled(true);
 		scrollPane = new JScrollPane(alignmentTable);
 		mainPanel.add(scrollPane, BorderLayout.CENTER);

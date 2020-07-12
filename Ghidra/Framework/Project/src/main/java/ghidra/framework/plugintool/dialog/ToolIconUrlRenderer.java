@@ -15,22 +15,21 @@
  */
 package ghidra.framework.plugintool.dialog;
 
-import java.awt.Color;
-import java.awt.Component;
+import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JList;
+import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.util.image.ToolIconURL;
 import docking.widgets.list.GListCellRenderer;
 
 class ToolIconUrlRenderer extends GListCellRenderer<ToolIconURL> {
-	private Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-	private Border blueLineBorder = BorderFactory.createLineBorder(Color.BLUE, 2);
-	private Border emptyBlueBorder = BorderFactory.createEmptyBorder(3, 3, 3, 3);
+	private final Border emptyBorder = GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5);
+	private final Border blueLineBorder = GhidraBorderFactory.createLineBorder(Color.BLUE, 2);
+	private final Border emptyBlueBorder = GhidraBorderFactory.createEmptyBorder(3, 3, 3, 3);
 	private Border blueCompoundBorder =
-		BorderFactory.createCompoundBorder(emptyBlueBorder, blueLineBorder);
+		GhidraBorderFactory.createCompoundBorder(emptyBlueBorder, blueLineBorder);
 
 	ToolIconUrlRenderer() {
 		setBorder(emptyBorder);

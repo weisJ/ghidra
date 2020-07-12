@@ -22,10 +22,13 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GLabel;
 import ghidra.app.util.AddressInput;
 import ghidra.app.util.bean.FixedBitSizeValueField;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.lang.Register;
 import ghidra.util.HelpLocation;
 import ghidra.util.MessageType;
@@ -75,7 +78,7 @@ class EditRegisterValueDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel(new PairLayout(5, 1));
 
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(new GLabel("Register:"));
 		panel.add(registerField);
 		panel.add(new GLabel("Start Address:"));

@@ -15,8 +15,7 @@
  */
 package docking.widgets;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.label.GLabel;
 import docking.widgets.table.AbstractGTableModel;
@@ -111,7 +111,7 @@ public class ListSelectionDialog<T> extends DialogComponentProvider {
 
 	protected JComponent buildWorkPanel(String label, DropDownTextFieldDataModel<T> model) {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(40, 40, 30, 40));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(40, 40, 30, 40));
 
 		field = new DropDownSelectionTextField<>(model) {
 
@@ -130,7 +130,7 @@ public class ListSelectionDialog<T> extends DialogComponentProvider {
 		field.addDropDownSelectionChoiceListener(selectionListener);
 
 		JLabel jLabel = new GLabel(label);
-		jLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+		jLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 20));
 		panel.add(jLabel, BorderLayout.WEST);
 		panel.add(field, BorderLayout.CENTER);
 

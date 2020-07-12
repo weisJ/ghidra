@@ -25,8 +25,12 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.PlainDocument;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.SmallBorderButton;
 import resources.ResourceManager;
 
@@ -59,7 +63,7 @@ public class FixedBitSizeValueField extends JPanel {
 			JPanel buttonPanel = new JPanel(new BorderLayout());
 			menuButton = new SmallBorderButton(" hex",DROP_DOWN_MENU_ICON);
 			menuButton.setHorizontalTextPosition(SwingConstants.LEADING);
-			buttonPanel.setBorder(BorderFactory.createEmptyBorder(0,2,0,3));
+			buttonPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 2, 0, 3));
 			buttonPanel.add(menuButton, BorderLayout.EAST);
 			add(buttonPanel, BorderLayout.EAST);
 			menuButton.setFocusable(false);

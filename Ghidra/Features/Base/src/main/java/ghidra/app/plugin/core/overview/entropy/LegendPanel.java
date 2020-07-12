@@ -17,8 +17,9 @@ package ghidra.app.plugin.core.overview.entropy;
 
 import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import javax.swing.*;
+
+import docking.border.GhidraBorderFactory;
 
 /**
  * Panel for display the Entropy color legend.
@@ -34,12 +35,12 @@ public class LegendPanel extends JPanel {
 		add(buildHeader(), BorderLayout.NORTH);
 		add(palettePanel, BorderLayout.WEST);
 		add(knotPanel, BorderLayout.CENTER);
-		setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+		setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 0, 0));
 	}
 
 	private Component buildHeader() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 0, 0, 0));
 		return panel;
 	}
 

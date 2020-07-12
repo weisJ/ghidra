@@ -16,13 +16,17 @@
 package docking.widgets.filechooser;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableCellEditor;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.util.Msg;
 import ghidra.util.filechooser.GhidraFileChooserModel;
@@ -93,7 +97,7 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor {
 			}
 		});
 
-		nameField.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+		nameField.setBorder(GhidraBorderFactory.createEmptyBorder(2, 2, 2, 2));
 
 		editor = new JPanel(new BorderLayout()) {
 
@@ -114,8 +118,9 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor {
 
 		// match the spacing of non-editing cells
 		editor.setBorder(
-			BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0),
-				BorderFactory.createLineBorder(Color.GRAY)));
+			GhidraBorderFactory.createCompoundBorder(
+				GhidraBorderFactory.createEmptyBorder(0, 5, 0, 0),
+				GhidraBorderFactory.createLineBorder(Color.GRAY)));
 	}
 
 	private void handleDoubleClick(Point p) {

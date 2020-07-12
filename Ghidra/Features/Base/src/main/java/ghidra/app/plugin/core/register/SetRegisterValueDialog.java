@@ -26,10 +26,13 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GLabel;
 import ghidra.app.util.bean.FixedBitSizeValueField;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.Program;
@@ -140,7 +143,7 @@ public class SetRegisterValueDialog extends DialogComponentProvider {
 		gbc.fill = GridBagConstraints.BOTH;
 		panel.add(scrollPane, gbc);
 
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 0, 5));
 
 		return panel;
 

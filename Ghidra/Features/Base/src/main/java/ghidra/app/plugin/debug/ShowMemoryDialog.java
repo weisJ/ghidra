@@ -22,6 +22,7 @@ import java.text.DecimalFormat;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.util.layout.PairLayout;
@@ -81,7 +82,7 @@ class ShowMemoryDialog extends DialogComponentProvider {
 
 	private JComponent createWorkPanel() {
 		JPanel panel = new JPanel(new PairLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		maxMem = new GDLabel("00000000000", SwingConstants.RIGHT);
 		totalMem = new GDLabel("00000000000", SwingConstants.RIGHT);
 		freeMem = new GDLabel("00000000000", SwingConstants.RIGHT);

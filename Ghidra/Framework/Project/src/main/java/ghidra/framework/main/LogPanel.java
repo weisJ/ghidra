@@ -25,11 +25,14 @@ import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
 
 import docking.StatusBarSpacer;
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDLabel;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.layout.HorizontalLayout;
 import log.LogListener;
 import log.LogPanelAppender;
@@ -48,7 +51,7 @@ public class LogPanel extends JPanel implements LogListener {
 	LogPanel(final FrontEndPlugin plugin) {
 		super(new BorderLayout());
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(8, 4, 4, 2));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(8, 4, 4, 2));
 		button = new EmptyBorderButton(ResourceManager.loadImage("images/monitor.png"));
 		label = new GDLabel();
 		label.setName("Details");
@@ -60,8 +63,9 @@ public class LogPanel extends JPanel implements LogListener {
 		eastPanel.add(new StatusBarSpacer());
 		panel.add(eastPanel, BorderLayout.EAST);
 
-		Border b = BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5),
-			BorderFactory.createLoweredBevelBorder());
+		Border b = GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createEmptyBorder(0, 0, 0, 5),
+			GhidraBorderFactory.createLoweredBevelBorder());
 		label.setBorder(b);
 
 		button.setPreferredSize(new Dimension(24, 24));

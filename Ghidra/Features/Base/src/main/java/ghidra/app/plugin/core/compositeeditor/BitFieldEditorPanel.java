@@ -23,6 +23,7 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 
 import docking.ActionContext;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.DropDownSelectionTextField;
 import docking.widgets.OptionDialog;
 import ghidra.app.plugin.core.compositeeditor.BitFieldPlacementComponent.BitAttributes;
@@ -34,7 +35,10 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.data.Composite;
 import ghidra.util.Msg;
 import ghidra.util.data.DataTypeParser.AllowedDataTypes;
-import ghidra.util.layout.*;
+import ghidra.util.layout.HorizontalLayout;
+import ghidra.util.layout.PairLayout;
+import ghidra.util.layout.TwoColumnPairLayout;
+import ghidra.util.layout.VerticalLayout;
 import resources.ResourceManager;
 
 /**
@@ -86,7 +90,7 @@ public class BitFieldEditorPanel extends JPanel {
 
 		this.dtmService = dtmService;
 
-		setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		if (composite instanceof Structure) {
 			add(createAllocationOffsetPanel());
@@ -177,8 +181,9 @@ public class BitFieldEditorPanel extends JPanel {
 		bitOffsetModel.addChangeListener(e -> update());
 
 		JPanel entryPanel = new JPanel(new TwoColumnPairLayout(5, 15, 5, 0));
-		entryPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
-			BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		entryPanel.setBorder(
+			GhidraBorderFactory.createCompoundBorder(GhidraBorderFactory.createEtchedBorder(),
+				GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		entryPanel.setFocusCycleRoot(true);
 
 		entryPanel.add(new JLabel("Base Datatype:"));
@@ -346,7 +351,7 @@ public class BitFieldEditorPanel extends JPanel {
 		JPanel bitViewPanel = new JPanel(new PairLayout(0, 5));
 
 		JPanel labelPanel = new JPanel(new VerticalLayout(7));
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(7, 5, 0, 0));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(7, 5, 0, 0));
 		JLabel byteOffsetLabel = new JLabel("Byte Offset:", SwingConstants.RIGHT);
 		labelPanel.add(byteOffsetLabel);
 		labelPanel.add(new JLabel("Component Bits:", SwingConstants.RIGHT));

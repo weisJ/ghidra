@@ -33,6 +33,7 @@ import javax.swing.text.JTextComponent;
 
 import docking.DockingWindowManager;
 import docking.actions.KeyBindingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.dnd.*;
 import docking.help.Help;
 import docking.help.HelpService;
@@ -54,7 +55,10 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.data.Composite;
 import ghidra.program.model.listing.DataTypeArchive;
 import ghidra.program.model.listing.Program;
-import ghidra.util.*;
+import ghidra.util.ColorUtils;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
 import ghidra.util.data.DataTypeParser.AllowedDataTypes;
 import ghidra.util.exception.UsrException;
 import ghidra.util.layout.VerticalLayout;
@@ -74,7 +78,7 @@ public abstract class CompositeEditorPanel extends JPanel
 	//private static final Color SELECTION_COLOR = Color.YELLOW.brighter().brighter();
 	//protected static final Insets TEXTFIELD_INSETS = new JTextField().getInsets();
 
-	protected static final Border BEVELED_BORDER = BorderFactory.createLoweredBevelBorder();
+	protected static final Border BEVELED_BORDER = GhidraBorderFactory.createLoweredBevelBorder();
 
 	protected static final HelpService helpManager = Help.getHelpService();
 

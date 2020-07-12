@@ -26,6 +26,7 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 import docking.action.DockingActionIf;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.VariableHeightPanel;
 import docking.widgets.label.GDLabel;
 
@@ -67,7 +68,7 @@ public class GenericHeader extends JPanel {
 		BorderLayout layout = new BorderLayout();
 		layout.setVgap(1);
 		setLayout(layout);
-		setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		setBorder(GhidraBorderFactory.createLineBorder(Color.GRAY));
 		setFocusable(false);
 
 		titlePanel = new TitlePanel();
@@ -178,7 +179,7 @@ public class GenericHeader extends JPanel {
 		}
 		else {
 			JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-			toolbar.setBorder(BorderFactory.createEmptyBorder());
+			toolbar.setBorder(GhidraBorderFactory.createEmptyBorder());
 			panel.add(toolbar);
 			panel.add(menuCloseToolbar);
 			add(panel, BorderLayout.EAST);
@@ -204,7 +205,7 @@ public class GenericHeader extends JPanel {
 
 	private void constructMultiLinePanel() {
 		removeAll();
-		toolbar.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
+		toolbar.setBorder(GhidraBorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
 		add(toolbar, BorderLayout.SOUTH);
 		add(titlePanel, BorderLayout.CENTER);
 		add(menuCloseToolbar, BorderLayout.EAST);
@@ -344,7 +345,7 @@ public class GenericHeader extends JPanel {
 			super(new BorderLayout());
 			setFocusable(false);
 			titleLabel = new GDLabel();
-			titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 6, 0, 0));
+			titleLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 6, 0, 0));
 			titleLabel.setForeground(Color.BLACK);
 			titleLabel.setFocusable(false);
 			add(titleLabel, BorderLayout.CENTER);
@@ -397,10 +398,10 @@ public class GenericHeader extends JPanel {
 
 			icon = DockingUtils.scaleIconAsNeeded(icon);
 			if (icon != null) {
-				titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 0));
+				titleLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 2, 0, 0));
 			}
 			else {
-				titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 6, 0, 0));
+				titleLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 6, 0, 0));
 			}
 			titleLabel.setIcon(icon);
 

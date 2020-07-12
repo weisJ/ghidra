@@ -15,11 +15,12 @@
  */
 package docking.widgets;
 
-import java.awt.BorderLayout;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
@@ -27,6 +28,7 @@ import javax.swing.event.HyperlinkListener;
 import javax.swing.text.DefaultCaret;
 
 import docking.DockingUtils;
+import docking.border.GhidraBorderFactory;
 
 /**
  * A component that acts like a label, but adds the ability to render HTML anchors and the 
@@ -68,7 +70,7 @@ public class HyperlinkComponent extends JPanel {
 			}
 		});
 
-		textPane.setBorder(BorderFactory.createEmptyBorder());
+		textPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 		textPane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
 
 		setText(htmlTextWithHyperlinks);

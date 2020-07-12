@@ -25,9 +25,12 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.HyperlinkEvent.EventType;
 
 import docking.EmptyBorderToggleButton;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.HyperlinkComponent;
 import docking.widgets.checkbox.GCheckBox;
-import docking.widgets.label.*;
+import docking.widgets.label.GHtmlLabel;
+import docking.widgets.label.GIconLabel;
+import docking.widgets.label.GLabel;
 import ghidra.framework.plugintool.PluginConfigurationModel;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.PluginPackage;
@@ -44,7 +47,7 @@ public class PluginManagerComponent extends JPanel implements ChangeListener, Sc
 
 	PluginManagerComponent(PluginTool tool) {
 		super(new VerticalLayout(2));
-		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setBackground(Color.WHITE);
 		this.tool = tool;
 		model = new PluginConfigurationModel(tool, this);
@@ -92,7 +95,7 @@ public class PluginManagerComponent extends JPanel implements ChangeListener, Sc
 			initializeLabelSection();
 			initializeDescriptionSection();
 
-			setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+			setBorder(GhidraBorderFactory.createLineBorder(Color.DARK_GRAY));
 			updateCheckBoxState();
 		}
 
@@ -140,7 +143,7 @@ public class PluginManagerComponent extends JPanel implements ChangeListener, Sc
 			final HyperlinkComponent configureHyperlink = createConfigureHyperlink();
 			labelPanel.add(configureHyperlink);
 			
-			labelPanel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 40));
+			labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 25, 0, 40));
 			centerPanel.add(labelPanel, gbc);
 			add(centerPanel);
 		}
@@ -166,7 +169,7 @@ public class PluginManagerComponent extends JPanel implements ChangeListener, Sc
 			
 			final JLabel descriptionlabel = new GHtmlLabel(htmlDescription);
 			descriptionlabel.setForeground(Color.GRAY);
-			descriptionlabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+			descriptionlabel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 0, 0, 0));
 			descriptionlabel.setVerticalAlignment(SwingConstants.TOP);
 			descriptionlabel.setToolTipText(
 				HTMLUtilities.toWrappedHTML(pluginPackage.getDescription(), 80));

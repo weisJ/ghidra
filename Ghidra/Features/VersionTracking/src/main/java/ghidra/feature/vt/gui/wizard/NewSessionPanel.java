@@ -23,9 +23,12 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.label.GDLabel;
-import docking.wizard.*;
+import docking.wizard.AbstractMageJPanel;
+import docking.wizard.WizardPanelDisplayability;
+import docking.wizard.WizardState;
 import ghidra.app.util.task.OpenProgramTask;
 import ghidra.framework.main.DataTreeDialog;
 import ghidra.framework.model.DomainFile;
@@ -60,7 +63,7 @@ public class NewSessionPanel extends AbstractMageJPanel<VTWizardStateKey> {
 	NewSessionPanel(PluginTool tool) {
 
 		this.tool = tool;
-		setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10));
 
 		JLabel folderLabel = new GDLabel("Project folder ");
 		folderLabel.setHorizontalAlignment(SwingConstants.RIGHT);

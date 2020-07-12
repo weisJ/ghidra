@@ -16,16 +16,23 @@
 package ghidra.app.plugin.core.searchtext;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
 
-import docking.*;
+import docking.ComponentProvider;
+import docking.DialogComponentProvider;
+import docking.TaskScheduler;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
@@ -33,7 +40,10 @@ import docking.widgets.label.GLabel;
 import ghidra.app.util.HelpTopics;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.util.*;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.StringUtilities;
+import ghidra.util.UserSearchUtils;
 import ghidra.util.layout.VerticalLayout;
 import ghidra.util.task.Task;
 import ghidra.util.task.TaskMonitorComponent;
@@ -198,7 +208,7 @@ class SearchTextDialog extends DialogComponentProvider {
 
 	private JPanel createSearchPanel() {
 		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createEmptyBorder(4, 4, 10, 4));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(4, 4, 10, 4));
 		panel.setLayout(new BorderLayout());
 
 		valueComboBox = new GhidraComboBox<>();
@@ -250,7 +260,7 @@ class SearchTextDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new GridLayout(1, 2, 10, 10));
 		panel.add(createFieldsPanel());
 		panel.add(createRightPanel());
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		return panel;
 	}
 
@@ -272,7 +282,7 @@ class SearchTextDialog extends DialogComponentProvider {
 		searchSelectionCB = new GCheckBox("Search Selection");
 		panel.add(searchSelectionCB);
 
-		panel.setBorder(BorderFactory.createTitledBorder("Options"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Options"));
 		return panel;
 	}
 
@@ -349,19 +359,19 @@ class SearchTextDialog extends DialogComponentProvider {
 		bg.add(searchAllRB);
 
 		JPanel optionsPanel = createFieldOptionsPanel();
-		Border b2 = BorderFactory.createEmptyBorder(0, 20, 10, 10);
+		Border b2 = GhidraBorderFactory.createEmptyBorder(0, 20, 10, 10);
 		optionsPanel.setBorder(b2);
 
 		radioPanel.add(searchFieldRB);
 		radioPanel.add(optionsPanel);
 		radioPanel.add(searchAllRB);
-		radioPanel.setBorder(BorderFactory.createTitledBorder("Fields"));
+		radioPanel.setBorder(GhidraBorderFactory.createTitledBorder("Fields"));
 		return radioPanel;
 	}
 
 	private JPanel createSearchTypePanel() {
 		JPanel panel = new JPanel(new GridLayout(1, 2));
-		panel.setBorder(BorderFactory.createTitledBorder("Search Type"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Search Type"));
 
 		ButtonGroup bg = new ButtonGroup();
 
@@ -395,7 +405,7 @@ class SearchTextDialog extends DialogComponentProvider {
 		panel.add(listingDisplaySearchRB);
 
 		JPanel outerPanel = new JPanel(new BorderLayout());
-		outerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		outerPanel.add(panel);
 		return outerPanel;
 	}
@@ -406,7 +416,7 @@ class SearchTextDialog extends DialogComponentProvider {
 	private JPanel createDirectionPanel() {
 
 		JPanel directionPanel = new JPanel(new VerticalLayout(3));
-		directionPanel.setBorder(BorderFactory.createTitledBorder("Memory Block Types"));
+		directionPanel.setBorder(GhidraBorderFactory.createTitledBorder("Memory Block Types"));
 
 		ButtonGroup directionGroup = new ButtonGroup();
 		loadedBlocksButton = new GRadioButton("Loaded Blocks", true);

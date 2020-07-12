@@ -28,6 +28,7 @@ import javax.swing.table.TableColumnModel;
 import org.apache.commons.lang3.StringUtils;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.filter.FilterListener;
@@ -35,18 +36,6 @@ import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import docking.widgets.table.GTableCellRenderingData;
 import ghidra.app.context.ListingActionContext;
-/**
- * Dialog for Equate Plugin.
- * Allows the user to enter a name to be used for an equate at a location.
- * The dialog will present the user with a textfield to type in the new name. Additionally,
- * if other equates already exist for the value in question, they will be displayed in
- * a drop down comboBox. If the user types in an invalid equate name (the string is not
- * a valid name or the string is already associated with a different numeric value),
- * an error message will be displayed.  The user can choose whether to apply to current
- * cursor location only (default), or all scalars of the same value in a selection or
- * the entire program. Users also can indicate whether a setEquate should replace any
- * existing equates or only apply to new ones.
- */
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.database.symbol.EquateManager;
@@ -60,8 +49,20 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.util.UniversalID;
 import ghidra.util.layout.HorizontalLayout;
 import ghidra.util.layout.VerticalLayout;
-import ghidra.util.table.*;
+import ghidra.util.table.GhidraTable;
+import ghidra.util.table.GhidraTableCellRenderer;
+import ghidra.util.table.GhidraTableFilterPanel;
 import utility.function.Callback;
+
+/**
+ * Dialog for Equate Plugin. Allows the user to enter a name to be used for an equate at a location. The dialog will
+ * present the user with a textfield to type in the new name. Additionally, if other equates already exist for the value
+ * in question, they will be displayed in a drop down comboBox. If the user types in an invalid equate name (the string
+ * is not a valid name or the string is already associated with a different numeric value), an error message will be
+ * displayed.  The user can choose whether to apply to current cursor location only (default), or all scalars of the
+ * same value in a selection or the entire program. Users also can indicate whether a setEquate should replace any
+ * existing equates or only apply to new ones.
+ */
 
 public class SetEquateDialog extends DialogComponentProvider {
 	public static final int CANCELED = 0;
@@ -226,7 +227,7 @@ public class SetEquateDialog extends DialogComponentProvider {
 	protected JPanel buildMainPanel() {
 
 		titleLabel = new GDLabel("Possible Matches");
-		titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		titleLabel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 0, 0, 0));
 
 		//long value = scalar.getSignedValue();
 		applyToCurrent = new GRadioButton("Current location", true);
@@ -289,7 +290,7 @@ public class SetEquateDialog extends DialogComponentProvider {
 				}
 			}
 		});
-		tablePanel.setBorder(BorderFactory.createEmptyBorder(2, 5, 5, 5));
+		tablePanel.setBorder(GhidraBorderFactory.createEmptyBorder(2, 5, 5, 5));
 
 		filterPanel =
 			new GhidraTableFilterPanel<>(suggestedEquatesTable, model, " Equate String: ");
@@ -309,14 +310,14 @@ public class SetEquateDialog extends DialogComponentProvider {
 			scalar.toString(10, false, true, "", "") + ")";
 		JLabel label = new GLabel(labelText);
 		label.setName("EquateField");
-		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		label.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 10, 0));
 		northPanel.add(label);
 		northPanel.add(titleLabel);
 		northPanel.add(filterPanel);
-		northPanel.setBorder(BorderFactory.createEmptyBorder(10, 5, 0, 5));
+		northPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 5, 0, 5));
 
 		JPanel scopePanel = new JPanel(new HorizontalLayout(2));
-		scopePanel.setBorder(BorderFactory.createEmptyBorder(10, 5, 0, 5));
+		scopePanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 5, 0, 5));
 
 		scopePanel.add(new GLabel("Apply To: "));
 		scopePanel.add(applyToCurrent);
@@ -324,7 +325,7 @@ public class SetEquateDialog extends DialogComponentProvider {
 		scopePanel.add(applyToAll);
 
 		JPanel optionsPanel = new JPanel(new HorizontalLayout(2));
-		optionsPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+		optionsPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 5));
 
 		optionsPanel.add(new GLabel("Options: "));
 		optionsPanel.add(overwriteExistingEquates);

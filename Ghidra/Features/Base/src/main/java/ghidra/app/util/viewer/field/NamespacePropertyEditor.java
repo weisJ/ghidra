@@ -15,15 +15,14 @@
  */
 package ghidra.app.util.viewer.field;
 
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.*;
 import java.beans.PropertyEditorSupport;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import ghidra.framework.options.CustomOptionsEditor;
 import ghidra.util.HTMLUtilities;
@@ -102,8 +101,9 @@ public class NamespacePropertyEditor extends PropertyEditorSupport implements Cu
 		});
 		showNonLocalCheckBox.addItemListener(e -> firePropertyChange());
 		showLibraryInNamespaceCheckBox.addItemListener(e -> firePropertyChange());
-		panel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createEmptyBorder(10, 0, 10, 0), new TitledBorder("Namespace Options")));
+		panel.setBorder(GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createEmptyBorder(10, 0, 10, 0),
+			GhidraBorderFactory.createTitledBorder("Namespace Options")));
 
 		return panel;
 	}
@@ -114,7 +114,7 @@ public class NamespacePropertyEditor extends PropertyEditorSupport implements Cu
 		textField.setEnabled(false);
 
 		JPanel textFieldPanel = new JPanel();
-		textFieldPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+		textFieldPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 0, 0));
 
 		useLocalPrefixCheckBox = new GCheckBox("Use Local Namespace Override");
 		useLocalPrefixCheckBox.setToolTipText(tooltipText);

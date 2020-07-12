@@ -16,18 +16,26 @@
  */
 package ghidra.app.plugin.core.stackeditor;
 
-import ghidra.app.plugin.core.compositeeditor.CompositeEditorPanel;
-import ghidra.framework.plugintool.PluginTool;
-import ghidra.program.database.DatabaseObject;
-import ghidra.program.model.data.*;
-import ghidra.program.model.listing.*;
-import ghidra.util.exception.UsrException;
-
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
+import ghidra.app.plugin.core.compositeeditor.CompositeEditorPanel;
+import ghidra.framework.plugintool.PluginTool;
+import ghidra.program.database.DatabaseObject;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.DataTypeManagerDomainObject;
+import ghidra.program.model.listing.DataTypeArchive;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.StackFrame;
+import ghidra.util.exception.UsrException;
 
 /**
  * Panel for editing a function stack.
@@ -92,7 +100,7 @@ public class StackEditorPanel extends CompositeEditorPanel {
 					localSizePanel }),
 				createHorizontalPanel(new JPanel[] { paramOffsetPanel, paramSizePanel }) };
 		JPanel outerPanel = createVerticalPanel(hPanels);
-		outerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return outerPanel;
 	}

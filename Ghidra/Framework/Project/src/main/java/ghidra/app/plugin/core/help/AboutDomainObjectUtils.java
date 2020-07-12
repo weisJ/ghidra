@@ -18,14 +18,19 @@ package ghidra.app.plugin.core.help;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.Transferable;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
 import docking.DialogComponentProvider;
 import docking.DockingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.dnd.GClipboard;
 import docking.dnd.StringTransferable;
 import docking.widgets.OptionDialog;
@@ -115,12 +120,12 @@ public class AboutDomainObjectUtils {
 			auxArea.setEditable(false);
 			auxArea.setCaretPosition(0); // move cursor to BOF...
 			JScrollPane sp = new JScrollPane(auxArea);
-			sp.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(Color.black), "Additional Information"));
+			sp.setBorder(GhidraBorderFactory.createTitledBorder(
+				GhidraBorderFactory.createLineBorder(Color.black), "Additional Information"));
 			sp.setPreferredSize(new Dimension(1, 175)); //width is ignored by border layout...
 
 			JScrollBar sb = sp.getVerticalScrollBar();
-			sb.setBorder(BorderFactory.createEtchedBorder());
+			sb.setBorder(GhidraBorderFactory.createEtchedBorder());
 
 			contentPanel.add(sp, BorderLayout.SOUTH);
 		}

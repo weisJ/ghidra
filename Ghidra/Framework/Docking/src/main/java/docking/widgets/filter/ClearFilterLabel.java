@@ -16,7 +16,10 @@
 package docking.widgets.filter;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.*;
@@ -27,6 +30,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
+import docking.border.GhidraBorderFactory;
 import docking.util.AnimationUtils;
 import docking.widgets.label.GIconLabel;
 import ghidra.util.SystemUtilities;
@@ -56,7 +60,7 @@ public class ClearFilterLabel extends GIconLabel {
 		this.textField = textField;
 
 		// pad some to offset from the edge of the text field
-		setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+		setBorder(GhidraBorderFactory.createEmptyBorder(2, 2, 2, 2));
 
 		textField.getDocument().addDocumentListener(new DocumentListener() {
 

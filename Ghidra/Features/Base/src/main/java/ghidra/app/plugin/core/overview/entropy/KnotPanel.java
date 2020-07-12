@@ -21,10 +21,10 @@ import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.util.GraphicsUtils;
 import docking.widgets.label.GLabel;
 
@@ -136,7 +136,7 @@ public class KnotPanel extends JPanel implements ComponentListener {
 		for (KnotRecord record : knots) {
 			JLabel label = new GLabel(record.name);
 			label.setFont(FONT);
-			label.setBorder(new ToplessLineBorder(Color.BLACK));
+			label.setBorder(GhidraBorderFactory.createMatteBorder(0, 1, 1, 1, Color.BLACK));
 			label.setHorizontalAlignment(SwingConstants.CENTER);
 			label.setToolTipText(record.name);
 
@@ -179,17 +179,5 @@ public class KnotPanel extends JPanel implements ComponentListener {
 
 	@Override
 	public void componentShown(ComponentEvent e) {
-	}
-
-	private class ToplessLineBorder extends LineBorder {
-
-		public ToplessLineBorder(Color color) {
-			super(color);
-		}
-
-		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-			super.paintBorder(c, g, x, y - 1, width, height + 1);
-		}
 	}
 }

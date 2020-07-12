@@ -25,6 +25,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.TableModel;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GDLabel;
 import docking.widgets.table.AbstractSortedTableModel;
@@ -67,7 +68,7 @@ public class ScrollingListChoicesPanel extends ConflictPanel {
 	}
 
 	private void init() {
-		setBorder(BorderFactory.createTitledBorder("Resolve Conflict"));
+		setBorder(GhidraBorderFactory.createTitledBorder("Resolve Conflict"));
 		gbl = new GridBagLayout();
 		rowPanel = new JPanel(gbl);
 		setLayout(new BorderLayout());

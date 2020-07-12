@@ -28,24 +28,34 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
-import javax.swing.table.*;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.ListSelectionTableDialog;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GDLabel;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import ghidra.app.services.ProgramManager;
-import ghidra.formats.gfilesystem.*;
+import ghidra.formats.gfilesystem.FSRL;
+import ghidra.formats.gfilesystem.FSRLRoot;
+import ghidra.formats.gfilesystem.FileSystemService;
 import ghidra.framework.model.DomainFolder;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.plugin.importer.ImporterUtilities;
 import ghidra.plugins.importer.batch.BatchGroup.BatchLoadConfig;
 import ghidra.plugins.importer.tasks.ImportBatchTask;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.filechooser.GhidraFileFilter;
 import ghidra.util.task.TaskLauncher;
 
@@ -185,7 +195,7 @@ public class BatchImportDialog extends DialogComponentProvider {
 		JPanel sourceOptionsPanel = new JPanel();
 
 		// some padding before the files table
-		sourceOptionsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		sourceOptionsPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 10, 0));
 		sourceListPanel.add(sourceOptionsPanel, BorderLayout.SOUTH);
 
 		JPanel maxDepthPanel = new JPanel();
@@ -281,8 +291,9 @@ public class BatchImportDialog extends DialogComponentProvider {
 
 	private Border createTitledBorder(String title, boolean drawLine) {
 		// a bit of padding to separate the sections
-		return BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5),
-			BorderFactory.createTitledBorder(' ' + title + ' '));
+		return GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5),
+			GhidraBorderFactory.createTitledBorder(' ' + title + ' '));
 	}
 
 	private JPanel buildOutputOptionsPanel() {
@@ -312,7 +323,7 @@ public class BatchImportDialog extends DialogComponentProvider {
 		}
 
 		// add some spacing between this panel and the one below it
-		outputChoicesPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		outputChoicesPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 10, 0));
 
 		BatchProjectDestinationPanel destPanel =
 			new BatchProjectDestinationPanel(getComponent(), destinationFolder) {

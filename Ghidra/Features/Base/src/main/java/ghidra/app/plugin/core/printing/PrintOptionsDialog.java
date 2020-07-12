@@ -16,11 +16,14 @@
 package ghidra.app.plugin.core.printing;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import ghidra.util.HelpLocation;
@@ -72,7 +75,7 @@ public class PrintOptionsDialog extends DialogComponentProvider {
 
 		JPanel rangePanel = new JPanel();
 		rangePanel.setLayout(new BoxLayout(rangePanel, BoxLayout.Y_AXIS));
-		rangePanel.setBorder(BorderFactory.createTitledBorder("Print Range"));
+		rangePanel.setBorder(GhidraBorderFactory.createTitledBorder("Print Range"));
 
 		KeyListener key = new KeyAdapter() {
 			@Override
@@ -102,7 +105,7 @@ public class PrintOptionsDialog extends DialogComponentProvider {
 
 		JPanel headerPanel = new JPanel();
 		headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.X_AXIS));
-		headerPanel.setBorder(BorderFactory.createTitledBorder("Header and Footer"));
+		headerPanel.setBorder(GhidraBorderFactory.createTitledBorder("Header and Footer"));
 
 		title = new GCheckBox("Title");
 		title.setSelected(true);
@@ -119,7 +122,7 @@ public class PrintOptionsDialog extends DialogComponentProvider {
 
 		JPanel optionsPanel = new JPanel();
 		optionsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		optionsPanel.setBorder(BorderFactory.createTitledBorder("Other Print Options"));
+		optionsPanel.setBorder(GhidraBorderFactory.createTitledBorder("Other Print Options"));
 
 		monochrome = new GCheckBox("Use Monochrome", true);
 		monochrome.addKeyListener(key);

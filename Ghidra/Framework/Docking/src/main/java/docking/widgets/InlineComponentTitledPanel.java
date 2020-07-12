@@ -22,6 +22,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import docking.border.GhidraBorderFactory;
+
 /**
  * A panel with a component-containing border. Use a checkbox as the component, for example, 
  * to control the enablement of child widgets.
@@ -35,7 +37,7 @@ import javax.swing.border.TitledBorder;
  *  public class MyPanel extends InlineComponentTitledPanel {
  *    private JCheckBox enableCheckbox = null;
  *    public MyPanel() {
- *      super(new JCheckBox("Enable"), BorderFactory.createEtchedBorder());
+ *      super(new JCheckBox("Enable"), GhidraBorderFactory.createEtchedBorder());
  *      enableCheckbox = (JCheckBox) getTitleComponent();
  *      enableCheckbox.addActionListener(...);
  *      
@@ -79,7 +81,8 @@ public class InlineComponentTitledPanel extends JPanel {
 	 */
 	public InlineComponentTitledPanel(JComponent titleComponent, int titleJustification,
 			int titlePosition) {
-		this(titleComponent, titleJustification, titlePosition, BorderFactory.createEmptyBorder());
+		this(titleComponent, titleJustification, titlePosition,
+			GhidraBorderFactory.createEmptyBorder());
 	}
 
 	/**

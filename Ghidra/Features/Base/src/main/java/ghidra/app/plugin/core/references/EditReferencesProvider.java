@@ -18,7 +18,10 @@ package ghidra.app.plugin.core.references;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.dnd.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,21 +34,28 @@ import javax.swing.table.TableColumnModel;
 
 import docking.ActionContext;
 import docking.action.*;
+import docking.border.GhidraBorderFactory;
 import docking.dnd.DropTgtAdapter;
 import docking.dnd.Droppable;
 import docking.widgets.checkbox.GCheckBox;
-import docking.widgets.table.*;
+import docking.widgets.table.GBooleanCellRenderer;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import ghidra.app.events.ProgramSelectionPluginEvent;
 import ghidra.app.util.SelectionTransferData;
 import ghidra.app.util.SelectionTransferable;
 import ghidra.framework.model.DomainObjectChangedEvent;
 import ghidra.framework.model.DomainObjectListener;
 import ghidra.framework.plugintool.ComponentProviderAdapter;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.data.DataUtilities;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.Memory;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceManager;
 import ghidra.program.util.*;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.HelpLocation;
@@ -928,7 +938,7 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 	private class RefCellBooleanRenderer extends GBooleanCellRenderer {
 
 		RefCellBooleanRenderer() {
-			// cb.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
+			// cb.setBorder(GhidraBorderFactory.createEmptyBorder(0, 3, 0, 0));
 		}
 
 		@Override
@@ -979,7 +989,7 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 			checkbox = (JCheckBox) editorComponent;
 			checkbox.setOpaque(false);
 			checkbox.setHorizontalAlignment(SwingConstants.CENTER);
-			checkbox.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
+			checkbox.setBorder(GhidraBorderFactory.createEmptyBorder(0, 3, 0, 0));
 		}
 
 		@Override
@@ -1024,7 +1034,7 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 			defaultFont = getFont();
 			boldFont = new Font(defaultFont.getName(), defaultFont.getStyle() | Font.BOLD,
 				defaultFont.getSize());
-			setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
+			setBorder(GhidraBorderFactory.createEmptyBorder(0, 3, 0, 0));
 		}
 
 		@Override

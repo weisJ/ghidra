@@ -18,13 +18,13 @@ package ghidra.feature.vt.gui.filters;
 import static ghidra.feature.vt.gui.filters.Filter.FilterEditingStatus.APPLIED;
 import static ghidra.feature.vt.gui.filters.Filter.FilterEditingStatus.NONE;
 
-import java.awt.Container;
-import java.awt.LayoutManager;
+import java.awt.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.framework.options.SaveState;
 import ghidra.util.layout.ColumnLayout;
 import ghidra.util.layout.VerticalLayout;
@@ -81,7 +81,7 @@ public abstract class CheckBoxBasedAncillaryFilter<T> extends AncillaryFilter<T>
 		LayoutManager manager = createLayoutManager();
 		JPanel panel = new JPanel();
 		panel.setLayout(manager);
-		panel.setBorder(BorderFactory.createTitledBorder(filterName));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder(filterName));
 
 		addCheckBoxes(panel);
 

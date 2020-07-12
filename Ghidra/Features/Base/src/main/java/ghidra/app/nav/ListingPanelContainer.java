@@ -16,12 +16,12 @@
  */
 package ghidra.app.nav;
 
-import ghidra.app.util.viewer.util.TitledPanel;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 
 import javax.swing.*;
+
+import docking.border.GhidraBorderFactory;
+import ghidra.app.util.viewer.util.TitledPanel;
 
 public class ListingPanelContainer extends JPanel {
 
@@ -35,7 +35,7 @@ public class ListingPanelContainer extends JPanel {
 		this.leftListingPanel = leftListingPanel;
 		setLayout(new BorderLayout());
 		add(leftListingPanel);
-		setConnnected( isConnected );
+		setConnnected(isConnected);
 	}
 
 	public ListingPanelContainer(JComponent leftListingPanel, JComponent rightListingPanel,
@@ -46,12 +46,12 @@ public class ListingPanelContainer extends JPanel {
 		setOtherPanel(rightListingPanel, leftTitle, rightTitle);
 	}
 
-	public void setConnnected( boolean isConnected ) {
-		if ( !isConnected ) {
-			setBorder( BorderFactory.createLineBorder( Color.ORANGE, 2 ) );
+	public void setConnnected(boolean isConnected) {
+		if (!isConnected) {
+			setBorder(GhidraBorderFactory.createLineBorder(Color.ORANGE, 2));
 		}
 		else {
-			setBorder( BorderFactory.createEmptyBorder() );
+			setBorder(GhidraBorderFactory.createEmptyBorder());
 		}
 	}
 
@@ -59,7 +59,8 @@ public class ListingPanelContainer extends JPanel {
 		removeAll();
 		leftTitlePanel = new TitledPanel(leftTitle, leftListingPanel, 20);
 		rightTitlePanelPanel = new TitledPanel(rightTitle, rightListingPanel, 20);
-		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftTitlePanel, rightTitlePanelPanel);
+		splitPane =
+			new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftTitlePanel, rightTitlePanelPanel);
 		splitPane.setDividerLocation(0.5);
 		splitPane.setResizeWeight(0.5);
 		add(splitPane, BorderLayout.CENTER);
@@ -83,7 +84,8 @@ public class ListingPanelContainer extends JPanel {
 	}
 
 	public void setOrientation(boolean isSideBySide) {
-		splitPane.setOrientation(isSideBySide ? JSplitPane.HORIZONTAL_SPLIT : JSplitPane.VERTICAL_SPLIT);
+		splitPane.setOrientation(
+			isSideBySide ? JSplitPane.HORIZONTAL_SPLIT : JSplitPane.VERTICAL_SPLIT);
 		splitPane.setDividerLocation(0.5);
 	}
 

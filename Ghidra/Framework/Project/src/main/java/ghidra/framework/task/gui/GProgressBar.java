@@ -21,6 +21,7 @@ import java.text.NumberFormat;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.util.AnimatedIcon;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDHtmlLabel;
@@ -243,7 +244,7 @@ public class GProgressBar extends JPanel {
 		else {
 			progressBar.setBorderPainted(true);
 			Dimension size = progressBar.getPreferredSize();
-			progressPanel.setBorder(BorderFactory.createEmptyBorder(
+			progressPanel.setBorder(GhidraBorderFactory.createEmptyBorder(
 				(imageLabel.getPreferredSize().height - size.height) / 2, 0, 0, 8));
 		}
 

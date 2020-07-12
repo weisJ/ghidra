@@ -15,12 +15,7 @@
  */
 package ghidra.app.merge.listing;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.ItemEvent;
@@ -29,17 +24,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDHtmlLabel;
@@ -105,7 +95,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	}
 
 	private void init() {
-		setBorder(BorderFactory.createTitledBorder("Resolve Conflict"));
+		setBorder(GhidraBorderFactory.createTitledBorder("Resolve Conflict"));
 		setLayout(new BorderLayout());
 
 		headerLabel = new GDHtmlLabel(" ");
@@ -120,7 +110,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		layout.maximizeColumn(0);
 		rowPanel = new JPanel(layout);
 		add(rowPanel, BorderLayout.CENTER);
-		rowPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		rowPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		GRadioButton rb = new GRadioButton();
 		JCheckBox cb = new GCheckBox();
@@ -209,7 +199,8 @@ public class VerticalChoicesPanel extends ConflictPanel {
 				headerComps[i] = new MyLabel(items[i]);
 				headerComps[i].setName(getComponentName(0, i));
 				setRowComponent(headerComps[i], 0, i, defaultInsets);
-				headerComps[i].setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+				headerComps[i]
+						.setBorder(GhidraBorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 			}
 		}
 		rowPanel.validate();
@@ -347,7 +338,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		rowTypes.add(INFORMATION);
 		rows.add(items);
 		MyLabel firstComp = new MyLabel(items[0]);
-		firstComp.setBorder(BorderFactory.createEmptyBorder(0, indent, 0, 0));
+		firstComp.setBorder(GhidraBorderFactory.createEmptyBorder(0, indent, 0, 0));
 		firstComp.setName(getComponentName(row, 0));
 		setRowComponent(firstComp, row, 0, defaultInsets);
 		for (int i = 1; i < items.length; i++) {

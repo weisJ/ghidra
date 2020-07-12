@@ -15,13 +15,13 @@
  */
 package ghidra.app.util.dialog;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GLabel;
 import ghidra.app.util.AddressInput;
 import ghidra.program.model.address.Address;
@@ -44,7 +44,7 @@ public class AskAddrDialog extends DialogComponentProvider {
 		addrInput.select();
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(new GLabel(message), BorderLayout.WEST);
 		panel.add(addrInput, BorderLayout.CENTER);
 

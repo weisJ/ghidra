@@ -15,15 +15,15 @@
  */
 package ghidra.app.plugin.core.data;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GhidraComboBox;
 import ghidra.app.cmd.data.RenameDataFieldCmd;
 import ghidra.program.model.data.DataTypeComponent;
@@ -80,7 +80,7 @@ class RenameDataFieldDialog extends DialogComponentProvider {
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		JPanel topPanel = new JPanel(new BorderLayout());
 		
-		Border border = BorderFactory.createTitledBorder("Data Field Name");
+		Border border = GhidraBorderFactory.createTitledBorder("Data Field Name");
 		topPanel.setBorder(border);
 			
 		mainPanel.add(topPanel, BorderLayout.NORTH);
@@ -94,7 +94,7 @@ class RenameDataFieldDialog extends DialogComponentProvider {
 				okCallback();
 			}
         });
-	    mainPanel.setBorder(new EmptyBorder(5,5,5,5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return mainPanel;
     }

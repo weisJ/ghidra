@@ -16,7 +16,9 @@
 package ghidra.feature.vt.gui.filters;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -25,6 +27,7 @@ import javax.swing.event.EventListenerList;
 
 import org.apache.commons.lang3.StringUtils;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GDLabel;
@@ -72,7 +75,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 	private JComponent createComponent() {
 		final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		panel.setBorder(BorderFactory.createTitledBorder("Address Range"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Address Range"));
 
 		//
 		// Enable panel
@@ -261,7 +264,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 		field.addPropertyChangeListener(new BackgroundColorChangeListener(comboBox));
 
 		// no border, since we are inside of another component
-		field.setBorder(BorderFactory.createEmptyBorder());
+		field.setBorder(GhidraBorderFactory.createEmptyBorder());
 
 		return comboBox;
 	}

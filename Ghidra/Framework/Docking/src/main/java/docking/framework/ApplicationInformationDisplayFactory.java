@@ -21,6 +21,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;
 import ghidra.framework.Application;
@@ -124,7 +125,7 @@ public class ApplicationInformationDisplayFactory {
 		Font newFont = new Font("Garamond", Font.BOLD, 35);
 		nameLabel.setFont(newFont);
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		nameLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		nameLabel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(nameLabel, BorderLayout.NORTH);
 
 		final JPanel imagePanel = new JPanel(new BorderLayout());

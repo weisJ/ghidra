@@ -16,18 +16,20 @@
  */
 package ghidra.app.plugin.core.clipboard;
 
-import ghidra.app.util.ClipboardType;
-import ghidra.util.HelpLocation;
-
-import java.awt.BorderLayout;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.list.ListPanel;
+import ghidra.app.util.ClipboardType;
+import ghidra.util.HelpLocation;
 
 
 public class CopyPasteSpecialDialog extends DialogComponentProvider {
@@ -80,7 +82,7 @@ public class CopyPasteSpecialDialog extends DialogComponentProvider {
 		});
 
 		mainPanel.add(listPanel, BorderLayout.CENTER);
-		mainPanel.setBorder(new TitledBorder("Select Format"));
+		mainPanel.setBorder(GhidraBorderFactory.createTitledBorder("Select Format"));
 
 		return mainPanel;
 	}

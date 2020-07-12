@@ -15,28 +15,36 @@
  */
 package ghidra.app.plugin.core.assembler;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.*;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
 import org.apache.commons.collections4.map.DefaultedMap;
 import org.apache.commons.collections4.map.LazyMap;
 
-import docking.*;
-import docking.action.*;
-import docking.widgets.autocomplete.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.DockingUtils;
+import docking.action.DockingAction;
+import docking.action.KeyBindingData;
+import docking.action.MenuData;
+import docking.border.GhidraBorderFactory;
+import docking.widgets.autocomplete.AutocompletionEvent;
+import docking.widgets.autocomplete.AutocompletionListener;
+import docking.widgets.autocomplete.TextFieldAutocompleter;
 import docking.widgets.fieldpanel.*;
 import docking.widgets.fieldpanel.support.FieldLocation;
 import ghidra.app.context.ListingActionContext;
 import ghidra.app.plugin.assembler.Assembler;
 import ghidra.app.plugin.assembler.Assemblers;
 import ghidra.app.plugin.assembler.sleigh.util.GhidraDBTransaction;
-import ghidra.app.plugin.core.assembler.AssemblyDualTextField.*;
+import ghidra.app.plugin.core.assembler.AssemblyDualTextField.AssemblyCompletion;
+import ghidra.app.plugin.core.assembler.AssemblyDualTextField.AssemblyInstruction;
+import ghidra.app.plugin.core.assembler.AssemblyDualTextField.VisibilityMode;
 import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.util.PluginConstants;
 import ghidra.app.util.viewer.field.ListingField;
@@ -45,7 +53,9 @@ import ghidra.app.util.viewer.listingpanel.ListingPanel;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.lang.Language;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.HelpLocation;
@@ -188,9 +198,9 @@ public class AssembleDockingAction extends DockingAction {
 				cancel();
 			}
 		});
-		input.getMnemonicField().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-		input.getOperandsField().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-		input.getAssemblyField().setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+		input.getMnemonicField().setBorder(GhidraBorderFactory.createLineBorder(Color.RED, 2));
+		input.getOperandsField().setBorder(GhidraBorderFactory.createLineBorder(Color.RED, 2));
+		input.getAssemblyField().setBorder(GhidraBorderFactory.createLineBorder(Color.RED, 2));
 
 		input.getAutocompleter().addAutocompletionListener(listener);
 		input.addKeyListener(listener);

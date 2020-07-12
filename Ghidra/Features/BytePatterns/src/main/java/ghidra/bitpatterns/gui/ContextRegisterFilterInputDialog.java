@@ -15,13 +15,16 @@
  */
 package ghidra.bitpatterns.gui;
 
-import java.awt.Component;
+import java.awt.*;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.*;
 
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GhidraComboBox;
 import ghidra.bitpatterns.info.ContextRegisterExtent;
 import ghidra.bitpatterns.info.ContextRegisterFilter;
@@ -72,7 +75,7 @@ public class ContextRegisterFilterInputDialog extends InputDialogComponentProvid
 		JPanel panel = new JPanel();
 		BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 		panel.setLayout(boxLayout);
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		for (String currentRegister : extent.getContextRegisters()) {
 			JPanel currentRegPanel = new JPanel();
 			PairLayout pairLayout = new PairLayout();

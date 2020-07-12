@@ -18,7 +18,10 @@ package ghidra.graph.viewer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.swing.*;
 
@@ -27,14 +30,17 @@ import com.google.common.base.Function;
 import docking.DockingUtils;
 import docking.DockingWindowManager;
 import docking.actions.KeyBindingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.help.HelpService;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.PopupWindow;
 import docking.widgets.label.GIconLabel;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.VisualizationServer.Paintable;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AbstractGraphMousePlugin;
 import edu.uci.ics.jung.visualization.decorators.PickableVertexPaintTransformer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
@@ -44,8 +50,14 @@ import edu.uci.ics.jung.visualization.renderers.Renderer;
 import edu.uci.ics.jung.visualization.util.Caching;
 import ghidra.graph.VisualGraph;
 import ghidra.graph.event.VisualGraphChangeListener;
-import ghidra.graph.viewer.edge.*;
-import ghidra.graph.viewer.event.mouse.*;
+import ghidra.graph.viewer.edge.VisualEdgeRenderer;
+import ghidra.graph.viewer.edge.VisualGraphEdgeSatelliteRenderer;
+import ghidra.graph.viewer.edge.VisualGraphEdgeStrokeTransformer;
+import ghidra.graph.viewer.edge.VisualGraphPathHighlighter;
+import ghidra.graph.viewer.event.mouse.VertexMouseInfo;
+import ghidra.graph.viewer.event.mouse.VisualGraphHoverMousePlugin;
+import ghidra.graph.viewer.event.mouse.VisualGraphMousePlugin;
+import ghidra.graph.viewer.event.mouse.VisualGraphPluggableGraphMouse;
 import ghidra.graph.viewer.event.picking.GPickedState;
 import ghidra.graph.viewer.event.picking.PickListener;
 import ghidra.graph.viewer.layout.LayoutListener;
@@ -54,7 +66,10 @@ import ghidra.graph.viewer.options.ViewRestoreOption;
 import ghidra.graph.viewer.options.VisualGraphOptions;
 import ghidra.graph.viewer.satellite.CachingSatelliteGraphViewer;
 import ghidra.graph.viewer.shape.VisualGraphShapePickSupport;
-import ghidra.graph.viewer.vertex.*;
+import ghidra.graph.viewer.vertex.VertexClickListener;
+import ghidra.graph.viewer.vertex.VertexFocusListener;
+import ghidra.graph.viewer.vertex.VisualGraphVertexShapeTransformer;
+import ghidra.graph.viewer.vertex.VisualVertexRenderer;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.AssertException;
@@ -374,7 +389,7 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 
 		mainPanel.add(layeredPane, BorderLayout.CENTER);
 
-		satellite.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		satellite.setBorder(GhidraBorderFactory.createLineBorder(Color.BLACK));
 
 		undockedSatellitePanel = new JPanel(new BorderLayout());
 		undockedSatellitePanel.addComponentListener(new ComponentAdapter() {
@@ -421,7 +436,7 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 		Icon icon = ResourceManager.loadImage("images/network-wireless.png");
 		JLabel iconLabel = new GIconLabel(icon);
 		iconLabel.setOpaque(false);
-		iconLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		iconLabel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		iconLabel.setToolTipText(tooltip);
 
 		EmptyBorderButton button = new VisualGraphLayeredPaneButton(icon);
@@ -461,7 +476,7 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 		Icon icon = Icons.REFRESH_ICON;
 		JLabel iconLabel = new GIconLabel(icon);
 		iconLabel.setOpaque(false);
-		iconLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		iconLabel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		iconLabel.setToolTipText(tooltip);
 
 		EmptyBorderButton refreshButton = new VisualGraphLayeredPaneButton(icon);

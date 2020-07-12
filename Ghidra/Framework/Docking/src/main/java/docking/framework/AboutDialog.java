@@ -15,13 +15,13 @@
  */
 package docking.framework;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 
 /**
  * Splash screen window to display version information about the current release of 
@@ -56,7 +56,7 @@ public class AboutDialog extends DialogComponentProvider {
 	 */
 	private JPanel createMainPanel() {
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+		mainPanel.setBorder(GhidraBorderFactory.createRaisedBevelBorder());
 		mainPanel.setBackground(DEFAULT_BACKGROUND_COLOR);
 		mainPanel.add(createInfoComponent(), BorderLayout.CENTER);
 		return mainPanel;

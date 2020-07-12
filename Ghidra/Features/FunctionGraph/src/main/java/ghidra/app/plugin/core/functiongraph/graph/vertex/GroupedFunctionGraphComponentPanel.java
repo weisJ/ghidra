@@ -26,16 +26,21 @@ import docking.ActionContext;
 import docking.GenericHeader;
 import docking.action.DockingAction;
 import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import ghidra.app.plugin.core.functiongraph.FunctionGraphPlugin;
 import ghidra.app.plugin.core.functiongraph.graph.FGEdge;
 import ghidra.app.plugin.core.functiongraph.mvc.FGController;
 import ghidra.app.plugin.core.functiongraph.mvc.FunctionGraphOptions;
 import ghidra.app.util.viewer.format.FormatManager;
 import ghidra.app.util.viewer.listingpanel.ListingModel;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import ghidra.util.layout.VerticalLayout;
 import resources.ResourceManager;
@@ -100,7 +105,7 @@ public class GroupedFunctionGraphComponentPanel extends AbstractGraphComponentPa
 		genericHeader.setTitle(title);
 
 		contentPanel = new JPanel();
-		contentPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		contentPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		contentPanel.setLayout(new VerticalLayout(0));
 		contentPanel.setOpaque(true);
 		contentPanel.setBackground(defaultBackgroundColor);
@@ -124,7 +129,7 @@ public class GroupedFunctionGraphComponentPanel extends AbstractGraphComponentPa
 		userTextArea.setEditable(false);
 		userTextArea.setLineWrap(true);
 		userTextArea.setWrapStyleWord(true);
-		userTextArea.setBorder(BorderFactory.createEmptyBorder());
+		userTextArea.setBorder(GhidraBorderFactory.createEmptyBorder());
 
 		// we are not editable; it makes no sense to allow users to drag text
 		userTextArea.setDragEnabled(false);
@@ -138,7 +143,7 @@ public class GroupedFunctionGraphComponentPanel extends AbstractGraphComponentPa
 		add(contentPanel, BorderLayout.CENTER);
 
 		BevelBorder beveledBorder =
-			(BevelBorder) BorderFactory.createBevelBorder(BevelBorder.RAISED,
+			(BevelBorder) GhidraBorderFactory.createBevelBorder(BevelBorder.RAISED,
 				new Color(225, 225, 225), new Color(155, 155, 155), new Color(96, 96, 96),
 				new Color(0, 0, 0));
 		setBorder(beveledBorder);

@@ -15,8 +15,7 @@
  */
 package ghidra.graph.graphs;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -35,7 +34,7 @@ public class LabelTestVertex extends AbstractTestVertex {
 		label.setPreferredSize(new Dimension(50, 50));
 		label.setBackground(Color.YELLOW.darker());
 		label.setOpaque(true);
-		label.setBorder(BorderFactory.createRaisedBevelBorder());
+		label.setBorder(GhidraBorderFactory.createRaisedBevelBorder());
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 

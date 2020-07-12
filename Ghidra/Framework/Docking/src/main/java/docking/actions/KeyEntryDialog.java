@@ -24,7 +24,10 @@ import javax.swing.text.*;
 
 import docking.DialogComponentProvider;
 import docking.KeyEntryTextField;
-import docking.action.*;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.MultipleKeyAction;
+import docking.border.GhidraBorderFactory;
 import docking.tool.ToolConstants;
 import docking.widgets.label.GIconLabel;
 import ghidra.util.HelpLocation;
@@ -67,12 +70,12 @@ public class KeyEntryDialog extends DialogComponentProvider {
 	private JPanel buildMainPanel() {
 
 		defaultPanel = new JPanel(new BorderLayout());
-		defaultPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 5));
+		defaultPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 0, 5, 5));
 
 		JLabel imageLabel = new GIconLabel(ResourceManager.loadImage("images/information.png"));
 		bgColor = imageLabel.getBackground();
 		JTextPane pane = new JTextPane();
-		pane.setBorder(BorderFactory.createEmptyBorder(0, 5, 2, 5));
+		pane.setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 2, 5));
 		pane.setBackground(bgColor);
 		pane.setEditable(false);
 
@@ -86,7 +89,7 @@ public class KeyEntryDialog extends DialogComponentProvider {
 		}
 
 		JPanel labelPanel = new JPanel();
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));
@@ -101,9 +104,9 @@ public class KeyEntryDialog extends DialogComponentProvider {
 		});
 
 		defaultPanel.add(labelPanel, BorderLayout.NORTH);
-		defaultPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+		defaultPanel.setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 		JPanel p = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		p.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+		p.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 5, 0));
 		p.add(keyEntryField);
 		KeyStroke keyBinding = action.getKeyBinding();
 		if (keyBinding != null) {

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.combobox.GComboBox;
@@ -37,10 +38,10 @@ class WorkspacePanel extends JPanel implements WorkspaceChangeListener {
 	private final static long serialVersionUID = 1L;
 	private final static String RUNNING_TOOLS_TITLE = "Running Tools";
 	private final static Border ACTIVE_WORKSPACE_BORDER =
-		BorderFactory.createTitledBorder(RUNNING_TOOLS_TITLE);
+		GhidraBorderFactory.createTitledBorder(RUNNING_TOOLS_TITLE);
 	private final static String NO_ACTIVE_WORKSPACE = "INACTIVE";
 	private final static Border INACTIVE_BORDER =
-		BorderFactory.createTitledBorder(RUNNING_TOOLS_TITLE + ": " + NO_ACTIVE_WORKSPACE);
+		GhidraBorderFactory.createTitledBorder(RUNNING_TOOLS_TITLE + ": " + NO_ACTIVE_WORKSPACE);
 
 	final static int TYPICAL_NUM_RUNNING_TOOLS = 3;
 

@@ -15,15 +15,13 @@
  */
 package ghidra.feature.vt.gui.provider.functionassociation;
 
-import static ghidra.feature.vt.api.impl.VTChangeManager.DOCR_VT_ASSOCIATION_STATUS_CHANGED;
-import static ghidra.feature.vt.api.impl.VTChangeManager.DOCR_VT_MATCH_ADDED;
-import static ghidra.feature.vt.api.impl.VTChangeManager.DOCR_VT_MATCH_DELETED;
-import static ghidra.feature.vt.gui.provider.functionassociation.FilterSettings.SHOW_ALL;
-import static ghidra.feature.vt.gui.provider.functionassociation.FilterSettings.SHOW_UNACCEPTED;
-import static ghidra.feature.vt.gui.provider.functionassociation.FilterSettings.SHOW_UNMATCHED;
+import static ghidra.feature.vt.api.impl.VTChangeManager.*;
+import static ghidra.feature.vt.gui.provider.functionassociation.FilterSettings.*;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
@@ -32,9 +30,15 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.JTableHeader;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.Tool;
+import docking.WindowPosition;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.ToggleDockingAction;
+import docking.action.ToolBarData;
 import docking.actions.PopupActionProvider;
+import docking.border.GhidraBorderFactory;
 import docking.menu.ActionState;
 import docking.menu.MultiStateDockingAction;
 import docking.widgets.EventTrigger;
@@ -48,21 +52,32 @@ import ghidra.app.util.viewer.listingpanel.ListingPanel;
 import ghidra.feature.vt.api.db.DeletedMatch;
 import ghidra.feature.vt.api.impl.VersionTrackingChangeRecord;
 import ghidra.feature.vt.api.main.*;
-import ghidra.feature.vt.gui.actions.*;
+import ghidra.feature.vt.gui.actions.CreateManualMatchAction;
+import ghidra.feature.vt.gui.actions.CreateManualMatchAndAcceptAction;
+import ghidra.feature.vt.gui.actions.CreateManualMatchAndAcceptAndApplyAction;
+import ghidra.feature.vt.gui.actions.SelectExistingMatchAction;
 import ghidra.feature.vt.gui.duallisting.VTListingNavigator;
-import ghidra.feature.vt.gui.plugin.*;
+import ghidra.feature.vt.gui.plugin.VTController;
+import ghidra.feature.vt.gui.plugin.VTControllerListener;
+import ghidra.feature.vt.gui.plugin.VTPlugin;
 import ghidra.feature.vt.gui.util.MatchInfo;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.DomainObjectChangeRecord;
+import ghidra.framework.model.DomainObjectChangedEvent;
 import ghidra.framework.options.Options;
 import ghidra.framework.options.SaveState;
 import ghidra.framework.plugintool.ComponentProviderAdapter;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
-import ghidra.program.util.*;
+import ghidra.program.util.ChangeManager;
+import ghidra.program.util.ProgramChangeRecord;
+import ghidra.program.util.ProgramLocation;
 import ghidra.util.HelpLocation;
 import ghidra.util.SystemUtilities;
-import ghidra.util.table.*;
+import ghidra.util.table.GhidraTable;
+import ghidra.util.table.GhidraTableFilterPanel;
+import ghidra.util.table.GhidraThreadedTablePanel;
 import resources.Icons;
 import resources.ResourceManager;
 
@@ -491,7 +506,7 @@ public class VTFunctionAssociationProvider extends ComponentProviderAdapter
 			(sourceProgram != null) ? sourceProgram.getDomainFile().toString() : NO_SESSION;
 		String sourceTitle = SOURCE_TITLE + " = " + sourceString;
 		sourceSessionLabel = new GDLabel(sourceTitle);
-		sourceSessionLabel.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
+		sourceSessionLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 4, 0, 0));
 		sourceFunctionPanel.add(sourceSessionLabel, BorderLayout.NORTH);
 		sourceFunctionPanel.add(sourceThreadedTablePanel, BorderLayout.CENTER);
 		sourceFunctionPanel.add(sourceTableFilterPanel, BorderLayout.SOUTH);
@@ -551,7 +566,7 @@ public class VTFunctionAssociationProvider extends ComponentProviderAdapter
 					: NO_SESSION;
 		String destinationTitle = DESTINATION_TITLE + " = " + destinationString;
 		destinationSessionLabel = new GDLabel(destinationTitle);
-		destinationSessionLabel.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
+		destinationSessionLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 4, 0, 0));
 		destinationFunctionPanel.add(destinationSessionLabel, BorderLayout.NORTH);
 		destinationFunctionPanel.add(destinationThreadedTablePanel, BorderLayout.CENTER);
 		destinationFunctionPanel.add(destinationTableFilterPanel, BorderLayout.SOUTH);

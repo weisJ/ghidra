@@ -15,17 +15,16 @@
  */
 package ghidra.feature.vt.gui.provider.matchtable;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.util.Objects;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
 import org.apache.commons.lang3.StringUtils;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.feature.vt.api.main.VTMatch;
 import ghidra.feature.vt.gui.filters.*;
@@ -57,9 +56,9 @@ public class LengthFilter extends Filter<VTMatch> {
 		textField.setColumns(5);
 
 		final JPanel panel = new JPanel(new BorderLayout());
-		Border paddingBorder = BorderFactory.createEmptyBorder(1, 5, 1, 5);
-		Border outsideBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
-		panel.setBorder(BorderFactory.createCompoundBorder(outsideBorder, paddingBorder));
+		Border paddingBorder = GhidraBorderFactory.createEmptyBorder(1, 5, 1, 5);
+		Border outsideBorder = GhidraBorderFactory.createLoweredBevelBorder();
+		panel.setBorder(GhidraBorderFactory.createCompoundBorder(outsideBorder, paddingBorder));
 
 		panel.add(label, BorderLayout.WEST);
 		panel.add(textField, BorderLayout.EAST);

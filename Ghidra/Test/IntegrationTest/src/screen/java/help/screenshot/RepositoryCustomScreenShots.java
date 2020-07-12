@@ -272,16 +272,16 @@ public class RepositoryCustomScreenShots extends GhidraScreenShotGenerator {
 		JPanel progressPanel = new JPanel(new VerticalLayout(2));
 		progressPanel.add(new JLabel("Progress In Current Phase"));
 		JProgressBar progress = new JProgressBar(0, 100);
-		progress.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 150));
+		progress.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 150));
 		progress.setValue(22);
 		progressPanel.add(progress);
 		ImageIcon infoIcon = ResourceManager.loadImage("images/information.png");
 		progressPanel.add(
 			new JLabel("Finding conflicting code unit chagnes...", infoIcon, SwingConstants.LEFT));
-		progressPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 100, 0));
+		progressPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 100, 0));
 
 		mainPanel.add(progressPanel);
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 100, 10));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 10, 100, 10));
 
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JButton apply = new JButton("Apply");

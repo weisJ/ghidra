@@ -18,11 +18,14 @@ package ghidra.app.plugin.core.disassembler;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GLabel;
 import ghidra.app.cmd.disassemble.SetFlowOverrideCmd;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.FlowOverride;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.program.util.ProgramSelection;
 
@@ -79,7 +82,7 @@ class SetFlowOverrideDialog extends DialogComponentProvider {
 	private JPanel buildMainPanel() {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 2));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(2, 5, 2, 2));
 		if (instruction != null) {
 			mainPanel.add(buildCurrentFlowPanel());
 		}
@@ -101,7 +104,7 @@ class SetFlowOverrideDialog extends DialogComponentProvider {
 			"Current Flow: " + flowType.getName() + (flowType.isConditional() ? "*" : "")));
 
 		panel.add(Box.createGlue());
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return panel;
 	}
@@ -113,7 +116,7 @@ class SetFlowOverrideDialog extends DialogComponentProvider {
 
 		panel.add(new GLabel(note));
 
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return panel;
 	}
@@ -144,7 +147,7 @@ class SetFlowOverrideDialog extends DialogComponentProvider {
 		panel.add(flowOverrideComboBox);
 
 		panel.add(Box.createGlue());
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return panel;
 	}

@@ -15,18 +15,22 @@
  */
 package ghidra.util;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyEditorSupport;
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.StreamTokenizer;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GDLabel;
 import ghidra.framework.options.CustomOptionsEditor;
@@ -201,7 +205,7 @@ public class ManualViewerCommandEditor extends PropertyEditorSupport
 
 		private JComponent createWorkPanel() {
 			JPanel workPanel = new JPanel();
-			workPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+			workPanel.setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 			workPanel.setLayout(new PairLayout());
 
 			JLabel commandLabel = new GDLabel(COMMAND_STRING_LABEL);

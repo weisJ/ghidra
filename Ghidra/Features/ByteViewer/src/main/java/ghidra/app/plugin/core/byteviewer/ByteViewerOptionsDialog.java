@@ -19,9 +19,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -29,6 +31,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GLabel;
 import ghidra.app.plugin.core.format.ByteBlockSelection;
@@ -64,7 +67,7 @@ public class ByteViewerOptionsDialog extends DialogComponentProvider
 
 	private JComponent buildPanel() {
 		JPanel mainPanel = new JPanel(new VerticalLayout(10));
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		mainPanel.add(buildSettingsPanel());
 		mainPanel.add(buildViewOptionsPanel());
 		setOkEnabled(hasValidFieldValues());
@@ -73,7 +76,7 @@ public class ByteViewerOptionsDialog extends DialogComponentProvider
 
 	private Component buildSettingsPanel() {
 		JPanel panel = new JPanel(new PairLayout(5, 5));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(new GLabel("Alignment Address:"));
 
 		if (provider instanceof ProgramByteViewerComponentProvider) {
@@ -109,9 +112,9 @@ public class ByteViewerOptionsDialog extends DialogComponentProvider
 
 	private Component buildViewOptionsPanel() {
 		JPanel panel = new JPanel(new GridLayout(0, 2, 40, 0));
-		Border outer = BorderFactory.createTitledBorder("Views");
-		Border inner = BorderFactory.createEmptyBorder(5, 15, 5, 15);
-		panel.setBorder(BorderFactory.createCompoundBorder(outer, inner));
+		Border outer = GhidraBorderFactory.createTitledBorder("Views");
+		Border inner = GhidraBorderFactory.createEmptyBorder(5, 15, 5, 15);
+		panel.setBorder(GhidraBorderFactory.createCompoundBorder(outer, inner));
 
 		Set<String> currentViews = provider.getCurrentViews();
 		List<String> dataModelNames = provider.getDataFormatNames();

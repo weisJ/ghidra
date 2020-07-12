@@ -15,9 +15,11 @@
  */
 package ghidra.bitpatterns.gui;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import javax.swing.*;
+
+import docking.border.GhidraBorderFactory;
 
 /**
  * 
@@ -49,7 +51,7 @@ public class ContextRegisterPanelBuilder {
 	 */
 	public JPanel buildContextRegisterPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		contextRegisterInfoField = new JTextArea();
 		contextRegisterInfoField.setText(message);
 		contextRegisterInfoField.setEditable(false);

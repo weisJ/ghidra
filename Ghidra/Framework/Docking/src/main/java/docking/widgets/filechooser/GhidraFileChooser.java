@@ -30,8 +30,14 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.filechooser.FileSystemView;
 
-import docking.*;
-import docking.widgets.*;
+import docking.DialogComponentProvider;
+import docking.DockingUtils;
+import docking.DockingWindowManager;
+import docking.EmptyBorderToggleButton;
+import docking.border.GhidraBorderFactory;
+import docking.widgets.DropDownSelectionChoiceListener;
+import docking.widgets.DropDownSelectionTextField;
+import docking.widgets.EmptyBorderButton;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
@@ -39,14 +45,20 @@ import docking.widgets.list.GListCellRenderer;
 import ghidra.framework.OperatingSystem;
 import ghidra.framework.Platform;
 import ghidra.framework.preferences.Preferences;
-import ghidra.util.*;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
-import ghidra.util.filechooser.*;
+import ghidra.util.filechooser.GhidraFileChooserListener;
+import ghidra.util.filechooser.GhidraFileChooserModel;
+import ghidra.util.filechooser.GhidraFileFilter;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.worker.Job;
 import ghidra.util.worker.Worker;
-import resources.*;
+import resources.Icons;
+import resources.MultiIcon;
+import resources.ResourceManager;
 import resources.icons.TranslateIcon;
 import util.CollectionUtils;
 import util.HistoryList;
@@ -361,7 +373,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 		shortCutPanel.add(recentButton);
 
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createLoweredBevelBorder());
+		panel.setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 		panel.setBackground(BACKGROUND_COLOR.darker());
 		panel.add(shortCutPanel, BorderLayout.NORTH);
 		return panel;
@@ -414,7 +426,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 		addFileFilter(GhidraFileFilter.ALL);
 
 		JPanel filenamePanel = new JPanel(new PairLayout(PAD, PAD));
-		filenamePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		filenamePanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		filenamePanel.add(filenameLabel);
 		filenamePanel.add(filenameTextField);
 		filenamePanel.add(filterLabel);
@@ -469,7 +481,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 	private void buildWaitPanel() {
 		waitPanel = new JPanel(new BorderLayout());
-		waitPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+		waitPanel.setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 		waitPanel.setBackground(BACKGROUND_COLOR);
 		waitPanel.addMouseListener(new MouseAdapter() {
 			@Override

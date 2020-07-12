@@ -15,10 +15,11 @@
  */
 package ghidra.examples2;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.table.GFilterTable;
 import ghidra.app.services.GoToService;
 import ghidra.framework.options.OptionsChangeListener;
@@ -46,7 +47,7 @@ public class SampleSearchTableProvider extends ComponentProviderAdapter
 
 	private JComponent build(SampleSearcher searcher) {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(3, 3, 3, 3));
 
 		model = new SampleSearchTableModel(searcher, plugin.getTool());
 		filterTable = new GhidraFilterTable<>(model);

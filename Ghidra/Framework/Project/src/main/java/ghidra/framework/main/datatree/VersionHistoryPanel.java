@@ -31,10 +31,18 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import docking.ActionContext;
-import docking.action.*;
-import docking.dnd.*;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.MenuData;
+import docking.border.GhidraBorderFactory;
+import docking.dnd.DragGestureAdapter;
+import docking.dnd.DragSrcAdapter;
+import docking.dnd.Draggable;
 import docking.widgets.OptionDialog;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
+import docking.widgets.table.GTableHeaderRenderer;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.framework.client.ClientUtil;
 import ghidra.framework.main.GetVersionedObjectTask;
@@ -42,8 +50,13 @@ import ghidra.framework.model.*;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.store.ItemCheckoutStatus;
 import ghidra.framework.store.Version;
-import ghidra.util.*;
-import ghidra.util.task.*;
+import ghidra.util.DateUtils;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Panel that shows version history in a JTable
@@ -389,7 +402,7 @@ public class VersionHistoryPanel extends JPanel implements Draggable {
 				setText(DateUtils.formatDateTimestamp((Date) value));
 			}
 
-			setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+			setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 0));
 
 			String toolTipText = null;
 

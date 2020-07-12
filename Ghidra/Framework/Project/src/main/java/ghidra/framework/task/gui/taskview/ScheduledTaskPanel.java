@@ -19,6 +19,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.framework.task.gui.GProgressBar;
 
@@ -33,7 +34,7 @@ public class ScheduledTaskPanel extends JPanel {
 		super();
 		this.indention = indention;
 
-		setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
+		setBorder(GhidraBorderFactory.createEmptyBorder(5, 0, 5, 0));
 
 		layout = new ScheduledElementLayout();
 		setLayout(layout);

@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import resources.Icons;
 import resources.ResourceManager;
 
@@ -130,7 +131,7 @@ public class FunctionTagButtonPanel extends JPanel {
 			});
 		add(deleteBtn, gbc);
 
-		setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		setMaximumSize(new Dimension(30, 300));
 	}
 

@@ -20,7 +20,10 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-import docking.widgets.*;
+import docking.border.GhidraBorderFactory;
+import docking.widgets.DataToStringConverter;
+import docking.widgets.DropDownTextFieldDataModel;
+import docking.widgets.ListSelectionDialog;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GLabel;
 import docking.widgets.textfield.IntegerTextField;
@@ -52,7 +55,7 @@ public class GhidraScriptSelectionDialog extends ListSelectionDialog<ResourceFil
 
 	private Component buildPriorityPanel() {
 		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createEmptyBorder(0, 40, 20, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 40, 20, 0));
 		panel.add(new GLabel("Priority:  "));
 		priorityField = new IntegerTextField(5, 0L);
 		panel.add(priorityField.getComponent());
@@ -86,9 +89,9 @@ public class GhidraScriptSelectionDialog extends ListSelectionDialog<ResourceFil
 		panel.add(createButtonComponent(AnalyzerType.INSTRUCTION_ANALYZER));
 		panel.add(createButtonComponent(AnalyzerType.FUNCTION_SIGNATURES_ANALYZER));
 		panel.add(createButtonComponent(AnalyzerType.DATA_ANALYZER));
-		Border inner = BorderFactory.createTitledBorder("Analyzer Type");
-		Border outer = BorderFactory.createEmptyBorder(0, 20, 20, 20);
-		panel.setBorder(BorderFactory.createCompoundBorder(outer, inner));
+		Border inner = GhidraBorderFactory.createTitledBorder("Analyzer Type");
+		Border outer = GhidraBorderFactory.createEmptyBorder(0, 20, 20, 20);
+		panel.setBorder(GhidraBorderFactory.createCompoundBorder(outer, inner));
 		return panel;
 	}
 

@@ -16,22 +16,30 @@
 package docking.widgets.table.constraint.dialog;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
 
 import org.apache.commons.lang3.StringUtils;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.DialogComponentProvider;
+import docking.DockingWindowManager;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.dialogs.InputDialog;
 import docking.widgets.label.GLabel;
 import docking.widgets.table.GTableFilterPanel;
 import docking.widgets.table.RowObjectFilterModel;
-import docking.widgets.table.columnfilter.*;
+import docking.widgets.table.columnfilter.ColumnBasedTableFilter;
+import docking.widgets.table.columnfilter.ColumnFilterSaveManager;
+import docking.widgets.table.columnfilter.LogicOperation;
 import docking.widgets.table.constrainteditor.ColumnConstraintEditor;
 import generic.util.WindowUtilities;
 import ghidra.util.HelpLocation;
@@ -206,7 +214,7 @@ public class ColumnFilterDialog<R> extends DialogComponentProvider
 	private JComponent buildFilterPanelContainer() {
 
 		filterPanelContainer = new JPanel(new VerticalLayout(4));
-		filterPanelContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		filterPanelContainer.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		JScrollPane jScrollPane = new JScrollPane(filterPanelContainer);
 
 		jScrollPane.setColumnHeaderView(buildHeaderPanel());
@@ -380,9 +388,10 @@ public class ColumnFilterDialog<R> extends DialogComponentProvider
 		headerPanel.add(new GLabel("Filter", SwingConstants.CENTER));
 		headerPanel.add(new GLabel("Filter Value", SwingConstants.CENTER));
 
-		headerPanel.setBorder(new CompoundBorder(
-			BorderFactory.createMatteBorder(0, 0, 1, 0, Color.DARK_GRAY.brighter().brighter()),
-			BorderFactory.createEmptyBorder(4, 0, 4, 0)));
+		headerPanel.setBorder(GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createMatteBorder(0, 0, 1, 0,
+				Color.DARK_GRAY.brighter().brighter()),
+			GhidraBorderFactory.createEmptyBorder(4, 0, 4, 0)));
 		return headerPanel;
 	}
 

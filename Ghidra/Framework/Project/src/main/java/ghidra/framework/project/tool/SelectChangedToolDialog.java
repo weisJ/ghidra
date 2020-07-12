@@ -15,8 +15,7 @@
  */
 package ghidra.framework.project.tool;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
@@ -24,6 +23,7 @@ import java.util.List;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GHtmlLabel;
@@ -63,10 +63,10 @@ public class SelectChangedToolDialog extends DialogComponentProvider {
 				" running.<p>Which one would like to save to your tool chest?"));
 		descriptionLabel.setIconTextGap(15);
 		descriptionLabel.setIcon(OptionDialog.getIconForMessageType(OptionDialog.WARNING_MESSAGE));
-		descriptionLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		descriptionLabel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(descriptionLabel, BorderLayout.NORTH);
 		JScrollPane scrollPane = new JScrollPane(buildRadioButtonPanel());
-		scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		scrollPane.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(scrollPane);
 		return panel;
 	}

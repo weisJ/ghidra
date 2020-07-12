@@ -22,12 +22,16 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.event.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Caret;
 
 import docking.DockingUtils;
 import docking.DockingUtils.TreeTraversalResult;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.textfield.TextFieldLinker;
 import generic.util.WindowUtilities;
 import ghidra.util.task.SwingUpdateManager;
@@ -125,9 +129,11 @@ public class TextFieldAutocompleter<T> {
 	// Prepare all the swing components (except the window)
 	{
 		content.setBorder(
-			BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, Color.GRAY));
+			GhidraBorderFactory.createBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY,
+				Color.GRAY));
 		scrollPane.setBorder(
-			BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.LIGHT_GRAY, Color.GRAY));
+			GhidraBorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.LIGHT_GRAY,
+				Color.GRAY));
 		//content.setFocusable(false);
 
 		scrollPane.getVerticalScrollBar().setFocusable(false);

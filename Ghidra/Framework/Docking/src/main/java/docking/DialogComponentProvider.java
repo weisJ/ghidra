@@ -17,17 +17,22 @@ package docking;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.*;
-import javax.swing.Timer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-import docking.action.*;
+import docking.action.ActionContextProvider;
+import docking.action.DockingActionIf;
+import docking.action.ToolBarData;
 import docking.actions.KeyBindingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.event.mouse.GMouseListenerAdapter;
 import docking.help.HelpService;
 import docking.menu.DialogToolbarButton;
@@ -35,7 +40,10 @@ import docking.util.AnimationUtils;
 import docking.widgets.label.GDHtmlLabel;
 import ghidra.util.*;
 import ghidra.util.exception.AssertException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskListener;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorComponent;
 import utility.function.Callback;
 
 /**
@@ -141,13 +149,13 @@ public class DialogComponentProvider
 			}
 		};
 		mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createEtchedBorder());
+		mainPanel.setBorder(GhidraBorderFactory.createEtchedBorder());
 		rootPanel.add(mainPanel, BorderLayout.CENTER);
 
 		taskScheduler = new TaskScheduler(this);
 
 		buttonPanel = new JPanel(new GridLayout(1, 0, 6, 0));
-		buttonPanel.setBorder(BorderFactory.createEmptyBorder(3, 0, 0, 0));
+		buttonPanel.setBorder(GhidraBorderFactory.createEmptyBorder(3, 0, 0, 0));
 		statusPanel = buildStatusPanel();
 
 		if (canRunTasks) {
@@ -897,7 +905,7 @@ public class DialogComponentProvider
 		statusLabel.setName("statusLabel");
 		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		statusLabel.setForeground(Color.blue);
-		statusLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+		statusLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 5));
 		statusLabel.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
@@ -1180,7 +1188,7 @@ public class DialogComponentProvider
 
 		if (toolbar == null) {
 			toolbar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 2, 0));
-			toolbar.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+			toolbar.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 10));
 			mainPanel.add(toolbar, BorderLayout.NORTH);
 		}
 

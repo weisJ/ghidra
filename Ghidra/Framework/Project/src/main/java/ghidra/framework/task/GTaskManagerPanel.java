@@ -16,15 +16,16 @@
  */
 package ghidra.framework.task;
 
-import ghidra.framework.task.gui.GTaskResultPanel;
-import ghidra.framework.task.gui.taskview.TaskViewer;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+
+import docking.border.GhidraBorderFactory;
+import ghidra.framework.task.gui.GTaskResultPanel;
+import ghidra.framework.task.gui.taskview.TaskViewer;
 
 /**
  * Main component for managing and viewing the state of a GTaskManager.
@@ -67,14 +68,14 @@ public class GTaskManagerPanel extends JPanel {
 		this.taskManager = taskMgr;
 		setLayout(new BorderLayout());
 
-		Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 0, 5);
+		Border emptyBorder = GhidraBorderFactory.createEmptyBorder(5, 5, 0, 5);
 		taskViewer = new TaskViewer(taskMgr);
 		resultPanel = new GTaskResultPanel(taskMgr);
-		resultPanel.setBorder(BorderFactory.createTitledBorder(emptyBorder, "Task Results"));
+		resultPanel.setBorder(GhidraBorderFactory.createTitledBorder(emptyBorder, "Task Results"));
 		mainPanel = new JSplitPane();
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 5, 10, 5));
 		JComponent taskViewerComponent = taskViewer.getComponent();
-		taskViewerComponent.setBorder(BorderFactory.createTitledBorder(emptyBorder,
+		taskViewerComponent.setBorder(GhidraBorderFactory.createTitledBorder(emptyBorder,
 			"Scheduled Tasks"));
 		mainPanel.setLeftComponent(taskViewerComponent);
 		mainPanel.setRightComponent(resultPanel);

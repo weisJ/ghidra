@@ -21,6 +21,7 @@ import java.util.*;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDHtmlLabel;
 import docking.widgets.table.constraint.ColumnConstraint;
@@ -55,7 +56,7 @@ public class EnumConstraintEditor<T extends Enum<T>> extends AbstractColumnConst
 	protected Component buildInlineEditorComponent() {
 
 		JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
-		panel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 20, 0, 10));
 
 		for (T t : allValues) {
 			GCheckBox jCheckBox = new GCheckBox(getElementDisplayName(t));

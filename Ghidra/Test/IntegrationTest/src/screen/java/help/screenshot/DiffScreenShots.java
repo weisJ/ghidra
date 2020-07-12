@@ -15,8 +15,7 @@
  */
 package help.screenshot;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -29,10 +28,14 @@ import ghidra.app.plugin.core.codebrowser.CodeViewerProvider;
 import ghidra.app.services.ProgramManager;
 import ghidra.framework.main.OpenVersionedFileDialog;
 import ghidra.framework.main.datatree.DataTree;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectData;
 import ghidra.framework.plugintool.Plugin;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.SymbolTable;
 import ghidra.util.task.TaskMonitor;

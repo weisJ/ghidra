@@ -16,7 +16,9 @@
 package ghidra.app.plugin.core.diff;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -25,8 +27,11 @@ import javax.swing.border.TitledBorder;
 
 import docking.DialogComponentProvider;
 import docking.DockingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramDiffFilter;
 import ghidra.program.util.ProgramMemoryComparator;
@@ -149,7 +154,7 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 	 */
 	private JPanel createDiffPanel() {
 		JPanel panel = new JPanel();
-		TitledBorder border = new TitledBorder("Do Differences On");
+		TitledBorder border = GhidraBorderFactory.createTitledBorder("Do Differences On");
 		panel.setBorder(border);
 		panel.add(createDiffFilterPanel());
 		return panel;
@@ -157,8 +162,8 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 
 	private JPanel createAddressPanel() {
 		JPanel addressPanel = new JPanel(new BorderLayout());
-		Border border = BorderFactory.createEtchedBorder();
-		addressPanel.setBorder(new TitledBorder(border, ADDRESS_AREA_TITLE));
+		Border border = GhidraBorderFactory.createEtchedBorder();
+		addressPanel.setBorder(GhidraBorderFactory.createTitledBorder(border, ADDRESS_AREA_TITLE));
 		addressPanel.add(createLimitPanel(), BorderLayout.NORTH);
 		addressText = new JTextArea(5, 30);
 		addressText.setName("AddressTextArea");

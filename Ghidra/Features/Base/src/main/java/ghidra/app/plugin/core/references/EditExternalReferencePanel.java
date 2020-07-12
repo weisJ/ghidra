@@ -15,16 +15,18 @@
  */
 package ghidra.app.plugin.core.references;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Arrays;
 
 import javax.swing.*;
-import javax.swing.border.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GLabel;
 import ghidra.app.util.AddressInput;
@@ -32,8 +34,12 @@ import ghidra.framework.main.DataTreeDialog;
 import ghidra.framework.model.DomainFile;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Library;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.ExternalReference;
+import ghidra.program.model.symbol.Reference;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
 
@@ -67,7 +73,9 @@ class EditExternalReferencePanel extends EditReferencePanel {
 
 		JPanel topPanel = new JPanel(new PairLayout(5, 10, 160));
 		topPanel.setBorder(
-			new CompoundBorder(new TitledBorder("External Program"), new EmptyBorder(0, 5, 5, 5)));
+			GhidraBorderFactory.createCompoundBorder(
+				GhidraBorderFactory.createTitledBorder("External Program"),
+				GhidraBorderFactory.createEmptyBorder(0, 5, 5, 5)));
 
 		topPanel.add(new GLabel("Name:", SwingConstants.RIGHT));
 		extLibName = new GhidraComboBox<>();
@@ -131,8 +139,9 @@ class EditExternalReferencePanel extends EditReferencePanel {
 		topPanel.add(pathPanel);
 
 		JPanel bottomPanel = new JPanel(new PairLayout(10, 10, 160));
-		bottomPanel.setBorder(new CompoundBorder(new TitledBorder("External Reference Data"),
-			new EmptyBorder(0, 5, 5, 5)));
+		bottomPanel.setBorder(GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createTitledBorder("External Reference Data"),
+			GhidraBorderFactory.createEmptyBorder(0, 5, 5, 5)));
 
 		bottomPanel.add(new GLabel("Label:", SwingConstants.RIGHT));
 		extLabel = new JTextField();

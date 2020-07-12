@@ -15,13 +15,14 @@
  */
 package docking.widgets.dialogs;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.math.BigInteger;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.textfield.IntegerTextField;
 import ghidra.util.Swing;
@@ -264,7 +265,7 @@ public abstract class AbstractNumberInputDialog extends DialogComponentProvider 
 	 */
 	private JPanel createPanel(String prompt) {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		label = new GDLabel(prompt);
 		numberInputField = new IntegerTextField(12);

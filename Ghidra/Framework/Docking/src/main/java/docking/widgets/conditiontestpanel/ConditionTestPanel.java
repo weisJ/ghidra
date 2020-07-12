@@ -23,9 +23,9 @@ import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDHtmlLabel;
@@ -150,7 +150,7 @@ public class ConditionTestPanel extends JPanel {
 
 	private Component buildTestPanel() {
 		JPanel panel = new JPanel(new PairLayout(5, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		List<ConditionTester> tests = conditionTestModel.getTests();
 		for (ConditionTester conditionTest : tests) {
 			TestPanel testPanel = new TestPanel(conditionTest);
@@ -193,7 +193,7 @@ public class ConditionTestPanel extends JPanel {
 		JButton runButton = new EmptyBorderButton(ResourceManager.loadImage("images/play.png"));
 		runButton.addActionListener(e -> conditionTestModel.runTests(taskMonitor));
 		JPanel buttonPanel = new JPanel(new BorderLayout());
-		buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 0));
+		buttonPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 0));
 		buttonPanel.add(runButton);
 		panel.add(buttonPanel, BorderLayout.WEST);
 		panel.add(createSummaryPanel());
@@ -202,7 +202,7 @@ public class ConditionTestPanel extends JPanel {
 
 	private Component createSummaryPanel() {
 		JPanel panel = new JPanel(new GridLayout(1, 3, 20, 0));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		runsLabel = new GDLabel("Tests: 0/" + conditionTestModel.getTestCount());
 		panel.add(runsLabel);
 		errorsLabel = new GDLabel("Errors: 0");
@@ -307,9 +307,9 @@ public class ConditionTestPanel extends JPanel {
 		private int progress;
 
 		public OverallProgressBar() {
-			Border emptyBorder = BorderFactory.createEmptyBorder(10, 15, 10, 5);
-			Border bevelBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
-			setBorder(BorderFactory.createCompoundBorder(emptyBorder, bevelBorder));
+			Border emptyBorder = GhidraBorderFactory.createEmptyBorder(10, 15, 10, 5);
+			Border bevelBorder = GhidraBorderFactory.createLoweredBevelBorder();
+			setBorder(GhidraBorderFactory.createCompoundBorder(emptyBorder, bevelBorder));
 		}
 
 		@Override

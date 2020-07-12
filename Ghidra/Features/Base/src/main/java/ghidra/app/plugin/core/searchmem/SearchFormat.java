@@ -16,9 +16,10 @@
  */
 package ghidra.app.plugin.core.searchmem;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.event.ChangeListener;
+
+import docking.border.GhidraBorderFactory;
 
 public abstract class SearchFormat {
 	private String name;
@@ -35,7 +36,7 @@ public abstract class SearchFormat {
 	
 	public JPanel getOptionsPanel() {
 		JPanel noOptionsPanel = new JPanel();
-        noOptionsPanel.setBorder(BorderFactory.createTitledBorder("Format Options"));
+		noOptionsPanel.setBorder(GhidraBorderFactory.createTitledBorder("Format Options"));
         return noOptionsPanel;
 	}
 		

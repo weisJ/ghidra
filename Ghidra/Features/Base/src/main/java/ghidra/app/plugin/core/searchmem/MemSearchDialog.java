@@ -18,15 +18,21 @@ package ghidra.app.plugin.core.searchmem;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeListener;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
 
-import docking.*;
+import docking.ComponentProvider;
+import docking.DialogComponentProvider;
+import docking.TaskScheduler;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
@@ -34,7 +40,9 @@ import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.app.util.HelpTopics;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.NumericUtilities;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.layout.VariableRowHeightGridLayout;
 import ghidra.util.layout.VerticalLayout;
@@ -296,7 +304,7 @@ class MemSearchDialog extends DialogComponentProvider {
 
 	private JPanel buildSearchPanel() {
 		JPanel labelPanel = new JPanel();
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 10));
 		labelPanel.setLayout(new GridLayout(0, 1));
 		labelPanel.add(new GLabel("Search Value: "));
 		labelPanel.add(new GLabel("Hex Sequence: "));
@@ -319,11 +327,11 @@ class MemSearchDialog extends DialogComponentProvider {
 		inputPanel.add(valueComboBox);
 		hexSeqField = new GDLabel();
 		hexSeqField.setName("HexSequenceField");
-		hexSeqField.setBorder(BorderFactory.createLoweredBevelBorder());
+		hexSeqField.setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 		inputPanel.add(hexSeqField);
 
 		JPanel searchPanel = new JPanel(new BorderLayout());
-		searchPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		searchPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		searchPanel.add(labelPanel, BorderLayout.WEST);
 		searchPanel.add(inputPanel, BorderLayout.CENTER);
 		return searchPanel;
@@ -365,7 +373,7 @@ class MemSearchDialog extends DialogComponentProvider {
 
 	private Container createSeparatorPanel() {
 		JPanel panel = new JPanel(new GridLayout(1, 1));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 0, 10, 10));
 
 		panel.add(new JSeparator(SwingConstants.VERTICAL));
 		return panel;
@@ -373,7 +381,7 @@ class MemSearchDialog extends DialogComponentProvider {
 
 	private Container buildAdvancedPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 10, 10));
 		panel.add(createSeparatorPanel(), BorderLayout.WEST);
 		panel.add(buildAdvancedPanelContents());
 
@@ -415,7 +423,7 @@ class MemSearchDialog extends DialogComponentProvider {
 		endianPanel.setLayout(new BoxLayout(endianPanel, BoxLayout.Y_AXIS));
 		endianPanel.add(littleEndian);
 		endianPanel.add(bigEndian);
-		endianPanel.setBorder(BorderFactory.createTitledBorder("Byte Order"));
+		endianPanel.setBorder(GhidraBorderFactory.createTitledBorder("Byte Order"));
 
 		return endianPanel;
 	}
@@ -441,7 +449,7 @@ class MemSearchDialog extends DialogComponentProvider {
 		codeUnitTypePanel.add(instructionsCheckBox);
 		codeUnitTypePanel.add(definedCheckBox);
 		codeUnitTypePanel.add(undefinedCheckBox);
-		codeUnitTypePanel.setBorder(BorderFactory.createTitledBorder(CODE_UNIT_SCOPE_NAME));
+		codeUnitTypePanel.setBorder(GhidraBorderFactory.createTitledBorder(CODE_UNIT_SCOPE_NAME));
 
 		return codeUnitTypePanel;
 	}
@@ -449,7 +457,7 @@ class MemSearchDialog extends DialogComponentProvider {
 	private Component buildSelectionPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(new TitledBorder("Selection Scope"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Selection Scope"));
 
 		searchSelectionRadioButton = new GRadioButton("Search Selection");
 		searchAllRadioButton = new GRadioButton("Search All");
@@ -486,7 +494,7 @@ class MemSearchDialog extends DialogComponentProvider {
 	 */
 	private JPanel buildFormatPanel() {
 		JPanel formatPanel = new JPanel();
-		formatPanel.setBorder(BorderFactory.createTitledBorder("Format"));
+		formatPanel.setBorder(GhidraBorderFactory.createTitledBorder("Format"));
 		formatPanel.setLayout(new GridLayout(0, 1));
 
 		ButtonGroup formatGroup = new ButtonGroup();
@@ -561,7 +569,7 @@ class MemSearchDialog extends DialogComponentProvider {
 		advancedButtonPanel.add(advancedButton);
 
 		JPanel optionsPanel = new JPanel();
-		optionsPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 20, 10));
+		optionsPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 20, 10));
 		optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
 		optionsPanel.add(northPanel);
 //		optionsPanel.add( southPanel );
@@ -591,7 +599,7 @@ class MemSearchDialog extends DialogComponentProvider {
 		directionPanel.setLayout(new BoxLayout(directionPanel, BoxLayout.Y_AXIS));
 		directionPanel.add(loadedBlocks);
 		directionPanel.add(allBlocks);
-		directionPanel.setBorder(BorderFactory.createTitledBorder("Memory Block Types"));
+		directionPanel.setBorder(GhidraBorderFactory.createTitledBorder("Memory Block Types"));
 
 		JPanel extrasPanel = new JPanel();
 		extrasPanel.setLayout(new BorderLayout());

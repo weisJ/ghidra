@@ -15,8 +15,7 @@
  */
 package ghidra.app.script;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GLabel;
 import ghidra.util.Msg;
@@ -70,7 +70,7 @@ public class MultipleOptionsDialog<T> extends DialogComponentProvider {
 	protected void setup(String message) {
 
 		JPanel panel = new JPanel(new GridLayout(0, 1));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		panel.add(new GLabel(message), BorderLayout.WEST);
 

@@ -15,12 +15,13 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.List;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;
@@ -96,7 +97,7 @@ public class UndoActionDialog extends DialogComponentProvider {
 	private JPanel buildMainPanel(String actionString, ImageIcon icon) {
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
-		innerPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+		innerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 5));
 
 		filePanel = new DomainFilesPanel(fileList, null);
 		saveCopyCB = new GCheckBox("Save copy of the file with a .keep extension", true);

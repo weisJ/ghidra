@@ -24,18 +24,24 @@ import java.util.List;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.app.script.SelectLanguageDialog;
-import ghidra.feature.fid.db.*;
+import ghidra.feature.fid.db.FidDB;
+import ghidra.feature.fid.db.FidFile;
+import ghidra.feature.fid.db.FidFileManager;
+import ghidra.feature.fid.db.LibraryRecord;
 import ghidra.feature.fid.service.DefaultFidPopulateResultReporter;
 import ghidra.feature.fid.service.FidService;
 import ghidra.framework.main.AppInfo;
 import ghidra.framework.main.DataTreeDialog;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectData;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.lang.LanguageCompilerSpecPair;
 import ghidra.util.HelpLocation;
@@ -107,7 +113,7 @@ public class PopulateFidDialog extends DialogComponentProvider {
 
 	private JComponent buildMainPanel() {
 		JPanel panel = new JPanel(new PairLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		JLabel jLabel = new GDLabel("Fid Database: ", SwingConstants.RIGHT);
 		jLabel.setToolTipText("Choose the Fid Database to populate");
 		panel.add(jLabel);

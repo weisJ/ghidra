@@ -15,15 +15,17 @@
  */
 package docking.widgets.dialogs;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 
 import org.apache.commons.lang3.StringUtils;
 
-import docking.*;
+import docking.DialogComponentProvider;
+import docking.DockingUtils;
+import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;
@@ -86,11 +88,11 @@ public class MultiLineMessageDialog extends DialogComponentProvider {
 		super(title, modal, false, true, false);
 
 		JPanel workPanel = new JPanel(new BorderLayout());
-		workPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		workPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		if (!StringUtils.isBlank(shortMessage)) {
 			JLabel shortMessageLabel = new GLabel(shortMessage);
-			shortMessageLabel.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 10));
+			shortMessageLabel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 5, 10, 10));
 			workPanel.add(shortMessageLabel, BorderLayout.NORTH);
 		}
 
@@ -120,7 +122,7 @@ public class MultiLineMessageDialog extends DialogComponentProvider {
 			DockingUtils.setTransparent(textpane);
 			JScrollPane scrollPane = new JScrollPane(textpane);
 			DockingUtils.setTransparent(scrollPane);
-			scrollPane.setBorder(BorderFactory.createEmptyBorder());
+			scrollPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 			workPanel.add(scrollPane, BorderLayout.CENTER);
 		}
 		else {
@@ -130,14 +132,14 @@ public class MultiLineMessageDialog extends DialogComponentProvider {
 			DockingUtils.setTransparent(textarea);
 			JScrollPane scrollPane = new JScrollPane(textarea);
 			DockingUtils.setTransparent(scrollPane);
-			scrollPane.setBorder(BorderFactory.createEmptyBorder());
+			scrollPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 			workPanel.add(scrollPane, BorderLayout.CENTER);
 		}
 
 		Icon icon = OptionDialog.getIconForMessageType(messageType);
 		if (icon != null) {
 			JLabel iconLabel = new GIconLabel(icon);
-			iconLabel.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 10));
+			iconLabel.setBorder(GhidraBorderFactory.createEmptyBorder(1, 10, 1, 10));
 			workPanel.add(iconLabel, BorderLayout.WEST);
 		}
 

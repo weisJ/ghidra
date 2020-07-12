@@ -15,12 +15,16 @@
  */
 package ghidra.app.plugin.core.datamgr.util;
 
-import java.awt.BorderLayout;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;
@@ -95,9 +99,9 @@ public class ConflictDialog extends DialogComponentProvider {
 	private JPanel buildMainPanel(String dtName, String categoryPath, String newDTName) {
 		JPanel outerPanel = new JPanel(new BorderLayout(20, 0));
 
-		outerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBorder(BorderFactory.createTitledBorder("Resolve Data Type Conflict"));
+		mainPanel.setBorder(GhidraBorderFactory.createTitledBorder("Resolve Data Type Conflict"));
 
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
@@ -144,7 +148,7 @@ public class ConflictDialog extends DialogComponentProvider {
 
 	private JPanel createLabelPanel(String dtName, String categoryPath) {
 		JPanel labelPanel = new JPanel();
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 20));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 0, 0, 20));
 		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));
@@ -154,7 +158,7 @@ public class ConflictDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(labelPanel);
-		panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 20, 0));
 		return panel;
 	}
 

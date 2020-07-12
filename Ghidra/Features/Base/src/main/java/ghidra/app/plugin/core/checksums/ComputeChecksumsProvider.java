@@ -15,15 +15,17 @@
  */
 package ghidra.app.plugin.core.checksums;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.ToggleDockingAction;
+import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.app.context.ProgramContextAction;
 import ghidra.framework.plugintool.ComponentProviderAdapter;
@@ -87,7 +89,7 @@ public class ComputeChecksumsProvider extends ComponentProviderAdapter {
 
 		main.setLayout(new BorderLayout());
 		JPanel resultsMainPanel = new JPanel(new BorderLayout());
-		resultsMainPanel.setBorder(BorderFactory.createTitledBorder("Checksum Results"));
+		resultsMainPanel.setBorder(GhidraBorderFactory.createTitledBorder("Checksum Results"));
 		JPanel tablePanel = new JPanel(new BorderLayout());
 		JScrollPane scroll = new JScrollPane(table);
 		tablePanel.add(scroll);
@@ -98,7 +100,7 @@ public class ComputeChecksumsProvider extends ComponentProviderAdapter {
 		errorStatus.setName("message");
 		errorStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		errorStatus.setForeground(Color.RED);
-		errorStatus.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+		errorStatus.setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 5));
 		main.add(errorStatus, BorderLayout.SOUTH);
 
 		return main;

@@ -16,16 +16,15 @@
  */
 package ghidra.app.merge.propertylist;
 
-import ghidra.app.merge.ProgramMultiUserMergeManager;
-import ghidra.app.merge.util.ConflictCountPanel;
+import java.awt.*;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import docking.border.GhidraBorderFactory;
+import ghidra.app.merge.ProgramMultiUserMergeManager;
+import ghidra.app.merge.util.ConflictCountPanel;
 
 /**
  * Panel to show conflicts for properties and the number of conflicts.
@@ -72,7 +71,7 @@ class PropertyListMergePanel extends JPanel {
 		conflictPanel = createConflictPanel();
 
 		setLayout(new BorderLayout(0, 20));
-		setBorder(BorderFactory.createEmptyBorder(10, 5, 0, 5));
+		setBorder(GhidraBorderFactory.createEmptyBorder(10, 5, 0, 5));
 		add(countPanel, BorderLayout.NORTH);
 		add(conflictPanel, BorderLayout.CENTER);
 	}

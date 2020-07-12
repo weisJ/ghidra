@@ -15,13 +15,15 @@
  */
 package ghidra.app.plugin.core.processors;
 
-import javax.swing.BorderFactory;
-
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.plugin.importer.LcsSelectionListener;
 import ghidra.plugin.importer.NewLanguagePanel;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.LanguageCompilerSpecPair;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageService;
 import ghidra.program.model.listing.Program;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.util.HelpLocation;
@@ -78,7 +80,7 @@ public class SetLanguageDialog extends DialogComponentProvider {
 
 		selectLangPanel.addSelectionListener(listener);
 
-		selectLangPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		selectLangPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		addWorkPanel(selectLangPanel);
 		addOKButton();

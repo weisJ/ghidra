@@ -19,24 +19,32 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.WeakHashMap;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdom.Element;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.app.util.AddressInput;
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.scalar.Scalar;
 import ghidra.program.model.symbol.*;
 import ghidra.program.util.OperandFieldLocation;
@@ -540,7 +548,7 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 		model = new HistoryTableModel(fromCodeUnit.getProgram());
 		displayTable = new JTable(model);
 		displayTable.setTableHeader(null);
-		displayTable.setBorder(new LineBorder(Color.BLACK));
+		displayTable.setBorder(GhidraBorderFactory.createLineBorder(Color.BLACK));
 		displayTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		displayTable.addMouseListener(new MouseAdapter() {

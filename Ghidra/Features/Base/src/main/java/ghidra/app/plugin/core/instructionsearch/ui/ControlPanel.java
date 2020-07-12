@@ -17,9 +17,9 @@ package ghidra.app.plugin.core.instructionsearch.ui;
 
 import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.app.plugin.core.instructionsearch.InstructionSearchPlugin;
 
 /**
@@ -60,7 +60,7 @@ public class ControlPanel extends JPanel {
 		gbc.weightx = 1.0;
 		this.add(directionWidget, gbc);
 
-		this.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		this.setBorder(GhidraBorderFactory.createLineBorder(Color.GRAY));
 	}
 
 	/**

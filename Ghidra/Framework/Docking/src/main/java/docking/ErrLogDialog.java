@@ -23,6 +23,7 @@ import java.net.UnknownHostException;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.ScrollableTextArea;
 import docking.widgets.label.GHtmlLabel;
 import docking.widgets.label.GIconLabel;
@@ -156,7 +157,7 @@ public class ErrLogDialog extends DialogComponentProvider {
 		}
 
 		JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 5, 5));
-		buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		buttonPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		if (errorReporter != null) {
 			buttonPanel.add(sendButton);
 		}

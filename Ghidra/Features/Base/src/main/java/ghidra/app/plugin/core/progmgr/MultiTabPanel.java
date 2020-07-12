@@ -22,9 +22,10 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.Border;
 
 import docking.actions.KeyBindingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GIconLabel;
 import generic.util.WindowUtilities;
@@ -92,9 +93,9 @@ public class MultiTabPanel extends JPanel {
 		// Create a border that is designed to draw a rectangle along the bottom of the
 		// panel that will accent the selected tab. This line is intended to appear as
 		// it is part of the selected tab.
-		Border outerBorder = new MatteBorder(0, 0, 3, 0, SELECTED_TAB_COLOR);
-		Border innerBorder = new BottomOnlyBevelBorder();
-		setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+		Border outerBorder = GhidraBorderFactory.createMatteBorder(0, 0, 3, 0, SELECTED_TAB_COLOR);
+		Border innerBorder = GhidraBorderFactory.createBottomOnlyBevelBorder();
+		setBorder(GhidraBorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
 		showHiddenListLabel = createLabel();
 
@@ -210,7 +211,7 @@ public class MultiTabPanel extends JPanel {
 
 	private TabPanel createProgramTab(final Program program, boolean isSelected) {
 		final JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 1));
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 10));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 10));
 
 		JLabel nameLabel = new GDLabel();
 		nameLabel.setIconTextGap(1);
@@ -279,7 +280,7 @@ public class MultiTabPanel extends JPanel {
 		gbc.anchor = GridBagConstraints.NORTHEAST;
 		gbl.setConstraints(iconLabel, gbc);
 		tabPanel.add(iconLabel);
-		tabPanel.setBorder(new BottomlessBevelBorder());
+		tabPanel.setBorder(GhidraBorderFactory.createBottomlessBevelBorder());
 
 		// this listener gets added to every component in the tab panel we are creating
 		MouseListener tabSelectionMouseListener = new MouseAdapter() {
@@ -633,13 +634,13 @@ public class MultiTabPanel extends JPanel {
 		JLabel newLabel = new GDLabel(DEFAULT_HIDDEN_COUNT_STR, LIST_ICON, SwingConstants.LEFT);
 		newLabel.setIconTextGap(0);
 		newLabel.setFont(LIST_LABEL_FONT);
-		newLabel.setBorder(BorderFactory.createEmptyBorder(4, 4, 0, 4));
+		newLabel.setBorder(GhidraBorderFactory.createEmptyBorder(4, 4, 0, 4));
 		newLabel.setToolTipText("Show Tab List");
 		newLabel.setName("showList");
 		newLabel.setBackground(new Color(255, 226, 213));
 
 		defaultListLabelBorder = newLabel.getBorder();
-		final Border hoverBorder = BorderFactory.createBevelBorder(BevelBorder.RAISED);
+		final Border hoverBorder = GhidraBorderFactory.createRaisedBevelBorder();
 		newLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -959,7 +960,7 @@ public class MultiTabPanel extends JPanel {
 		private SelectedPanel(Color backgroundColor, Program program, JLabel nameLabel,
 				JPanel labelPanel, JLabel iconLabel) {
 			super(backgroundColor, program, nameLabel, labelPanel, iconLabel);
-			setBorder(new BottomlessBevelBorder());
+			setBorder(GhidraBorderFactory.createBottomlessBevelBorder());
 
 			// color our widgets special
 			setBackground(BG_SELECTION_COLOR);
@@ -992,89 +993,6 @@ public class MultiTabPanel extends JPanel {
 
 			// this tab is selected, so change the foreground to be readable
 			nameLabel.setForeground(foreground);
-		}
-	}
-
-	// This class doesn't paint the bottom border in order to make the object appear to be 
-	// connected to the component below.  This class also paints its side borders below its 
-	// bounds for the same reason.
-	class BottomlessBevelBorder extends BevelBorder {
-		public BottomlessBevelBorder() {
-			super(RAISED);
-		}
-
-		@Override
-		// overridden to reduce the space below, since there is no component	    
-		public Insets getBorderInsets(Component c) {
-			Insets borderInsets = super.getBorderInsets(c);
-			borderInsets.bottom = 0;
-			return borderInsets;
-		}
-
-		@Override
-		protected void paintRaisedBevel(Component c, Graphics g, int x, int y, int width,
-				int height) {
-			Color oldColor = g.getColor();
-			int h = height;
-			int w = width;
-
-			g.translate(x, y);
-
-			Shape saveClip = g.getClip();
-			Rectangle bounds = saveClip.getBounds();
-			g.setClip(bounds.x, bounds.y, bounds.width, getHeight() + 2);
-
-			g.setColor(getShadowOuterColor(c));
-			g.drawLine(0, 0, 0, h); // left outer
-			g.setColor(getHighlightOuterColor(c));
-			g.drawLine(1, 0, w - 2, 0); // upper outer
-
-			g.setColor(getHighlightInnerColor(c));
-			g.drawLine(1, 1, 1, h); // left inner
-			g.drawLine(2, 1, w - 3, 1); // upper inner
-
-			// bottom outer
-			g.setColor(getShadowOuterColor(c));
-			g.drawLine(w - 1, 0, w - 1, h); // right outer
-
-			// bottom inner
-			g.setColor(getShadowInnerColor(c));
-			g.drawLine(w - 2, 1, w - 2, h); // right inner
-
-			g.setClip(saveClip);
-
-			g.translate(-x, -y);
-			g.setColor(oldColor);
-
-		}
-	}
-
-	// a bevel border to paint only it's bottom edge, but with the highlight normally found at
-	// the top edge
-	class BottomOnlyBevelBorder extends BevelBorder {
-		public BottomOnlyBevelBorder() {
-			super(RAISED);
-		}
-
-		@Override
-		protected void paintRaisedBevel(Component c, Graphics g, int x, int y, int width,
-				int height) {
-			Color oldColor = g.getColor();
-			int h = height;
-			int w = width;
-
-			g.translate(x, y);
-
-			// bottom outer
-			g.setColor(getHighlightOuterColor(c));
-			g.drawLine(0, h - 1, w - 1, h - 1);
-
-			// bottom inner         
-			g.setColor(getShadowInnerColor(c));
-
-			g.translate(-x, -y);
-			g.setColor(oldColor);
-
 		}
 	}
 }

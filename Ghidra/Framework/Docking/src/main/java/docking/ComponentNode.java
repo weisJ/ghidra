@@ -15,15 +15,22 @@
  */
 package docking;
 
-import java.awt.Component;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
 import org.jdom.Element;
 
+import docking.border.GhidraBorderFactory;
 import docking.help.HelpService;
 import docking.widgets.OptionDialog;
 import docking.widgets.tabbedpane.DockingTabRenderer;
@@ -259,7 +266,7 @@ class ComponentNode extends Node {
 		if (count == 1) {
 			top = activeComponents.get(0);
 			comp = top.getComponent();
-			comp.setBorder(BorderFactory.createRaisedBevelBorder());
+			comp.setBorder(GhidraBorderFactory.createRaisedBevelBorder());
 
 			installRenameMenu(top, null);
 		}
@@ -271,7 +278,7 @@ class ComponentNode extends Node {
 			for (int i = 0; i < count; i++) {
 				ComponentPlaceholder placeholder = activeComponents.get(i);
 				DockableComponent c = placeholder.getComponent();
-				c.setBorder(BorderFactory.createEmptyBorder());
+				c.setBorder(GhidraBorderFactory.createEmptyBorder());
 				String title = placeholder.getTitle();
 				String tabText = placeholder.getTabText();
 

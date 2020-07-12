@@ -15,17 +15,19 @@
  */
 package ghidra.app.util;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 import org.apache.commons.lang3.StringUtils;
 
 import docking.ComponentProvider;
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
 import ghidra.app.cmd.label.*;
@@ -33,7 +35,9 @@ import ghidra.framework.cmd.CompoundCmd;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.database.symbol.FunctionSymbol;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionManager;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.AssertException;
@@ -465,12 +469,14 @@ public class AddEditDialog extends DialogComponentProvider {
 		JPanel bottomPanel = new JPanel();
 
 		nameBorder =
-			BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "Enter Label");
+			GhidraBorderFactory.createTitledBorder(GhidraBorderFactory.createEmptyBorder(),
+				"Enter Label");
 		topPanel.setBorder(nameBorder);
 		Border border =
-			BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "Namespace");
+			GhidraBorderFactory.createTitledBorder(GhidraBorderFactory.createEmptyBorder(),
+				"Namespace");
 		midPanel.setBorder(border);
-		border = BorderFactory.createEmptyBorder(5, 0, 0, 5);
+		border = GhidraBorderFactory.createEmptyBorder(5, 0, 0, 5);
 		bottomPanel.setBorder(border);
 
 		mainPanel.add(topPanel);
@@ -482,10 +488,10 @@ public class AddEditDialog extends DialogComponentProvider {
 		bottomPanel.add(entryPointCheckBox);
 		bottomPanel.add(primaryCheckBox);
 		bottomPanel.add(pinnedCheckBox);
-		bottomPanel.setBorder(BorderFactory.createTitledBorder("Properties"));
+		bottomPanel.setBorder(GhidraBorderFactory.createTitledBorder("Properties"));
 		addListeners();
 
-		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return mainPanel;
 	}

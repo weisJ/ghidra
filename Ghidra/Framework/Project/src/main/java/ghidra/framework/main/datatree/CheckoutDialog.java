@@ -15,11 +15,12 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.MultiLineLabel;
 import docking.widgets.OptionDialog;
 import docking.widgets.checkbox.GCheckBox;
@@ -76,7 +77,7 @@ public class CheckoutDialog extends DialogComponentProvider {
 	private JPanel buildMainPanel() {
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BorderLayout());
-		innerPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+		innerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 0, 10));
 
 		JPanel msgPanel = new JPanel(new BorderLayout());
 		msgPanel.add(
@@ -92,7 +93,7 @@ public class CheckoutDialog extends DialogComponentProvider {
 		exclusiveCB = new GCheckBox("Request exclusive checkout");
 
 		JPanel cbPanel = new JPanel(new BorderLayout());
-		cbPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+		cbPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 5, 0));
 		cbPanel.add(exclusiveCB);
 		innerPanel.add(cbPanel, BorderLayout.SOUTH);
 

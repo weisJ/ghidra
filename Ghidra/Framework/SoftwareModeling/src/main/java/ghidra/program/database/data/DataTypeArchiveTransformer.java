@@ -20,12 +20,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import javax.swing.*;
 
 import org.apache.commons.lang3.StringUtils;
 
+import docking.border.GhidraBorderFactory;
 import docking.framework.DockingApplicationConfiguration;
 import docking.widgets.label.GDLabel;
 import ghidra.GhidraApplicationLayout;
@@ -35,10 +38,17 @@ import ghidra.framework.ApplicationConfiguration;
 import ghidra.program.model.data.*;
 import ghidra.program.model.data.Composite;
 import ghidra.program.model.data.Enum;
-import ghidra.util.*;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
+import ghidra.util.UniversalID;
+import ghidra.util.UniversalIdGenerator;
 import ghidra.util.classfinder.ClassSearcher;
-import ghidra.util.exception.*;
-import ghidra.util.task.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.task.MonitoredRunnable;
+import ghidra.util.task.RunManager;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * DataTypeArchiveTransformer changes (transforms) a new archive file so that it appears to be 
@@ -777,7 +787,7 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		filePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		filePanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		frame.add(filePanel, gbc);
 
 		// Add the taskMonitor to the status area.
@@ -792,7 +802,7 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 		Dimension preferredSize = statusLabel.getPreferredSize();
 		preferredSize.height = monitorComponent.getPreferredSize().height;
 		statusLabel.setPreferredSize(preferredSize);
-		statusLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		statusLabel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		// Add the status area.
 		gbc.gridx = 0;

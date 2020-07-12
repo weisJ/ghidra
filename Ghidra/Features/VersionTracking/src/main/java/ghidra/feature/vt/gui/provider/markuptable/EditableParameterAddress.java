@@ -16,19 +16,22 @@
  */
 package ghidra.feature.vt.gui.provider.markuptable;
 
-import ghidra.feature.vt.api.main.VTMarkupItem;
-import ghidra.feature.vt.gui.editors.*;
-import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.Function;
-import ghidra.program.model.listing.Parameter;
-import ghidra.util.exception.InvalidInputException;
-
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
+
+import docking.border.GhidraBorderFactory;
+import ghidra.feature.vt.api.main.VTMarkupItem;
+import ghidra.feature.vt.gui.editors.AddressEditorPanel;
+import ghidra.feature.vt.gui.editors.AddressEditorPanelListener;
+import ghidra.feature.vt.gui.editors.EditableAddress;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Parameter;
+import ghidra.util.exception.InvalidInputException;
 
 public class EditableParameterAddress extends DisplayableParameterAddress implements
 		EditableAddress {
@@ -107,7 +110,7 @@ public class EditableParameterAddress extends DisplayableParameterAddress implem
 				}
 			});
 
-			setBorder(BorderFactory.createEmptyBorder(2, 5, 5, 5));
+			setBorder(GhidraBorderFactory.createEmptyBorder(2, 5, 5, 5));
 		}
 
 		private int getListIndex(Address desiredParameterAddress, Parameter[] parameters) {

@@ -16,22 +16,30 @@
 package ghidra.framework.plugintool.dialog;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.util.image.ToolIconURL;
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.label.GLabel;
-import ghidra.framework.model.*;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.project.tool.GhidraToolTemplate;
@@ -275,7 +283,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 	private JPanel createToolFieldPanel() {
 
 		JPanel namePanel = new JPanel(new PairLayout(5, 5, 150));
-		Border border = BorderFactory.createEmptyBorder(5, 3, 3, 3);
+		Border border = GhidraBorderFactory.createEmptyBorder(5, 3, 3, 3);
 		namePanel.setBorder(border);
 
 		nameField = new JTextField(11);
@@ -303,7 +311,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 		JScrollPane iconListScrollPane = new JScrollPane(iconList);
 
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(new TitledBorder("Choose Icon"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Choose Icon"));
 		panel.add(iconListScrollPane, BorderLayout.CENTER);
 		return panel;
 	}
@@ -315,7 +323,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 		browseButton = ButtonPanelFactory.createButton(ButtonPanelFactory.BROWSE_TYPE);
 
 		JPanel panel = new JPanel(new BorderLayout(5, 0));
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		panel.add(new GLabel("Icon Name:"), BorderLayout.WEST);
 		panel.add(iconField, BorderLayout.CENTER);
 		panel.add(browseButton, BorderLayout.EAST);

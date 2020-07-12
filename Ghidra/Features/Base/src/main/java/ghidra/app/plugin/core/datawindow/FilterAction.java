@@ -16,7 +16,10 @@
 package ghidra.app.plugin.core.datawindow;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
@@ -25,9 +28,12 @@ import javax.swing.*;
 
 import org.apache.commons.lang3.StringUtils;
 
-import docking.*;
+import docking.ActionContext;
+import docking.DialogComponentProvider;
+import docking.DockingUtils;
 import docking.action.ToggleDockingAction;
 import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GHtmlCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
@@ -253,7 +259,7 @@ class FilterAction extends ToggleDockingAction {
 			disableButton.addKeyListener(listener);
 			enablePanel.add(disableButton);
 			group.add(disableButton);
-			enablePanel.setBorder(BorderFactory.createTitledBorder("Filter Enable"));
+			enablePanel.setBorder(GhidraBorderFactory.createTitledBorder("Filter Enable"));
 			mainPanel.add(enablePanel);
 
 			enableButton.addChangeListener(e -> {
@@ -276,7 +282,7 @@ class FilterAction extends ToggleDockingAction {
 			limitComboBox.setModel(new DefaultComboBoxModel<>(
 				new String[] { ENTIRE_PROGRAM, CURRENT_VIEW, SELECTION }));
 			limitPanel.add(limitComboBox);
-			limitPanel.setBorder(BorderFactory.createTitledBorder("Limit Data To"));
+			limitPanel.setBorder(GhidraBorderFactory.createTitledBorder("Limit Data To"));
 			mainPanel.add(limitPanel);
 
 			JPanel typesPanel = new JPanel(new BorderLayout());
@@ -310,17 +316,17 @@ class FilterAction extends ToggleDockingAction {
 			JScrollPane scroller = new JScrollPane(checkboxPanel);
 			scroller.setPreferredSize(new Dimension(checkboxPanel.getPreferredSize().width, 150));
 			typesPanel.add(scroller, BorderLayout.CENTER);
-			typesPanel.setBorder(BorderFactory.createTitledBorder("Enabled Data Types"));
+			typesPanel.setBorder(GhidraBorderFactory.createTitledBorder("Enabled Data Types"));
 			typesPanel.add(typeButtonPanel, BorderLayout.SOUTH);
 			mainPanel.add(typesPanel);
 
 			JPanel filterBorderPanel = new JPanel(new GridLayout(1, 2, 5, 0));
 			filterBorderPanel.setBorder(
-				BorderFactory.createTitledBorder("Filter Enabled Data Types List Above"));
+				GhidraBorderFactory.createTitledBorder("Filter Enabled Data Types List Above"));
 
 			JPanel filterPanel = new JPanel(new BorderLayout());
 			filterField = new FilterTextField(checkboxPanel);
-			filterPanel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+			filterPanel.setBorder(GhidraBorderFactory.createEmptyBorder(3, 3, 3, 3));
 			filterPanel.add(new GLabel("Filter:"), BorderLayout.WEST);
 
 			filterPanel.add(filterField, BorderLayout.CENTER);

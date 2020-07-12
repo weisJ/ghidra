@@ -15,13 +15,16 @@
  */
 package ghidra.feature.vt.gui.wizard;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.List;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDHtmlLabel;
-import docking.wizard.*;
+import docking.wizard.AbstractMageJPanel;
+import docking.wizard.WizardPanelDisplayability;
+import docking.wizard.WizardState;
 import ghidra.feature.vt.api.main.VTProgramCorrelatorFactory;
 import ghidra.feature.vt.gui.wizard.ChooseAddressSetEditorPanel.AddressSetChoice;
 import ghidra.framework.model.DomainFile;
@@ -46,7 +49,7 @@ public class SummaryPanel extends AbstractMageJPanel<VTWizardStateKey> {
 		mainPanel.add(labelLabel);
 		mainPanel.add(summaryLabel);
 
-		setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10));
 		setLayout(new BorderLayout());
 		add(mainPanel, BorderLayout.CENTER);
 	}

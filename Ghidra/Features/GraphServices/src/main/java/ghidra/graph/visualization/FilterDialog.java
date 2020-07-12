@@ -20,6 +20,7 @@ import java.util.List;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.util.layout.VerticalLayout;
 
 /**
@@ -74,13 +75,13 @@ public class FilterDialog extends DialogComponentProvider {
 
 		if (!vertexButtons.isEmpty()) {
 			JPanel vertexPanel = new JPanel(new VerticalLayout(5));
-			vertexPanel.setBorder(BorderFactory.createTitledBorder(VERTEX_TITLE));
+			vertexPanel.setBorder(GhidraBorderFactory.createTitledBorder(VERTEX_TITLE));
 			vertexButtons.forEach(vertexPanel::add);
 			panel.add(vertexPanel);
 		}
 		if (!edgeButtons.isEmpty()) {
 			JPanel edgePanel = new JPanel(new VerticalLayout(5));
-			edgePanel.setBorder(BorderFactory.createTitledBorder(EDGE_TITLE));
+			edgePanel.setBorder(GhidraBorderFactory.createTitledBorder(EDGE_TITLE));
 			edgeButtons.forEach(edgePanel::add);
 			panel.add(edgePanel);
 		}
@@ -88,7 +89,7 @@ public class FilterDialog extends DialogComponentProvider {
 		if (vertexButtons.isEmpty() && edgeButtons.isEmpty()) {
 
 			JLabel label = new JLabel("No Filters available for this graph!");
-			label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+			label.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 			panel.add(label);
 		}
 		return panel;

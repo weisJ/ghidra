@@ -15,27 +15,31 @@
  */
 package ghidra.app.plugin.core.datamgr;
 
-import java.awt.Component;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkEvent.EventType;
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreePath;
 
 import docking.ActionContext;
 import docking.DockingWindowManager;
 import docking.action.DockingAction;
 import docking.action.ToggleDockingAction;
+import docking.border.GhidraBorderFactory;
 import docking.event.mouse.GMouseListenerAdapter;
 import docking.menu.MultiActionDockingAction;
 import docking.widgets.OptionDialog;
 import docking.widgets.PopupWindow;
 import docking.widgets.textpane.GHtmlTextPane;
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeNode;
+import docking.widgets.tree.GTreeState;
 import docking.widgets.tree.support.GTreeSelectionEvent.EventOrigin;
 import ghidra.app.plugin.core.datamgr.actions.*;
 import ghidra.app.plugin.core.datamgr.archive.*;
@@ -52,7 +56,9 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.data.DataTypeConflictHandler.ConflictResolutionPolicy;
 import ghidra.program.model.listing.DataTypeArchive;
 import ghidra.program.model.listing.Program;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.task.SwingUpdateManager;
 import resources.ResourceManager;
 import util.HistoryList;
@@ -433,7 +439,7 @@ public class DataTypesProvider extends ComponentProviderAdapter {
 	private void buildPreviewPane() {
 		previewPane = new GHtmlTextPane();
 		previewPane.setEditable(false);
-		previewPane.setBorder(BorderFactory.createLoweredBevelBorder());
+		previewPane.setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 
 		// This listener responds to the user hovering/clicking the preview's hyperlinks
 		previewPane.addHyperlinkListener(event -> {

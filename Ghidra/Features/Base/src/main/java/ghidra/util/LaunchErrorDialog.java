@@ -23,8 +23,11 @@ import java.net.URL;
 import javax.swing.*;
 
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
-import docking.widgets.label.*;
+import docking.widgets.label.GHtmlLabel;
+import docking.widgets.label.GIconLabel;
+import docking.widgets.label.GLabel;
 import generic.util.WindowUtilities;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
@@ -58,7 +61,7 @@ public class LaunchErrorDialog extends JDialog {
 		JPanel rootPanel = new JPanel(new BorderLayout());
 
 		JPanel workPanel = new JPanel();
-		workPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		workPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		workPanel.setLayout(new BoxLayout(workPanel, BoxLayout.Y_AXIS));
 
 		JPanel innerPanel = createInnerWidgetPanel();
@@ -80,7 +83,7 @@ public class LaunchErrorDialog extends JDialog {
 		iconLabel.setVerticalAlignment(SwingConstants.TOP);
 
 		JPanel widgetPanel = new JPanel(new VerticalLayout(5));
-		widgetPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		widgetPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JTextField urlField = new JTextField(40);
 		urlField.setText(url.toString());

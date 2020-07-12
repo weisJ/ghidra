@@ -16,7 +16,9 @@
 package pdb;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -28,6 +30,7 @@ import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.dialogs.ObjectChooserDialog;
 import docking.widgets.label.GDLabel;
 import generic.jar.ResourceFile;
@@ -72,7 +75,7 @@ public class AskPdbUrlDialog extends DialogComponentProvider {
 		};
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		label = new GDLabel(message);
 		panel.add(label, BorderLayout.WEST);

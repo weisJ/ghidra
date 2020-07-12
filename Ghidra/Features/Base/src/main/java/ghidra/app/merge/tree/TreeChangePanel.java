@@ -19,6 +19,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GIconLabel;
 import ghidra.util.layout.PairLayout;
@@ -47,7 +48,7 @@ class TreeChangePanel extends JPanel {
 
 	TreeChangePanel(String title) {
 		super(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder(title));
+		setBorder(GhidraBorderFactory.createTitledBorder(title));
 		create();
 	}
 
@@ -69,7 +70,7 @@ class TreeChangePanel extends JPanel {
 
 	private void create() {
 		JPanel panel = new JPanel(new BorderLayout(0, 5));
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		treeNameLabel = new GDLabel("Tree Name");
 		Font font = treeNameLabel.getFont();

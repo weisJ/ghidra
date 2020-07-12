@@ -16,14 +16,21 @@
 package ghidra.app.plugin.core.datamgr.editor;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Arrays;
+import java.util.EventObject;
+import java.util.NoSuchElementException;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GDLabel;
@@ -34,7 +41,9 @@ import docking.widgets.textfield.GValidatedTextField;
 import docking.widgets.textfield.GValidatedTextField.LongField.LongValidator;
 import docking.widgets.textfield.GValidatedTextField.ValidationFailedException;
 import docking.widgets.textfield.GValidatedTextField.ValidationMessageListener;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.DataTypeManagerDomainObject;
+import ghidra.program.model.data.EnumDataType;
 import ghidra.program.model.listing.DataTypeArchive;
 import ghidra.program.model.listing.Program;
 import ghidra.util.InvalidNameException;
@@ -359,7 +368,7 @@ class EnumEditorPanel extends JPanel {
 
 		JPanel outerPanel = new JPanel();
 		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
-		outerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		JPanel descPanel = createDescriptionPanel();
 		outerPanel.add(createNamePanel());
 		outerPanel.add(Box.createVerticalStrut(2));

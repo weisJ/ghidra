@@ -15,37 +15,48 @@
  */
 package ghidra.framework.main;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 
-import docking.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.WindowPosition;
 import docking.action.DockingAction;
 import docking.action.MenuData;
+import docking.border.GhidraBorderFactory;
 import docking.tool.ToolConstants;
 import docking.widgets.OkDialog;
 import docking.widgets.OptionDialog;
 import docking.widgets.dialogs.InputDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.filechooser.GhidraFileChooserMode;
-import docking.widgets.label.*;
+import docking.widgets.label.GDLabel;
+import docking.widgets.label.GIconLabel;
+import docking.widgets.label.GLabel;
 import ghidra.app.plugin.PluginCategoryNames;
 import ghidra.framework.GenericRunInfo;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RemoteAdapterListener;
+import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.main.datatable.ProjectDataTablePanel;
 import ghidra.framework.main.datatree.ClearCutAction;
 import ghidra.framework.main.datatree.ProjectDataTreePanel;
 import ghidra.framework.main.projectdata.actions.*;
 import ghidra.framework.model.*;
 import ghidra.framework.options.SaveState;
-import ghidra.framework.plugintool.*;
+import ghidra.framework.plugintool.Plugin;
+import ghidra.framework.plugintool.PluginInfo;
+import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.PluginStatus;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.remote.User;
@@ -685,8 +696,8 @@ public class FrontEndPlugin extends Plugin
 		connectionButton.setContentAreaFilled(false);
 		connectionButton.setSelected(isConnected);
 		connectionButton.setBorder(
-			isConnected ? BorderFactory.createBevelBorder(BevelBorder.LOWERED)
-					: BorderFactory.createBevelBorder(BevelBorder.RAISED));
+			isConnected ? GhidraBorderFactory.createLoweredBevelBorder()
+					: GhidraBorderFactory.createRaisedBevelBorder());
 		connectionIconPanel.add(connectionButton);
 		if (isConnected) {
 
@@ -822,7 +833,7 @@ public class FrontEndPlugin extends Plugin
 		JPanel connectionPanel = new JPanel();
 		connectionPanel.setLayout(new BorderLayout());
 		repositoryLabel = new GDLabel();
-		repositoryLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+		repositoryLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 0, 0));
 		connectionIconPanel = new JPanel();
 		connectionLabel = new GLabel();
 		connectionIconPanel.add(connectionLabel);

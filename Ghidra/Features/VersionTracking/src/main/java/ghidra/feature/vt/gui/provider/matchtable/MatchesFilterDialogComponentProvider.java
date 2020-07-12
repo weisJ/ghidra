@@ -17,8 +17,11 @@ package ghidra.feature.vt.gui.provider.matchtable;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.feature.vt.api.main.VTMatch;
-import ghidra.feature.vt.gui.filters.*;
+import ghidra.feature.vt.gui.filters.AncillaryFilterDialogComponentProvider;
+import ghidra.feature.vt.gui.filters.FilterDialogModel;
+import ghidra.feature.vt.gui.filters.TagFilter;
 import ghidra.feature.vt.gui.plugin.VTController;
 import ghidra.util.HelpLocation;
 import ghidra.util.layout.VariableRowHeightGridLayout;
@@ -37,7 +40,7 @@ public class MatchesFilterDialogComponentProvider extends
 	@Override
 	protected JComponent buildFilterPanel() {
 		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		panel.setLayout(new VerticalLayout(0));
 
 		JPanel rowOnePanel = new JPanel(new VariableRowHeightGridLayout(3));

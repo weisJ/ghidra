@@ -16,18 +16,29 @@
 package docking.menu;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Objects;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import org.apache.commons.lang3.StringUtils;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.DockingUtils;
+import docking.DockingWindowManager;
+import docking.action.DockingActionIf;
+import docking.action.MultiActionDockingActionIf;
+import docking.action.ToggleDockingAction;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDHtmlLabel;
 import ghidra.util.SystemUtilities;
@@ -423,7 +434,7 @@ public class MultipleActionDockingToolbarButton extends EmptyBorderButton {
 		private int separatorHeight = EMTPY_SEPARATOR_HEIGHT;
 
 		private ProgramNameSeparator(String name, String description) {
-			setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+			setBorder(GhidraBorderFactory.createEmptyBorder(20, 0, 20, 0));
 			renderer.setText(name);
 			DockingUtils.setTransparent(renderer);
 			renderer.setHorizontalAlignment(SwingConstants.CENTER);

@@ -15,21 +15,26 @@
  */
 package ghidra.app.plugin.core.function.tags;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import javax.swing.*;
 
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.dialogs.InputDialog;
 import ghidra.app.cmd.function.ChangeFunctionTagCmd;
 import ghidra.app.cmd.function.DeleteFunctionTagCmd;
 import ghidra.framework.cmd.Command;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionTag;
+import ghidra.program.model.listing.Program;
 import ghidra.util.Msg;
 
 /**
@@ -145,7 +150,7 @@ public abstract class TagListPanel extends JPanel {
 		});
 
 		titleLabel = new JLabel(title);
-		titleLabel.setBorder(BorderFactory.createEmptyBorder(3, 5, 0, 0));
+		titleLabel.setBorder(GhidraBorderFactory.createEmptyBorder(3, 5, 0, 0));
 		add(titleLabel, BorderLayout.NORTH);
 		add(new JScrollPane(table), BorderLayout.CENTER);
 	}

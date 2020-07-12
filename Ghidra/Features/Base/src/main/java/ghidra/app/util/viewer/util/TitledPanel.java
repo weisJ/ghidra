@@ -15,17 +15,13 @@
  */
 package ghidra.app.util.viewer.util;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDHtmlLabel;
 import docking.widgets.label.GDLabel;
 
@@ -62,13 +58,13 @@ public class TitledPanel extends JPanel {
 		super(new BorderLayout());
 		titlePanel = new JPanel(new BorderLayout());
 		iconPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 4, 1));
-		iconPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		iconPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 0));
 		title = titleLabel;
 		JLabel filler = new GDLabel();
 		filler.setPreferredSize(new Dimension(margin, filler.getPreferredSize().height));
 		titlePanel.add(filler, BorderLayout.WEST);
 
-		titlePanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		titlePanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 0));
 		titlePanel.add(title, BorderLayout.CENTER);
 		titlePanel.add(iconPanel, BorderLayout.EAST);
 

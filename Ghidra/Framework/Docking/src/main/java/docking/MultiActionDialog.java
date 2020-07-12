@@ -22,6 +22,7 @@ import java.util.List;
 import javax.swing.*;
 
 import docking.action.DockingActionIf;
+import docking.border.GhidraBorderFactory;
 import docking.event.mouse.GMouseListenerAdapter;
 import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;
@@ -102,7 +103,7 @@ public class MultiActionDialog extends DialogComponentProvider {
 		labelPanel.add(new GLabel("Actions that can be enabled at the same"));
 		labelPanel.add(new GLabel("time should be mapped to different keys"));
 
-		innerPanel.setBorder(BorderFactory.createTitledBorder("Actions"));
+		innerPanel.setBorder(GhidraBorderFactory.createTitledBorder("Actions"));
 
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 

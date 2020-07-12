@@ -3,7 +3,10 @@
  */
 package mobiledevices.dmg.hfsplus;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,12 +14,17 @@ import org.catacombae.hfsexplorer.fs.ImplHFSXFileSystemView;
 import org.catacombae.hfsexplorer.fs.NullProgressMonitor;
 import org.catacombae.hfsexplorer.types.hfscommon.CommonHFSCatalogFile;
 import org.catacombae.hfsexplorer.types.hfscommon.CommonHFSForkData;
-import org.catacombae.hfsexplorer.types.hfsplus.*;
+import org.catacombae.hfsexplorer.types.hfsplus.HFSCatalogNodeID;
+import org.catacombae.hfsexplorer.types.hfsplus.HFSPlusCatalogFile;
+import org.catacombae.hfsexplorer.types.hfsplus.HFSPlusForkData;
+import org.catacombae.hfsexplorer.types.hfsplus.HFSPlusVolumeHeader;
 import org.catacombae.jparted.lib.fs.FSFile;
 import org.catacombae.jparted.lib.fs.hfscommon.HFSCommonFSFile;
 import org.catacombae.jparted.lib.fs.hfsx.HFSXFileSystemHandler;
 
-import mobiledevices.dmg.btree.*;
+import mobiledevices.dmg.btree.BTreeNodeDescriptor;
+import mobiledevices.dmg.btree.BTreeNodeRecord;
+import mobiledevices.dmg.btree.BTreeRootNodeDescriptor;
 import mobiledevices.dmg.decmpfs.DecmpfsHeader;
 import mobiledevices.dmg.ghidra.GBinaryReader;
 import mobiledevices.dmg.ghidra.GByteProvider;

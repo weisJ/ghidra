@@ -25,6 +25,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.util.HelpLocation;
 import util.CollectionUtils;
 
@@ -69,7 +70,7 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 		ghidraTable.getTableHeader().setReorderingAllowed(false);
 		ghidraTable.setColumnHeaderPopupEnabled(false);
 
-		ghidraTable.setBorder(BorderFactory.createEtchedBorder());
+		ghidraTable.setBorder(GhidraBorderFactory.createEtchedBorder());
 		Dimension size = new Dimension(300, 400);
 		setPreferredSize(size.width, size.height);
 		setRememberSize(true);

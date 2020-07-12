@@ -21,6 +21,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.tree.TreePath;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GLabel;
 import docking.widgets.list.GListCellRenderer;
@@ -117,7 +118,7 @@ public class CreateTypeDefDialog extends DialogComponentProvider {
 		panel.add(new GLabel("Archive:"));
 		panel.add(dataTypeManagerBox);
 
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10));
 
 		return panel;
 	}

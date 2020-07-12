@@ -16,24 +16,35 @@
 package ghidra.app.plugin.core.function.editor;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellEditor;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.DropDownSelectionTextField;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import docking.widgets.table.GTable;
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.AbstractFloatDataType;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.Undefined;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
 import ghidra.util.layout.PairLayout;
@@ -160,7 +171,7 @@ public class StorageAddressEditorDialog extends DialogComponentProvider
 
 	private Component buildInfoPanel(DataTypeManagerService service) {
 		JPanel panel = new JPanel(new PairLayout(10, 4));
-		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 		panel.add(new GLabel("Datatype: "));
 
@@ -226,7 +237,7 @@ public class StorageAddressEditorDialog extends DialogComponentProvider
 
 	private Component buildTablePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder("Storage Locations"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Storage Locations"));
 		varnodeTableModel = new VarnodeTableModel(model);
 		varnodeTable = new GTable(varnodeTableModel);
 		selectionListener = new ListSelectionListener() {
@@ -254,7 +265,7 @@ public class StorageAddressEditorDialog extends DialogComponentProvider
 
 	private Component buildButtonPanel() {
 		JPanel panel = new JPanel(new VerticalLayout(5));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		addButton = new JButton("Add");
 		removeButton = new JButton("Remove");
 		upButton = new JButton("Up");

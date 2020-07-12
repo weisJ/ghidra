@@ -6,7 +6,9 @@ package mobiledevices.dmg.server;
 import java.io.*;
 import java.util.List;
 
-import org.catacombae.jparted.lib.fs.*;
+import org.catacombae.jparted.lib.fs.FSEntry;
+import org.catacombae.jparted.lib.fs.FSFile;
+import org.catacombae.jparted.lib.fs.FSLink;
 
 import mobiledevices.dmg.ghidra.GByteProvider;
 import mobiledevices.dmg.ghidra.GFileUtilityMethods;

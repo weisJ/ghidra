@@ -15,13 +15,14 @@
  */
 package ghidra.app.merge.tree;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GIconLabel;
@@ -45,7 +46,7 @@ class NameConflictsPanel extends JPanel {
 
 	NameConflictsPanel(ChangeListener listener) {
 		super(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder("Resolve Program Tree Conflict"));
+		setBorder(GhidraBorderFactory.createTitledBorder("Resolve Program Tree Conflict"));
 		create();
 		this.listener = listener;
 	}
@@ -123,7 +124,7 @@ class NameConflictsPanel extends JPanel {
 	private void create() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JPanel iconPanel = new JPanel();
 		iconPanel.setLayout(new BoxLayout(iconPanel, BoxLayout.X_AXIS));
@@ -133,7 +134,7 @@ class NameConflictsPanel extends JPanel {
 		iconPanel.add(new GIconLabel(icon));
 		iconPanel.add(Box.createHorizontalStrut(5));
 		iconPanel.add(conflictsLabel);
-		iconPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		iconPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 10, 0));
 
 		keepOtherRB = new GRadioButton("Keep 'Other' Name");
 		addOrRenameRB = new GRadioButton("Rename 'My' name to My.username");

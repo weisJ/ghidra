@@ -28,6 +28,7 @@ import javax.swing.*;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.event.mouse.GMouseListenerAdapter;
 import docking.widgets.AutoLookup;
 import docking.widgets.label.GDLabel;
@@ -182,13 +183,13 @@ class DirectoryList extends GList<File> implements GhidraFileChooserDirectoryMod
 		});
 
 		listEditor = new JPanel(new BorderLayout());
-		listEditor.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		listEditor.setBorder(GhidraBorderFactory.createLineBorder(Color.GRAY));
 
 		listEditor.add(listEditorLabel, BorderLayout.WEST);
 		listEditor.add(listEditorField, BorderLayout.CENTER);
 
 		listEditor.setBackground(Color.WHITE);
-		listEditorField.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+		listEditorField.setBorder(GhidraBorderFactory.createEmptyBorder(2, 2, 2, 2));
 
 		add(listEditor);
 	}

@@ -19,15 +19,24 @@ import static java.awt.Color.blue;
 import static java.awt.Color.red;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.text.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import docking.actions.KeyBindingUtils;
+import docking.border.GhidraBorderFactory;
 import ghidra.util.Swing;
 
 class FunctionSignatureTextField extends JTextPane {
@@ -286,7 +295,7 @@ class FunctionSignatureTextField extends JTextPane {
 		jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		FunctionSignatureTextField field = new FunctionSignatureTextField();
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		jFrame.getContentPane().add(panel);
 		panel.add(field);
 		jFrame.setSize(400, 200);

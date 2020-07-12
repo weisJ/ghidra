@@ -16,7 +16,9 @@
 package ghidra.app.decompiler.component;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -24,6 +26,7 @@ import javax.swing.*;
 import docking.ActionContext;
 import docking.ComponentProvider;
 import docking.action.DockingAction;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.fieldpanel.FieldPanel;
 import docking.widgets.fieldpanel.internal.FieldPanelCoordinator;
 import docking.widgets.fieldpanel.support.FieldLocation;
@@ -35,7 +38,9 @@ import ghidra.app.util.viewer.util.TitledPanel;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.address.AddressSetView;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Program;
 import ghidra.program.util.FunctionUtility;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.HTMLUtilities;
@@ -282,7 +287,7 @@ public abstract class DecompilerCodeComparisonPanel<T extends DualDecompilerFiel
 			titlePanels[RIGHT]);
 		splitPane.setResizeWeight(0.5);
 		splitPane.setDividerSize(4);
-		splitPane.setBorder(BorderFactory.createEmptyBorder());
+		splitPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 		add(splitPane, BorderLayout.CENTER);
 	}
 

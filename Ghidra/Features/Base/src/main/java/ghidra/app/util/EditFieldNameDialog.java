@@ -15,21 +15,20 @@
  */
 package ghidra.app.util;
 
+import java.awt.*;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
+import docking.ComponentProvider;
+import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.DataTypeComponent;
 import ghidra.program.model.listing.Program;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.DuplicateNameException;
-
-import java.awt.*;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
-
-import docking.ComponentProvider;
-import docking.DialogComponentProvider;
 
 public class EditFieldNameDialog extends DialogComponentProvider {
 
@@ -134,12 +133,12 @@ public class EditFieldNameDialog extends DialogComponentProvider {
 		
 		JPanel mainPanel = new JPanel(new BorderLayout());
 
-		nameBorder = BorderFactory.createTitledBorder("Enter Field Name");
+		nameBorder = GhidraBorderFactory.createTitledBorder("Enter Field Name");
 		mainPanel.setBorder(nameBorder);
 		
 		mainPanel.add(fieldName, BorderLayout.CENTER);
 	    
-		mainPanel.setBorder(new EmptyBorder(5,5,5,5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return mainPanel;
 	}

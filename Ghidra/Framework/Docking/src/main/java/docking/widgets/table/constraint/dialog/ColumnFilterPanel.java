@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GDLabel;
@@ -48,8 +48,8 @@ class ColumnFilterPanel extends JPanel {
 		add(buildConstraintPanels(), BorderLayout.CENTER);
 		add(buildButtonPanel(), BorderLayout.EAST);
 		setBorder(
-			BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED),
-				BorderFactory.createEmptyBorder(3, 3, 3, 3)));
+			GhidraBorderFactory.createCompoundBorder(GhidraBorderFactory.createLoweredBevelBorder(),
+				GhidraBorderFactory.createEmptyBorder(3, 3, 3, 3)));
 
 	}
 
@@ -94,7 +94,7 @@ class ColumnFilterPanel extends JPanel {
 
 	private Component buildConstraintPanels() {
 		JPanel panel = new JPanel(new VerticalLayout(0));
-		setBorder(BorderFactory.createEmptyBorder(5, 2, 2, 2));
+		setBorder(GhidraBorderFactory.createEmptyBorder(5, 2, 2, 2));
 		buildColumnComboBox();
 
 		List<DialogFilterCondition<?>> filterConditions = filterEntry.getFilterConditions();

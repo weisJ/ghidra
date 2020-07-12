@@ -69,3 +69,6 @@ Release
 */*/*/*/src-gen
 */*/*/*/model/generated
 */*/*/*/test-bin
+
+# IDE files
+./idea

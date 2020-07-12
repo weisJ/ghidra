@@ -15,13 +15,13 @@
  */
 package ghidra.app.plugin.core.instructionsearch.model;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.app.plugin.core.instructionsearch.ui.AbstractInstructionTable.OperandState;
 import ghidra.app.plugin.core.instructionsearch.ui.InstructionTable;
 
@@ -126,13 +126,13 @@ public class InstructionTableDataObject {
 				backgroundColor =
 					isInstruction ? BACKGROUND_COLOR : BACKGROUND_COLOR_NON_INSTRUCTION;
 				foregroundColor = Color.BLACK;
-				border = BorderFactory.createLoweredSoftBevelBorder();
+				border = GhidraBorderFactory.createLoweredSoftBevelBorder();
 				break;
 			case NOT_MASKED:
 				backgroundColor = isInstruction ? BACKGROUND_COLOR_DARKER
 						: BACKGROUND_COLOR_DARKER_NON_INSTRUCTION;
 				foregroundColor = Color.BLACK;
-				border = BorderFactory.createRaisedSoftBevelBorder();
+				border = GhidraBorderFactory.createRaisedSoftBevelBorder();
 				break;
 			case NA:
 				backgroundColor = PANEL_COLOR;

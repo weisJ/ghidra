@@ -15,22 +15,23 @@
  */
 package ghidra.feature.vt.gui.util;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.util.Objects;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.text.DefaultFormatter;
 import javax.swing.text.DefaultFormatterFactory;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.table.GTable;
 import ghidra.feature.vt.api.main.VTAssociation;
 import ghidra.feature.vt.api.main.VTSession;
-import ghidra.feature.vt.gui.filters.*;
+import ghidra.feature.vt.gui.filters.Filter;
+import ghidra.feature.vt.gui.filters.FilterFormattedTextField;
+import ghidra.feature.vt.gui.filters.StatusLabel;
 import ghidra.feature.vt.gui.plugin.VTController;
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
@@ -57,9 +58,9 @@ public abstract class AbstractTextFilter<T> extends Filter<T> {
 
 	private JComponent createComponent(String filterName) {
 		final JPanel panel = new JPanel(new BorderLayout());
-		Border paddingBorder = BorderFactory.createEmptyBorder(1, 5, 1, 5);
-		Border outsideBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
-		panel.setBorder(BorderFactory.createCompoundBorder(outsideBorder, paddingBorder));
+		Border paddingBorder = GhidraBorderFactory.createEmptyBorder(1, 5, 1, 5);
+		Border outsideBorder = GhidraBorderFactory.createLoweredBevelBorder();
+		panel.setBorder(GhidraBorderFactory.createCompoundBorder(outsideBorder, paddingBorder));
 
 		DefaultFormatterFactory factory = new DefaultFormatterFactory(new DefaultFormatter());
 		textField = new FilterFormattedTextField(factory, defaultValue);

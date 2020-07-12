@@ -15,12 +15,12 @@
  */
 package docking.widgets.table.constraint.dialog;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.list.GListCellRenderer;
@@ -70,7 +70,7 @@ public class ConstraintFilterPanel extends JPanel {
 			return null;
 		}
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(4, 50, 14, 20));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(4, 50, 14, 20));
 		panel.add(detailEditorComponent);
 		return panel;
 	}

@@ -15,8 +15,7 @@
  */
 package ghidra.app.plugin.core.datamgr.util;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import javax.swing.*;
 import javax.swing.tree.TreePath;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.filter.FilterOptions;
 import docking.widgets.filter.TextFilterStrategy;
 import docking.widgets.label.GLabel;
@@ -101,7 +101,7 @@ public class DataTypeChooserDialog extends DialogComponentProvider {
 	private JComponent createWorkPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		messageLabel = new GLabel("Choose the data type you wish to use.");
-		messageLabel.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 2));
+		messageLabel.setBorder(GhidraBorderFactory.createEmptyBorder(2, 4, 2, 2));
 		panel.add(messageLabel, BorderLayout.NORTH);
 		panel.add(this.tree, BorderLayout.CENTER);
 

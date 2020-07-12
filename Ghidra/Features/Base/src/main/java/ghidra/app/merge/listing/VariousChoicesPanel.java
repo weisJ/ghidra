@@ -15,10 +15,7 @@
  */
 package ghidra.app.merge.listing;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
+import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.ItemEvent;
@@ -26,15 +23,12 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDHtmlLabel;
@@ -55,7 +49,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 
 	private final static long serialVersionUID = 1;
 	private static final Border UNDERLINE_BORDER =
-		BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
+		GhidraBorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
 
 	private JPanel rowPanel;
 	private GDHtmlLabel headerLabel;
@@ -84,11 +78,11 @@ public class VariousChoicesPanel extends ConflictPanel {
 	}
 
 	private void init() {
-		setBorder(BorderFactory.createTitledBorder("Resolve Conflict"));
+		setBorder(GhidraBorderFactory.createTitledBorder("Resolve Conflict"));
 		rows = new ArrayList<>();
 		layout = new MaximizeSpecificColumnGridLayout(5, 5, columnCount);
 		rowPanel = new JPanel(layout);
-		rowPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		rowPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout());
 		headerLabel = new GDHtmlLabel(" ");
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -100,10 +94,11 @@ public class VariousChoicesPanel extends ConflictPanel {
 		indent = Math.max(rb.getPreferredSize().width, cb.getPreferredSize().width);
 		int radioButtonOffset = (rb.getPreferredSize().height - lbl.getPreferredSize().height) / 2;
 		int checkBoxOffset = (cb.getPreferredSize().height - lbl.getPreferredSize().height) / 2;
-		radioButtonBorder = BorderFactory.createEmptyBorder(
+		radioButtonBorder = GhidraBorderFactory.createEmptyBorder(
 			(radioButtonOffset > 0 ? radioButtonOffset : 0), 0, 0, 0);
 		checkBoxBorder =
-			BorderFactory.createEmptyBorder((checkBoxOffset > 0 ? checkBoxOffset : 0), 0, 0, 0);
+			GhidraBorderFactory.createEmptyBorder((checkBoxOffset > 0 ? checkBoxOffset : 0), 0, 0,
+				0);
 
 		add(createUseForAllCheckBox(), BorderLayout.SOUTH);
 		adjustUseForAllEnablement();

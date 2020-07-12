@@ -21,7 +21,7 @@ import static org.junit.Assert.assertThat;
 
 import java.text.ParseException;
 
-import javax.swing.JFormattedTextField;
+import javax.swing.*;
 
 import org.junit.Before;
 import org.junit.Test;

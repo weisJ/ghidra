@@ -24,6 +24,7 @@ import javax.swing.*;
 
 import docking.ComponentProvider;
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GLabel;
 import docking.widgets.textfield.IntegerTextField;
@@ -86,7 +87,7 @@ class SelectBlockDialog extends DialogComponentProvider {
 
 	private JPanel buildBlockPanel() {
 		JPanel main = new JPanel();
-		main.setBorder(BorderFactory.createTitledBorder("Byte Selection"));
+		main.setBorder(GhidraBorderFactory.createTitledBorder("Byte Selection"));
 		
 		main.setLayout(new PairLayout());
 
@@ -105,7 +106,7 @@ class SelectBlockDialog extends DialogComponentProvider {
 	private JPanel methodPanel() {
 		ButtonGroup buttonGroup = new ButtonGroup();
 		JPanel main = new JPanel();
-		main.setBorder(BorderFactory.createTitledBorder("By Method"));
+		main.setBorder(GhidraBorderFactory.createTitledBorder("By Method"));
 		main.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(2, 2, 2, 2);

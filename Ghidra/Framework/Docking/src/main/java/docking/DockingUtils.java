@@ -16,7 +16,10 @@
 package docking;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicSeparatorUI;
@@ -27,6 +30,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.undo.UndoableEdit;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.checkbox.GHtmlCheckBox;
@@ -336,7 +340,7 @@ public class DockingUtils {
 		// ...I really mean it!
 		if (!(c instanceof JViewport)) {
 			// ugly, I know, but you cannot do this
-			c.setBorder(BorderFactory.createEmptyBorder());
+			c.setBorder(GhidraBorderFactory.createEmptyBorder());
 		}
 
 		c.setBackground(new Color(0, 0, 0, 0));

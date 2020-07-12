@@ -19,8 +19,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.Border;
 import javax.swing.event.ListSelectionListener;
+
+import docking.border.GhidraBorderFactory;
 
 /**
  * This class provides a panel that contains a JList component.
@@ -96,13 +98,13 @@ public class ListPanel extends JPanel {
 	 */
 	public void setListTitle(String listTitle) {
 		if (listTitle == null) {
-			Border border = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+			Border border = GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5);
 			setBorder(border);
 		}
 		else {
-			TitledBorder tBorder = new TitledBorder(listTitle);
-			Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-			setBorder(new CompoundBorder(tBorder, emptyBorder));
+			Border tBorder = GhidraBorderFactory.createTitledBorder(listTitle);
+			Border emptyBorder = GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5);
+			setBorder(GhidraBorderFactory.createCompoundBorder(tBorder, emptyBorder));
 		}
 	}
 

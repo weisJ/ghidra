@@ -15,12 +15,15 @@
  */
 package docking.widgets;
 
-import java.awt.Toolkit;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GLabel;
@@ -124,7 +127,7 @@ public class PasswordDialog extends DialogComponentProvider {
 		}
 
 		workPanel = new JPanel(new PairLayout(5, 5));
-		workPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 10));
+		workPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 0, 10));
 
 		if (serverName != null) {
 			workPanel.add(new GLabel(serverType + ":"));

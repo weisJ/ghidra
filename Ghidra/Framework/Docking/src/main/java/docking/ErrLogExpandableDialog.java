@@ -16,7 +16,10 @@
 package docking;
 
 import java.awt.*;
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
@@ -25,14 +28,20 @@ import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.tree.TreePath;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GHtmlLabel;
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeLazyNode;
+import docking.widgets.tree.GTreeNode;
 import docking.widgets.tree.support.GTreeDragNDropHandler;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
+import ghidra.util.exception.CausesImportant;
+import ghidra.util.exception.HasConsoleText;
+import ghidra.util.exception.MultipleCauses;
 import ghidra.util.html.HTMLElement;
 import resources.ResourceManager;
 import util.CollectionUtils;
@@ -171,7 +180,7 @@ public class ErrLogExpandableDialog extends DialogComponentProvider {
 		JPanel workPanel = new JPanel(new BorderLayout());
 		JPanel msgPanel = new JPanel();
 		msgPanel.setLayout(new BorderLayout(16, 16));
-		msgPanel.setBorder(new EmptyBorder(16, 16, 16, 16));
+		msgPanel.setBorder(GhidraBorderFactory.createEmptyBorder(16, 16, 16, 16));
 		{
 			JLabel msgText = new GHtmlLabel(getHTML(msg, report)) {
 				@Override

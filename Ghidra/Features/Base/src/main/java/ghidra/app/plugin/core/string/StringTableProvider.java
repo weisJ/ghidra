@@ -25,9 +25,12 @@ import javax.swing.*;
 import docking.ActionContext;
 import docking.DockingUtils;
 import docking.action.*;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GLabel;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import docking.widgets.table.threaded.ThreadedTableModel;
 import docking.widgets.textfield.IntegerTextField;
 import ghidra.app.services.GoToService;
@@ -43,10 +46,15 @@ import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.util.ProgramSelection;
 import ghidra.program.util.string.FoundString;
 import ghidra.program.util.string.FoundString.DefinedState;
-import ghidra.util.*;
+import ghidra.util.DateUtils;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import ghidra.util.layout.VerticalLayout;
-import ghidra.util.table.*;
+import ghidra.util.table.GhidraTable;
+import ghidra.util.table.GhidraTableFilterPanel;
+import ghidra.util.table.GhidraThreadedTablePanel;
+import ghidra.util.table.SelectionNavigationAction;
 import ghidra.util.table.actions.MakeProgramSelectionAction;
 import ghidra.util.task.TaskLauncher;
 import resources.ResourceManager;
@@ -336,7 +344,7 @@ public class StringTableProvider extends ComponentProviderAdapter implements Dom
 
 	private JPanel buildMakeStringOptionsPanel() {
 		JPanel panel = new JPanel(new VerticalLayout(0));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		panel.add(buildOffsetPanel());
 		panel.add(buildButtonPanel());
@@ -407,7 +415,7 @@ public class StringTableProvider extends ComponentProviderAdapter implements Dom
 		makeCharArrayButton.addActionListener(e -> makeString(true));
 
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 0));
-		buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		buttonPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 0));
 		buttonPanel.add(makeStringButton);
 		buttonPanel.add(makeCharArrayButton);
 		return buttonPanel;

@@ -21,11 +21,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import docking.*;
+import docking.ActionContext;
+import docking.DialogComponentProvider;
+import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.event.mouse.GMouseListenerAdapter;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GDLabel;
@@ -33,7 +35,9 @@ import docking.widgets.label.GLabel;
 import docking.widgets.tree.support.GTreeSelectionEvent;
 import docking.widgets.tree.support.GTreeSelectionListener;
 import ghidra.framework.main.datatree.ProjectDataTreePanel;
-import ghidra.framework.main.projectdata.actions.*;
+import ghidra.framework.main.projectdata.actions.ProjectDataCollapseAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataExpandAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataNewFolderAction;
 import ghidra.framework.model.*;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
@@ -521,7 +525,7 @@ public class DataTreeDialog extends DialogComponentProvider
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(new TitledBorder("Current Projects"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Current Projects"));
 		projectComboBox = new GComboBox<>();
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
 		projectComboBox.setModel(model);
@@ -595,7 +599,7 @@ public class DataTreeDialog extends DialogComponentProvider
 		JPanel namePanel = new JPanel(new PairLayout(2, 5, 100));
 
 		if (!userChoosesName) {
-			namePanel.setBorder(BorderFactory.createEmptyBorder(20, 5, 5, 5));
+			namePanel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 5, 5, 5));
 		}
 		namePanel.add(new GLabel("Folder Path:", SwingConstants.RIGHT));
 

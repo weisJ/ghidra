@@ -24,6 +24,7 @@ import docking.DockingUtils;
 import docking.DockingWindowManager;
 import docking.action.DockingActionIf;
 import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.VariableHeightPanel;
 
 /**
@@ -115,7 +116,7 @@ public class ToolBarManager {
 
 	private JComponent buildToolbar() {
 		JComponent newToolBar = new VariableHeightPanel(true, 0, 0);
-		newToolBar.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+		newToolBar.setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 0));
 
 		boolean isFirstGroup = true;
 		Set<Entry<String, List<ToolBarItemManager>>> entrySet = groupToItemsMap.entrySet();

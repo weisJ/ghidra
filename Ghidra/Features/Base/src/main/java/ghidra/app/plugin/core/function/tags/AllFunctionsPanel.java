@@ -15,14 +15,13 @@
  */
 package ghidra.app.plugin.core.function.tags;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.app.services.GoToService;
 import ghidra.framework.plugintool.ComponentProviderAdapter;
 import ghidra.program.model.listing.Function;
@@ -53,7 +52,7 @@ public class AllFunctionsPanel extends JPanel {
 		setLayout(new BorderLayout());
 		
 		titleLabel = new JLabel(title);
-		titleLabel.setBorder(BorderFactory.createEmptyBorder(3, 5, 0, 0));
+		titleLabel.setBorder(GhidraBorderFactory.createEmptyBorder(3, 5, 0, 0));
 		
 		add(titleLabel, BorderLayout.NORTH);
 		add(tablePanel, BorderLayout.CENTER);

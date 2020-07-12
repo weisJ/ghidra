@@ -17,14 +17,20 @@ package docking.options.editor;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
-import ghidra.framework.options.*;
+import ghidra.framework.options.EditorState;
+import ghidra.framework.options.EditorStateFactory;
+import ghidra.framework.options.Options;
+import ghidra.framework.options.OptionsEditor;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.InvalidInputException;
@@ -109,10 +115,10 @@ public class OptionsEditorPanel extends JPanel implements OptionsEditor {
 	}
 
 	private void createBorder() {
-		Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);
-		Border titleBorder = BorderFactory.createTitledBorder(title);
+		Border emptyBorder = GhidraBorderFactory.createEmptyBorder(20, 20, 20, 20);
+		Border titleBorder = GhidraBorderFactory.createTitledBorder(title);
 
-		Border border = BorderFactory.createCompoundBorder(titleBorder, emptyBorder);
+		Border border = GhidraBorderFactory.createCompoundBorder(titleBorder, emptyBorder);
 		setBorder(border);
 	}
 

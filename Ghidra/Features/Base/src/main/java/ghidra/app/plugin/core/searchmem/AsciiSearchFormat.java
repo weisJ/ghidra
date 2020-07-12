@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.searchmem;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.charset.Charset;
@@ -23,10 +23,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GDLabel;
@@ -76,7 +76,7 @@ public class AsciiSearchFormat extends SearchFormat {
 
 		JPanel stringOptionsPanel = new JPanel();
 		stringOptionsPanel.setLayout(new BoxLayout(stringOptionsPanel, BoxLayout.Y_AXIS));
-		stringOptionsPanel.setBorder(new TitledBorder("Format Options"));
+		stringOptionsPanel.setBorder(GhidraBorderFactory.createTitledBorder("Format Options"));
 		JPanel encodingOptionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		encodingOptionsPanel.add(searchType);
 		encodingOptionsPanel.add(encodingCB);

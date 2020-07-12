@@ -15,13 +15,14 @@
  */
 package ghidra.app.merge.tree;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import ghidra.app.merge.MergeConstants;
 
@@ -41,7 +42,7 @@ class NamePanel extends JPanel {
 
 	NamePanel(ChangeListener listener) {
 		super(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder("Resolve Tree Name Conflict"));
+		setBorder(GhidraBorderFactory.createTitledBorder("Resolve Tree Name Conflict"));
 		this.listener = listener;
 		create();
 	}
@@ -86,7 +87,7 @@ class NamePanel extends JPanel {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		keepOtherRB = new GRadioButton("Keep 'Other' Name");
 		keepMyRB = new GRadioButton("Keep 'My' Name");

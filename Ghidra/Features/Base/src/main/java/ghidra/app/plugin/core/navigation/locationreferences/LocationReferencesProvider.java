@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.navigation.locationreferences;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 
@@ -23,7 +23,10 @@ import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.ToggleDockingAction;
+import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.table.GTable;
 import ghidra.app.nav.Navigatable;
 import ghidra.app.nav.NavigatableRemovalListener;
@@ -225,7 +228,7 @@ public class LocationReferencesProvider extends ComponentProviderAdapter
 //==================================================================================================
 	private void createView() {
 		providerComponent = new JPanel(new BorderLayout(10, 10));
-		providerComponent.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		providerComponent.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		referencesPanel = new LocationReferencesPanel(this);
 		providerComponent.add(referencesPanel, BorderLayout.CENTER);
 	}

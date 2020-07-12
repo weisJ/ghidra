@@ -15,14 +15,17 @@
  */
 package ghidra.app.plugin.core.analysis;
 
-import java.awt.BorderLayout;
-import java.util.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.*;
 import javax.swing.text.html.HTMLEditorKit;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.label.GLabel;
 import ghidra.GhidraOptions;
@@ -38,7 +41,9 @@ import ghidra.program.util.GhidraProgramUtilities;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.Swing;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.*;
+import ghidra.util.task.CancelledListener;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskMonitor;
 
 class AnalyzeAllOpenProgramsTask extends Task {
 	/** The program that is used for a source of analysis options */
@@ -504,9 +509,9 @@ class AnalyzeAllOpenProgramsTask extends Task {
 				editorPane.setBackground(new GLabel().getBackground());
 
 				JPanel panel = new JPanel(new BorderLayout());
-				panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+				panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 				JScrollPane scrollPane = new JScrollPane(editorPane);
-				scrollPane.setBorder(BorderFactory.createEmptyBorder());
+				scrollPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 				panel.add(scrollPane);
 				return panel;
 			}

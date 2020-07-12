@@ -15,13 +15,17 @@
  */
 package docking.widgets;
 
-import java.awt.Toolkit;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Arrays;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GLabel;
 import ghidra.util.MessageType;
 import ghidra.util.Msg;
@@ -41,7 +45,7 @@ public class PasswordChangeDialog extends DialogComponentProvider {
 	private void createWorkPanel(String serverType, String serverName, String userID) {
 
 		JPanel wp = new JPanel(new PairLayout(5, 5));
-		wp.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 10));
+		wp.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 0, 10));
 
 		if (serverName != null) {
 			wp.add(new GLabel(serverType + ":"));

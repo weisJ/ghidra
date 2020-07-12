@@ -20,6 +20,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import resources.ResourceManager;
 
 /**
@@ -213,7 +214,8 @@ public class ButtonPanelFactory {
 				: new GridLayout(1, 0, BUTTON_GAP, 0)));
 
 		Border inside =
-			BorderFactory.createEmptyBorder(TOP_MARGIN, sideMargin, BOTTOM_MARGIN, sideMargin);
+			GhidraBorderFactory.createEmptyBorder(TOP_MARGIN, sideMargin, BOTTOM_MARGIN,
+				sideMargin);
 		subPanel.setBorder(inside);
 
 		for (JButton button : buttons) {

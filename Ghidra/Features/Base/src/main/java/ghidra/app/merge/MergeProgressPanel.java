@@ -15,13 +15,13 @@
  */
 package ghidra.app.merge;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;
 import ghidra.util.Msg;
@@ -51,9 +51,10 @@ public class MergeProgressPanel extends JPanel {
 
 	private JPanel getProgressTitlePanel() {
 		JPanel phasesTitlePanel = new JPanel();
-		Border insideBorder = BorderFactory.createEmptyBorder(0, 0, 2, 0);
-		Border outsideBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLUE);
-		Border compoundBorder = BorderFactory.createCompoundBorder(outsideBorder, insideBorder);
+		Border insideBorder = GhidraBorderFactory.createEmptyBorder(0, 0, 2, 0);
+		Border outsideBorder = GhidraBorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLUE);
+		Border compoundBorder =
+			GhidraBorderFactory.createCompoundBorder(outsideBorder, insideBorder);
 		phasesTitlePanel.setBorder(compoundBorder);
 		BoxLayout bl = new BoxLayout(phasesTitlePanel, BoxLayout.X_AXIS);
 		phasesTitlePanel.setLayout(bl);
@@ -87,7 +88,7 @@ public class MergeProgressPanel extends JPanel {
 		int phaseDepth = phase.length - 1;
 		JLabel imageLabel = new GIconLabel(DEFINED_ICON);
 		JPanel labelPanel = new JPanel();
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 0));
 		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(INDENT_IN_PIXELS * phaseDepth));

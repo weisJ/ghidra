@@ -18,16 +18,20 @@ package ghidra.feature.vt.gui.filters;
 import static ghidra.feature.vt.gui.filters.Filter.FilterEditingStatus.APPLIED;
 import static ghidra.feature.vt.gui.filters.Filter.FilterEditingStatus.NONE;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.*;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.feature.vt.api.impl.VTChangeManager;
 import ghidra.feature.vt.api.impl.VersionTrackingChangeRecord;
-import ghidra.feature.vt.api.main.*;
+import ghidra.feature.vt.api.main.VTMarkupItem;
+import ghidra.feature.vt.api.main.VTMatch;
+import ghidra.feature.vt.api.main.VTMatchTag;
+import ghidra.feature.vt.api.main.VTSession;
 import ghidra.feature.vt.gui.plugin.VTController;
 import ghidra.feature.vt.gui.plugin.VTControllerListener;
 import ghidra.feature.vt.gui.util.MatchInfo;
@@ -64,7 +68,7 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 
 	private JComponent createComponent() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder("Tags"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Tags"));
 
 		editButton = new JButton("Edit");
 		editButton.addActionListener(e -> chooseExcludedTags());

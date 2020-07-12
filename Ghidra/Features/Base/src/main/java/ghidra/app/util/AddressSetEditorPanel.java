@@ -22,8 +22,12 @@ import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.program.model.address.*;
 import ghidra.util.layout.MiddleLayout;
@@ -51,7 +55,7 @@ public class AddressSetEditorPanel extends JPanel {
 		this.addressFactory = addressFactory;
 		this.addressSet = new AddressSet(addressSet);
 
-		setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+		setBorder(GhidraBorderFactory.createEmptyBorder(20, 0, 0, 0));
 		add(createAddRangePanel(), BorderLayout.NORTH);
 		add(createRangeListPanel(), BorderLayout.CENTER);
 		add(createRemoveRangePanel(), BorderLayout.SOUTH);
@@ -86,7 +90,7 @@ public class AddressSetEditorPanel extends JPanel {
 		maxAddressField.setAddressFactory(addressFactory);
 		maxAddressField.addChangeListener(listener);
 		maxAddressPanel.add(maxAddressField, BorderLayout.CENTER);
-		maxAddressPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+		maxAddressPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 0, 0));
 		addRangeButton = new JButton(ADD_ICON);
 		addRangeButton.addActionListener(new ActionListener() {
 			@Override
@@ -105,8 +109,8 @@ public class AddressSetEditorPanel extends JPanel {
 		subtractRangeButton.setToolTipText("Remove the range from the set of included addresses");
 
 		JPanel addressPanel = new JPanel();
-		addressPanel.setBorder(BorderFactory.createTitledBorder(
-			BorderFactory.createEmptyBorder(10, 10, 20, 10), "Add/Remove Address Range"));
+		addressPanel.setBorder(GhidraBorderFactory.createTitledBorder(
+			GhidraBorderFactory.createEmptyBorder(10, 10, 20, 10), "Add/Remove Address Range"));
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.weightx = 1;
@@ -156,8 +160,8 @@ public class AddressSetEditorPanel extends JPanel {
 			}
 		});
 		JScrollPane scrollPane = new JScrollPane(list);
-		panel.setBorder(BorderFactory.createTitledBorder(
-			BorderFactory.createEmptyBorder(10, 10, 10, 10), "Included Address Ranges:"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder(
+			GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10), "Included Address Ranges:"));
 		panel.add(scrollPane);
 
 		return panel;

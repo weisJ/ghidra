@@ -15,8 +15,7 @@
  */
 package ghidra.framework.main;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.HashMap;
@@ -26,12 +25,16 @@ import javax.swing.*;
 
 import docking.ActionContext;
 import docking.ComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.tabbedpane.DockingTabRenderer;
 import ghidra.framework.main.datatable.ProjectDataTablePanel;
 import ghidra.framework.main.datatree.ProjectDataTreePanel;
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectData;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ProjectManager;
 import ghidra.framework.options.SaveState;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
@@ -71,14 +74,14 @@ class ProjectDataPanel extends JSplitPane {
 		readOnlyViews = new HashMap<>(TYPICAL_NUM_VIEWS);
 
 		projectTab = new JTabbedPane(SwingConstants.BOTTOM);
-		projectTab.setBorder(BorderFactory.createTitledBorder(BORDER_PREFIX));
+		projectTab.setBorder(GhidraBorderFactory.createTitledBorder(BORDER_PREFIX));
 		projectTab.addChangeListener(e -> frontEndPlugin.getTool().contextChanged(null));
 
 		projectTab.addTab("Tree View", activePanel);
 		projectTab.addTab("Table View", tablePanel);
 		// setup the active data tree panel
 		this.add(projectTab, JSplitPane.LEFT);
-		projectTab.setBorder(BorderFactory.createTitledBorder(BORDER_PREFIX));
+		projectTab.setBorder(GhidraBorderFactory.createTitledBorder(BORDER_PREFIX));
 
 		// initialize the read-only project view tabbed pane
 		// create a container panel just to have a title border because of a bug in
@@ -88,7 +91,7 @@ class ProjectDataPanel extends JSplitPane {
 
 		readOnlyTab = new JTabbedPane(SwingConstants.BOTTOM);
 		bugFixPanel.add(readOnlyTab, BorderLayout.CENTER);
-		bugFixPanel.setBorder(BorderFactory.createTitledBorder(READ_ONLY_BORDER));
+		bugFixPanel.setBorder(GhidraBorderFactory.createTitledBorder(READ_ONLY_BORDER));
 
 		setHelpOnReadOnlyTab();
 		this.add(bugFixPanel, JSplitPane.RIGHT);
@@ -110,7 +113,7 @@ class ProjectDataPanel extends JSplitPane {
 	 * If no project views are open, the tabbed pane is not visible.
 	 */
 	private void populateReadOnlyViews(Project project) {
-//		readOnlyTab.setBorder(BorderFactory.createTitledBorder(READ_ONLY_BORDER));
+//		readOnlyTab.setBorder(GhidraBorderFactory.createTitledBorder(READ_ONLY_BORDER));
 
 		if (project == null) {
 			setViewsVisible(false);
@@ -316,7 +319,7 @@ class ProjectDataPanel extends JSplitPane {
 	}
 
 	void setBorder(String projectName) {
-		projectTab.setBorder(BorderFactory.createTitledBorder(BORDER_PREFIX + projectName));
+		projectTab.setBorder(GhidraBorderFactory.createTitledBorder(BORDER_PREFIX + projectName));
 		treePanel.updateProjectName(projectName);
 	}
 

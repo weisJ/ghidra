@@ -15,18 +15,19 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import docking.ActionContext;
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.table.GTableCellRenderer;
 import docking.widgets.table.GTableCellRenderingData;
 import docking.widgets.table.threaded.GThreadedTablePanel;
@@ -35,7 +36,9 @@ import ghidra.framework.main.datatable.ProjectDataContext;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainFolder;
 import ghidra.framework.plugintool.Plugin;
-import ghidra.util.*;
+import ghidra.util.DateUtils;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 
 /**
  * Dialog that shows all checkouts in a specific folder and all of its subfolders.
@@ -145,7 +148,7 @@ public class FindCheckoutsDialog extends DialogComponentProvider {
 				setText(DateUtils.formatDateTimestamp((Date) value));
 			}
 
-			setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+			setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 0));
 
 			String toolTipText = null;
 

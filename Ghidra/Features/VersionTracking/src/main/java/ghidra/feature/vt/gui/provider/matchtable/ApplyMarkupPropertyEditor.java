@@ -17,8 +17,7 @@ package ghidra.feature.vt.gui.provider.matchtable;
 
 import static ghidra.feature.vt.gui.util.VTOptionDefines.*;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -27,6 +26,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.help.HelpService;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
@@ -36,12 +36,14 @@ import docking.widgets.label.GLabel;
 import ghidra.GhidraOptions;
 import ghidra.feature.vt.gui.plugin.VTController;
 import ghidra.feature.vt.gui.plugin.VTPlugin;
-import ghidra.feature.vt.gui.util.VTMatchApplyChoices.*;
 import ghidra.feature.vt.gui.util.VTOptionDefines;
+import ghidra.feature.vt.gui.util.VTMatchApplyChoices.*;
 import ghidra.framework.options.*;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.InvalidInputException;
-import ghidra.util.layout.*;
+import ghidra.util.layout.PairLayout;
+import ghidra.util.layout.VariableHeightPairLayout;
+import ghidra.util.layout.VerticalLayout;
 
 /**
  * The ApplyMarkupPropertyEditor provides a custom GUI layout for the options that are used when 
@@ -207,7 +209,7 @@ public class ApplyMarkupPropertyEditor implements OptionsEditor {
 		panel.add(createIgnoreCheckBoxPanel());
 
 		// TODO More needs to be done with the layout here.
-		panel.setBorder(BorderFactory.createTitledBorder("Apply Markup Options"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Apply Markup Options"));
 		JScrollPane scrollPane = new JScrollPane(panel);
 
 		return scrollPane;
@@ -216,7 +218,7 @@ public class ApplyMarkupPropertyEditor implements OptionsEditor {
 	private Component createSeparator() {
 		JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
 		JPanel borderPanel = new JPanel(new BorderLayout());
-		borderPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+		borderPanel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 50, 20, 50));
 		borderPanel.add(separator);
 		return borderPanel;
 	}
@@ -251,9 +253,9 @@ public class ApplyMarkupPropertyEditor implements OptionsEditor {
 		setupFunctionSignatureDetailChoiceListeners();
 
 		JPanel outerPanel = new JPanel();
-		outerPanel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 3, 0, 0));
 		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createTitledBorder(null, "Function Signature Details",
+		panel.setBorder(GhidraBorderFactory.createTitledBorder(null, "Function Signature Details",
 			TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION));
 		panel.setLayout(new PairLayout(3, 5));
 
@@ -340,9 +342,9 @@ public class ApplyMarkupPropertyEditor implements OptionsEditor {
 		setupParameterChoiceListeners();
 
 		JPanel outerPanel = new JPanel();
-		outerPanel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 3, 0, 0));
 		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createTitledBorder(null, "Function Parameter Details",
+		panel.setBorder(GhidraBorderFactory.createTitledBorder(null, "Function Parameter Details",
 			TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION));
 		panel.setLayout(new VariableHeightPairLayout(3, 5));
 
@@ -414,7 +416,7 @@ public class ApplyMarkupPropertyEditor implements OptionsEditor {
 	private JPanel createPrioritySubPanel() {
 		JPanel outerPanel = new JPanel();
 		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createTitledBorder(null, "Parameter Name Priority",
+		panel.setBorder(GhidraBorderFactory.createTitledBorder(null, "Parameter Name Priority",
 			TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION));
 		panel.setLayout(new VerticalLayout(5));
 		panel.setToolTipText(PARAMETER_NAME_PRIORITY_TOOTIP);
@@ -439,7 +441,7 @@ public class ApplyMarkupPropertyEditor implements OptionsEditor {
 		setupNonCommentMarkupChoiceListeners();
 
 		JPanel outerPanel = new JPanel();
-		outerPanel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 3, 0, 0));
 		JPanel panel = new JPanel();
 		panel.setLayout(new PairLayout(3, 5));
 
@@ -500,7 +502,7 @@ public class ApplyMarkupPropertyEditor implements OptionsEditor {
 		setupCommentChoiceListeners();
 
 		JPanel outerPanel = new JPanel();
-		outerPanel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 3, 0, 0));
 		JPanel panel = new JPanel();
 		panel.setLayout(new PairLayout(3, 5));
 

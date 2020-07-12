@@ -15,12 +15,13 @@
  */
 package ghidra.app.merge.listing;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.fieldpanel.FieldPanel;
@@ -29,11 +30,16 @@ import docking.widgets.label.GIconLabel;
 import ghidra.app.merge.MergeConstants;
 import ghidra.app.merge.MergeManager;
 import ghidra.app.merge.util.ConflictCountPanel;
-import ghidra.app.plugin.core.codebrowser.hover.*;
+import ghidra.app.plugin.core.codebrowser.hover.DataTypeListingHover;
+import ghidra.app.plugin.core.codebrowser.hover.FunctionNameListingHover;
+import ghidra.app.plugin.core.codebrowser.hover.ReferenceListingHover;
+import ghidra.app.plugin.core.codebrowser.hover.TruncatedTextListingHover;
 import ghidra.app.services.CodeFormatService;
 import ghidra.app.util.viewer.field.RegisterFieldFactory;
 import ghidra.app.util.viewer.format.FormatManager;
-import ghidra.app.util.viewer.listingpanel.*;
+import ghidra.app.util.viewer.listingpanel.EmptyListingModel;
+import ghidra.app.util.viewer.listingpanel.ListingModel;
+import ghidra.app.util.viewer.listingpanel.ListingPanel;
 import ghidra.app.util.viewer.multilisting.AddressTranslator;
 import ghidra.app.util.viewer.multilisting.MultiListingLayoutModel;
 import ghidra.app.util.viewer.util.TitledPanel;
@@ -260,7 +266,7 @@ class ExternalAddConflictPanel extends JPanel implements CodeFormatService {
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		splitPane.setResizeWeight(0.5);
 		splitPane.setDividerSize(4);
-		splitPane.setBorder(BorderFactory.createEmptyBorder());
+		splitPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 		splitPane.setLeftComponent(latestTitlePanel);
 		splitPane.setRightComponent(myTitlePanel);
 		centerPanel.add(splitPane, BorderLayout.CENTER);

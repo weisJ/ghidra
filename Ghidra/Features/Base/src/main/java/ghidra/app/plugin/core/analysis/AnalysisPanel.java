@@ -16,25 +16,36 @@
 package ghidra.app.plugin.core.analysis;
 
 import java.awt.*;
-import java.beans.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyEditor;
 import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.table.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.options.editor.GenericOptionsComponent;
 import docking.widgets.OptionDialog;
 import docking.widgets.label.GLabel;
-import docking.widgets.table.*;
+import docking.widgets.table.GBooleanCellRenderer;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import ghidra.GhidraOptions;
 import ghidra.app.services.Analyzer;
-import ghidra.framework.options.*;
+import ghidra.framework.options.EditorState;
+import ghidra.framework.options.EditorStateFactory;
+import ghidra.framework.options.OptionType;
+import ghidra.framework.options.Options;
 import ghidra.program.model.listing.Program;
 import ghidra.util.ColorUtils;
 import ghidra.util.HelpLocation;
@@ -161,7 +172,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 		splitpane.setBorder(null);
 
 		setLayout(new BorderLayout());
-		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		add(splitpane, BorderLayout.CENTER);
 	}
 
@@ -424,10 +435,10 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	 * of a titled border and a 10 pixel wide empty border.
 	 */
 	private void configureBorder(JComponent component, String title) {
-		Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+		Border emptyBorder = GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10);
 		Border titleBorder =
-			BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), title);
-		Border compoundBorder = BorderFactory.createCompoundBorder(titleBorder, emptyBorder);
+			GhidraBorderFactory.createTitledBorder(GhidraBorderFactory.createEtchedBorder(), title);
+		Border compoundBorder = GhidraBorderFactory.createCompoundBorder(titleBorder, emptyBorder);
 		component.setBorder(compoundBorder);
 	}
 
@@ -508,7 +519,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	private void loadAnalyzerOptionsPanels() {
 		List<Options> optionGroups = analysisOptions.getChildOptions();
 		noOptionsPanel = new JPanel(new VerticalLayout(5));
-		noOptionsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+		noOptionsPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 5));
 		noOptionsPanel.add(new GLabel("No options available."));
 
 		HelpService help = Help.getHelpService();
@@ -517,7 +528,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 			String analyzerName = optionsGroup.getName();
 
 			JPanel optionsContainer = new JPanel(new VerticalLayout(5));
-			optionsContainer.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+			optionsContainer.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 5));
 
 			JScrollPane scrollPane = new JScrollPane(optionsContainer);
 			scrollPane.setBorder(null);

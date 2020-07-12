@@ -18,14 +18,16 @@ package ghidra.framework.main;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.tool.ToolConstants;
 import docking.widgets.checkbox.GCheckBox;
@@ -122,7 +124,7 @@ class ImportGhidraToolsDialog extends DialogComponentProvider {
 		// Layout Main Panel
 		availableToolsPanel.add(buttonPanel, BorderLayout.EAST);
 		availableToolsPanel.add(listPanel, BorderLayout.CENTER);
-		availableToolsPanel.setBorder(new TitledBorder("Available Tools"));
+		availableToolsPanel.setBorder(GhidraBorderFactory.createTitledBorder("Available Tools"));
 
 		panel.add(availableToolsPanel, BorderLayout.CENTER);
 		return panel;

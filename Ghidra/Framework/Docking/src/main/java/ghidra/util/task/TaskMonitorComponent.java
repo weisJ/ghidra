@@ -15,14 +15,14 @@
  */
 package ghidra.util.task;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.text.NumberFormat;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.OptionDialog;
 import docking.widgets.label.GDHtmlLabel;
@@ -479,7 +479,7 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 		else {
 			progressBar.setBorderPainted(true);
 			Dimension size = progressBar.getPreferredSize();
-			progressBarPanel.setBorder(BorderFactory.createEmptyBorder(
+			progressBarPanel.setBorder(GhidraBorderFactory.createEmptyBorder(
 				(progressPanel.getPreferredSize().height - size.height) / 2, 0, 0, 8));
 		}
 

@@ -15,10 +15,11 @@
  */
 package ghidra.app.plugin.core.symtable;
 
-import java.awt.Component;
+import java.awt.*;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.program.model.symbol.Symbol;
 
 class SymbolEditor extends DefaultCellEditor {
@@ -28,7 +29,7 @@ class SymbolEditor extends DefaultCellEditor {
 	SymbolEditor() {
 		super(new JTextField());
 		symbolField = (JTextField) super.getComponent();
-		symbolField.setBorder(BorderFactory.createEmptyBorder());
+		symbolField.setBorder(GhidraBorderFactory.createEmptyBorder());
 	}
 
 	@Override

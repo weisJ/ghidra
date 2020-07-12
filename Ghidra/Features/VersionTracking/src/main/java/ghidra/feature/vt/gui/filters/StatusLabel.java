@@ -16,10 +16,13 @@
 package ghidra.feature.vt.gui.filters;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.feature.vt.gui.filters.Filter.FilterEditingStatus;
 
@@ -35,7 +38,7 @@ public class StatusLabel extends GDLabel implements FilterStatusListener {
 				resetBounds();
 			}
 		});
-		setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+		setBorder(GhidraBorderFactory.createEmptyBorder(2, 2, 2, 2));
 
 		addMouseListener(new MouseAdapter() {
 			@Override

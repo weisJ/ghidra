@@ -16,11 +16,7 @@
  */
 package ghidra.app.plugin.core.validator;
 
-import ghidra.program.model.listing.Program;
-import ghidra.util.HelpLocation;
-
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -28,8 +24,11 @@ import java.util.List;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.conditiontestpanel.ConditionTestPanel;
 import docking.widgets.conditiontestpanel.ConditionTester;
+import ghidra.program.model.listing.Program;
+import ghidra.util.HelpLocation;
 
 public class ValidateProgramDialog extends DialogComponentProvider {
 	private ConditionTestPanel conditionTestPanel;
@@ -40,13 +39,13 @@ public class ValidateProgramDialog extends DialogComponentProvider {
 		JPanel mainPanel = new JPanel();
 
 		conditionTestPanel = new ConditionTestPanel(list);
-		conditionTestPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		conditionTestPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10));
 		mainPanel.setLayout(new BorderLayout());
 
 		JPanel runButtonPanel = new JPanel();
-		runButtonPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+		runButtonPanel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 0, 0, 0));
 		runButtonPanel.setLayout(new FlowLayout());
 		JButton runTestsButton = new JButton("Run Validators");
 		runTestsButton.addActionListener(new ActionListener() {

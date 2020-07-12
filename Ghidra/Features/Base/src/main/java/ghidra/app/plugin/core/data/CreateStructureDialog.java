@@ -16,27 +16,39 @@
 package ghidra.app.plugin.core.data;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.*;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractSortedTableModel;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.app.util.ToolTipUtils;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Program;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.InvalidNameException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.table.GhidraTableFilterPanel;
@@ -109,7 +121,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 	private JPanel buildNameTextFieldPanel() {
 		JPanel namePanel = new JPanel();
 		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.Y_AXIS));
-		nameBorder = BorderFactory.createTitledBorder("Create Structure By Name");
+		nameBorder = GhidraBorderFactory.createTitledBorder("Create Structure By Name");
 		namePanel.setBorder(nameBorder);
 
 		nameTextField = new JTextField() {
@@ -170,7 +182,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 	private JPanel buildMatchingStructurePanel() {
 		JPanel structurePanel = new JPanel();
 		structurePanel.setLayout(new BoxLayout(structurePanel, BoxLayout.Y_AXIS));
-		structureBorder = BorderFactory.createTitledBorder("Use Existing Structure");
+		structureBorder = GhidraBorderFactory.createTitledBorder("Use Existing Structure");
 		structurePanel.setBorder(structureBorder);
 
 		GTable table = buildMatchingStructuresTable();
@@ -244,7 +256,8 @@ public class CreateStructureDialog extends DialogComponentProvider {
 		};
 		matchingStylePanel.setLayout(new BoxLayout(matchingStylePanel, BoxLayout.X_AXIS));
 		matchingStylePanel.setBorder(
-			new TitledBorder(BorderFactory.createEmptyBorder(), "Matching: "));
+			GhidraBorderFactory.createTitledBorder(GhidraBorderFactory.createEmptyBorder(),
+				"Matching: "));
 
 		exactMatchButton = new GRadioButton("Exact");
 		sizeMatchButton = new GRadioButton("Size");

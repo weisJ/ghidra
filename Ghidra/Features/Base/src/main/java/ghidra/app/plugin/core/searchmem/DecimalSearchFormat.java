@@ -15,15 +15,19 @@
  */
 package ghidra.app.plugin.core.searchmem;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.exception.AssertException;
@@ -118,7 +122,7 @@ public class DecimalSearchFormat extends SearchFormat {
 		decimalOptionsPanel.add(decimalQWord);
 		decimalOptionsPanel.add(decimalFloat);
 		decimalOptionsPanel.add(decimalDouble);
-		decimalOptionsPanel.setBorder(BorderFactory.createTitledBorder("Format Options"));
+		decimalOptionsPanel.setBorder(GhidraBorderFactory.createTitledBorder("Format Options"));
 
 		return decimalOptionsPanel;
 

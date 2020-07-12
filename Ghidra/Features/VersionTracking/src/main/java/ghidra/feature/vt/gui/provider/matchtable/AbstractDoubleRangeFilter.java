@@ -15,15 +15,15 @@
  */
 package ghidra.feature.vt.gui.provider.matchtable;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
 import org.apache.commons.lang3.StringUtils;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.numberformat.BoundedRangeDecimalFormatterFactory;
 import ghidra.feature.vt.gui.filters.*;
@@ -81,9 +81,9 @@ public abstract class AbstractDoubleRangeFilter<T> extends Filter<T>
 			new BoundedRangeInputVerifier(lowerBoundField, false, maxValue, minValue));
 
 		final JPanel panel = new JPanel(new HorizontalLayout(4));
-		Border paddingBorder = BorderFactory.createEmptyBorder(1, 5, 1, 5);
-		Border outsideBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
-		panel.setBorder(BorderFactory.createCompoundBorder(outsideBorder, paddingBorder));
+		Border paddingBorder = GhidraBorderFactory.createEmptyBorder(1, 5, 1, 5);
+		Border outsideBorder = GhidraBorderFactory.createLoweredBevelBorder();
+		panel.setBorder(GhidraBorderFactory.createCompoundBorder(outsideBorder, paddingBorder));
 
 		JLabel filterLabel = new GDLabel(filterName + " Filter: ");
 		JLabel middleLabel = new GDLabel("to");

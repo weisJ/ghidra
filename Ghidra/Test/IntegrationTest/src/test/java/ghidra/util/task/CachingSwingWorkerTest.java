@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.SwingWorker;
+import javax.swing.*;
 
 import org.junit.Test;
 

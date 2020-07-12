@@ -15,13 +15,14 @@
  */
 package docking.widgets.table;
 
-import java.awt.Component;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.event.*;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
@@ -30,11 +31,17 @@ import org.jdom.Element;
 
 import docking.ActionContext;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.help.HelpService;
-import docking.menu.*;
+import docking.menu.ActionState;
+import docking.menu.MultiStateDockingAction;
+import docking.menu.NonToolbarMultiStateAction;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.EventTrigger;
-import docking.widgets.filter.*;
+import docking.widgets.filter.FilterListener;
+import docking.widgets.filter.FilterOptions;
+import docking.widgets.filter.FilterOptionsEditorDialog;
+import docking.widgets.filter.FilterTextField;
 import docking.widgets.label.GDLabel;
 import docking.widgets.table.columnfilter.ColumnBasedTableFilter;
 import docking.widgets.table.columnfilter.ColumnFilterSaveManager;
@@ -347,7 +354,7 @@ public class GTableFilterPanel<ROW_OBJECT> extends JPanel {
 
 	private void buildPanel(String filterLabel) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 
 		searchLabel = new GDLabel(filterLabel);
 		searchLabel.setToolTipText("Include only table elements that match the given search text");

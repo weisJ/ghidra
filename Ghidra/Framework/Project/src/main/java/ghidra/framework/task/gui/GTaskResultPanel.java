@@ -19,6 +19,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.list.GListCellRenderer;
 import ghidra.framework.task.GTaskManager;
 import ghidra.framework.task.GTaskResult;
@@ -36,7 +37,7 @@ public class GTaskResultPanel extends JPanel {
 		jList.setCellRenderer(new GTaskResultCellRenderer());
 		JScrollPane scroll = new JScrollPane(jList);
 		add(scroll);
-		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 	}
 
 	static class GTaskResultCellRenderer extends GListCellRenderer<GTaskResultInfo> {

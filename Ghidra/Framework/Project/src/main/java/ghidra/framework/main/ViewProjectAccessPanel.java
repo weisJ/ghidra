@@ -15,13 +15,13 @@
  */
 package ghidra.framework.main;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.plugintool.PluginTool;
@@ -74,14 +74,14 @@ public class ViewProjectAccessPanel extends ProjectAccessPanel {
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10));
 
 		userAccessPanel = new UserAccessPanel(currentUser);
 		mainPanel.add(userAccessPanel, BorderLayout.CENTER);
 
 		if (anonymousServerAccessAllowed && origAnonymousAccessEnabled) {
 			JLabel anonymousAccessLabel = new GDLabel("Anonymous Read-Only Access Enabled");
-			anonymousAccessLabel.setBorder(BorderFactory.createEmptyBorder(5, 2, 0, 0));
+			anonymousAccessLabel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 2, 0, 0));
 			Font f = anonymousAccessLabel.getFont().deriveFont(Font.ITALIC);
 			anonymousAccessLabel.setFont(f);
 

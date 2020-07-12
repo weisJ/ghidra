@@ -20,19 +20,29 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GComboBox;
-import docking.widgets.fieldpanel.*;
-import docking.widgets.fieldpanel.field.*;
+import docking.widgets.fieldpanel.FieldPanel;
+import docking.widgets.fieldpanel.Layout;
+import docking.widgets.fieldpanel.LayoutModel;
+import docking.widgets.fieldpanel.field.AttributedString;
+import docking.widgets.fieldpanel.field.ClippingTextField;
+import docking.widgets.fieldpanel.field.FieldElement;
+import docking.widgets.fieldpanel.field.TextFieldElement;
 import docking.widgets.fieldpanel.listener.LayoutModelListener;
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.support.Highlight;
+import docking.widgets.fieldpanel.support.HighlightFactory;
+import docking.widgets.fieldpanel.support.SingleRowLayout;
 import docking.widgets.indexedscrollpane.IndexedScrollPane;
 import docking.widgets.label.GDLabel;
 import ghidra.GhidraOptions;
@@ -317,9 +327,10 @@ public class OptionsGui extends JPanel {
 		namesList = new JList<>(elements);
 		namesList.setVisibleRowCount(10);
 		JScrollPane scrollPane = new JScrollPane(namesList);
-		Border border = BorderFactory.createCompoundBorder(
-			BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createEtchedBorder());
-		scrollPane.setBorder(BorderFactory.createTitledBorder(border, "Screen Element"));
+		Border border = GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createEmptyBorder(4, 4, 4, 4),
+			GhidraBorderFactory.createEtchedBorder());
+		scrollPane.setBorder(GhidraBorderFactory.createTitledBorder(border, "Screen Element"));
 		panel.add(buildGlobalOptionsPanel(), BorderLayout.NORTH);
 		panel.add(scrollPane, BorderLayout.CENTER);
 		panel.add(buildElementOptionsPanel(), BorderLayout.SOUTH);
@@ -330,10 +341,11 @@ public class OptionsGui extends JPanel {
 	 * Builds the base font selection panel.
 	 */
 	private JPanel buildGlobalOptionsPanel() {
-		Border border = BorderFactory.createCompoundBorder(
-			BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createEtchedBorder());
+		Border border = GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createEmptyBorder(4, 4, 4, 4),
+			GhidraBorderFactory.createEtchedBorder());
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder(border, "Font"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder(border, "Font"));
 
 		JPanel panel1 = new JPanel(new FlowLayout());
 
@@ -388,13 +400,14 @@ public class OptionsGui extends JPanel {
 	 * Builds the selected Field options panel.
 	 */
 	private JPanel buildElementOptionsPanel() {
-		Border border = BorderFactory.createCompoundBorder(
-			BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createEtchedBorder());
+		Border border = GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createEmptyBorder(4, 4, 4, 4),
+			GhidraBorderFactory.createEtchedBorder());
 
 		JPanel panel = new JPanel(new BorderLayout());
 
 		JPanel subPanel = new JPanel(new GridLayout(1, 3, 2, 4));
-		subPanel.setBorder(BorderFactory.createTitledBorder(border, "Style Settings"));
+		subPanel.setBorder(GhidraBorderFactory.createTitledBorder(border, "Style Settings"));
 		boldCheckbox = new GCheckBox("Bold");
 		italicsCheckbox = new GCheckBox("Italics");
 		customCheckbox = new GCheckBox("Custom");
@@ -404,7 +417,7 @@ public class OptionsGui extends JPanel {
 		panel.add(subPanel, BorderLayout.SOUTH);
 
 		subPanel = new JPanel(new BorderLayout());
-		subPanel.setBorder(BorderFactory.createTitledBorder(border, "Color"));
+		subPanel.setBorder(GhidraBorderFactory.createTitledBorder(border, "Color"));
 		colorPanel = new JPanel();
 		colorPanel.setBackground(Color.white);
 		subPanel.add(colorPanel, BorderLayout.CENTER);

@@ -19,13 +19,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.*;
 
-import docking.widgets.conditiontestpanel.*;
-import docking.wizard.*;
+import docking.border.GhidraBorderFactory;
+import docking.widgets.conditiontestpanel.ConditionTestListener;
+import docking.widgets.conditiontestpanel.ConditionTestPanel;
+import docking.widgets.conditiontestpanel.ConditionTester;
+import docking.wizard.AbstractMageJPanel;
+import docking.wizard.WizardPanelDisplayability;
+import docking.wizard.WizardState;
 import ghidra.feature.vt.api.main.VTSession;
 import ghidra.feature.vt.gui.validator.VTPreconditionValidator;
 import ghidra.program.model.listing.Program;
@@ -42,11 +49,11 @@ public class PreconditionsPanel extends AbstractMageJPanel<VTWizardStateKey> imp
 	public PreconditionsPanel(VTNewSessionWizardManager panelManager) {
 
 		this.wizardManager = panelManager;
-		setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10));
 		setLayout(new BorderLayout());
 
 		JPanel runButtonPanel = new JPanel();
-		runButtonPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+		runButtonPanel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 0, 0, 0));
 		runButtonPanel.setLayout(new FlowLayout());
 		JButton runTestsButton = new JButton("Run Precondition Checks");
 		runTestsButton.addActionListener(new ActionListener() {

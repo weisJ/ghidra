@@ -17,7 +17,10 @@ package docking.widgets.filechooser;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.dnd.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
 
@@ -25,6 +28,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.dnd.DropTgtAdapter;
 import docking.dnd.Droppable;
 import docking.widgets.OptionDialog;
@@ -104,7 +108,8 @@ public class GhidraFileChooserPanel extends JPanel implements Droppable {
 
 	private void build() {
 		if (createBorder) {
-			setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(1), title));
+			setBorder(GhidraBorderFactory
+					.createTitledBorder(GhidraBorderFactory.createEtchedBorder(), title));
 		}
 
 		filenameTextField = new JTextField(20);

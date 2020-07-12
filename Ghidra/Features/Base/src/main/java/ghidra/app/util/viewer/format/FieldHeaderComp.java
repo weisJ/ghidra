@@ -16,11 +16,15 @@
 package ghidra.app.util.viewer.format;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.label.GDLabel;
@@ -70,14 +74,14 @@ public class FieldHeaderComp extends JPanel {
 		FormatManager formatMgr = headerPanel.getFormatManager();
 		this.model = formatMgr.getModel(modelNumber);
 		this.headerPanel = headerPanel;
-		Border border1 = BorderFactory.createRaisedBevelBorder();
-		Border border2 = BorderFactory.createEmptyBorder(0, 0, 1, 1);
+		Border border1 = GhidraBorderFactory.createRaisedBevelBorder();
+		Border border2 = GhidraBorderFactory.createEmptyBorder(0, 0, 1, 1);
 
 		label = new GDLabel("Test");
 		label.setOpaque(true);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		buttonColor = label.getBackground();
-		label.setBorder(BorderFactory.createCompoundBorder(border2, border1));
+		label.setBorder(GhidraBorderFactory.createCompoundBorder(border2, border1));
 		label.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		Dimension d = label.getPreferredSize();
 		highlightButtonColor = new Color(244, 221, 183);
@@ -91,7 +95,7 @@ public class FieldHeaderComp extends JPanel {
 		help.registerHelp(this, new HelpLocation("CodeBrowserPlugin", "Field_Formatter"));
 
 		// process mouse motion events
-		setBorder(BorderFactory.createRaisedBevelBorder());
+		setBorder(GhidraBorderFactory.createRaisedBevelBorder());
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

@@ -21,11 +21,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
@@ -35,14 +35,20 @@ import ghidra.app.util.AddressInput;
 import ghidra.app.util.NamespaceUtils;
 import ghidra.framework.main.AppInfo;
 import ghidra.framework.main.DataTreeDialog;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectData;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CircularDependencyException;
+import ghidra.program.model.listing.Library;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
 
@@ -118,8 +124,9 @@ class EditExternalLocationPanel extends JPanel {
 	private void buildPanel() {
 
 		JPanel topPanel = new JPanel(new PairLayout(5, 10, 160));
-		topPanel.setBorder(
-			new CompoundBorder(new TitledBorder("External Program"), new EmptyBorder(0, 5, 5, 5)));
+		topPanel.setBorder(GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createTitledBorder("External Program"),
+			GhidraBorderFactory.createEmptyBorder(0, 5, 5, 5)));
 
 		topPanel.add(new GLabel("Name:", SwingConstants.RIGHT));
 		extLibNameComboBox = new GhidraComboBox<>();
@@ -173,8 +180,9 @@ class EditExternalLocationPanel extends JPanel {
 		topPanel.add(pathPanel);
 
 		JPanel bottomPanel = new JPanel(new PairLayout(10, 10, 160));
-		bottomPanel.setBorder(
-			new CompoundBorder(new TitledBorder("External Location"), new EmptyBorder(0, 5, 5, 5)));
+		bottomPanel.setBorder(GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createTitledBorder("External Location"),
+			GhidraBorderFactory.createEmptyBorder(0, 5, 5, 5)));
 
 		bottomPanel.add(new GLabel("Type:", SwingConstants.RIGHT));
 

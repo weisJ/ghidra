@@ -22,7 +22,11 @@ import javax.swing.*;
 
 import docking.ActionContext;
 import docking.WindowPosition;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.KeyBindingData;
+import docking.action.MenuData;
+import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import ghidra.framework.plugintool.ComponentProviderAdapter;
 import ghidra.framework.plugintool.PluginTool;
@@ -118,9 +122,9 @@ public class HelloWorldComponentProvider extends ComponentProviderAdapter {
 
 	private void buildMainPanel() {
 		mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 10));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 20, 10));
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		panel.setBorder(BorderFactory.createTitledBorder("Example of a Component"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Example of a Component"));
 		activeButtonObj = new MyButton("Hello World");
 		Font f = activeButtonObj.getFont();
 		activeButtonObj.setFont(new Font(f.getFontName(), Font.BOLD, 14));
@@ -149,7 +153,7 @@ public class HelloWorldComponentProvider extends ComponentProviderAdapter {
 	private class MyButton extends EmptyBorderButton {
 		MyButton(String name) {
 			super(name);
-			setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
+			setBorder(GhidraBorderFactory.createEmptyBorder(10, 5, 10, 5));
 
 			addActionListener(new ActionListener() {
 

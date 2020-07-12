@@ -22,6 +22,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
+
 /**
  * Class that is a JButton that has an empty border and adds a mouse listener
  * so that the button looks raised when the mouse pointer enters the button,
@@ -33,21 +35,21 @@ public class SmallBorderButton extends JButton {
 	/**
 	 * A raised beveled border.
 	 */
-    public static final Border RAISED_BORDER = BorderFactory.createCompoundBorder(
-				BorderFactory.createRaisedBevelBorder(),
-				BorderFactory.createEmptyBorder(1,1,1,1));
+	public static final Border RAISED_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createRaisedBevelBorder(),
+		GhidraBorderFactory.createEmptyBorder(1, 1, 1, 1));
     /**
      * An empty border.
      */
-//    public static final Border NO_BORDER = new EmptyBorder(RAISED_BORDER.getBorderInsets(new JButton()));
+//    public static final Border NO_BORDER = GhidraBorderFactory.createEmptyBorder(RAISED_BORDER.getBorderInsets(new JButton()));
     public static final Border NO_BORDER = RAISED_BORDER;
     
     /**
      * A lowered border beveled border.
      */
-    public static final Border LOWERED_BORDER = BorderFactory.createCompoundBorder(
-				BorderFactory.createLoweredBevelBorder(),
-				BorderFactory.createEmptyBorder(1,1,1,1));
+	public static final Border LOWERED_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createLoweredBevelBorder(),
+		GhidraBorderFactory.createEmptyBorder(1, 1, 1, 1));
 
 	private Border overrideBorder;
 

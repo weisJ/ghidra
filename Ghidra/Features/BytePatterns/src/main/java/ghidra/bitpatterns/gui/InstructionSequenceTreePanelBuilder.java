@@ -15,7 +15,7 @@
  */
 package ghidra.bitpatterns.gui;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -24,6 +24,7 @@ import javax.swing.*;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.dialogs.NumberInputDialog;
 import docking.widgets.label.GDLabel;
 import docking.widgets.tree.GTree;
@@ -64,7 +65,7 @@ public class InstructionSequenceTreePanelBuilder extends ContextRegisterFilterab
 
 	private JPanel buildTreePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(3, 3, 3, 3));
 		FunctionBitPatternsGTreeRootNode root = new FunctionBitPatternsGTreeRootNode();
 		GTree defaultEmptyTree = new GTree(root);
 		panel.add(defaultEmptyTree, BorderLayout.CENTER);

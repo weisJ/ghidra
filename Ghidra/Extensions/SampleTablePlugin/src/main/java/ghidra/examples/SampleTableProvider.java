@@ -23,7 +23,10 @@ import java.util.List;
 import javax.swing.*;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.MenuData;
+import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.filechooser.GhidraFileChooserPanel;
 import docking.widgets.table.GFilterTable;
@@ -31,7 +34,9 @@ import ghidra.framework.options.OptionsChangeListener;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.ComponentProviderAdapter;
 import ghidra.framework.plugintool.util.OptionsService;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.layout.MiddleLayout;
 import resources.ResourceManager;
@@ -83,7 +88,7 @@ public class SampleTableProvider extends ComponentProviderAdapter implements Opt
 
 	private Component buildControlPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		panel.add(buildAlgorithmsPanel(), BorderLayout.WEST);
 		panel.add(buildButtonsPanel(), BorderLayout.CENTER); // run button
@@ -94,7 +99,7 @@ public class SampleTableProvider extends ComponentProviderAdapter implements Opt
 	private JPanel buildAlgorithmsPanel() {
 
 		JPanel checkBoxPanel = new JPanel(new GridLayout(0, 1));
-		checkBoxPanel.setBorder(BorderFactory.createTitledBorder("Discovered Algorithms"));
+		checkBoxPanel.setBorder(GhidraBorderFactory.createTitledBorder("Discovered Algorithms"));
 		checkBoxes = new GCheckBox[discoveredAlgorithms.size()];
 		for (int i = 0; i < discoveredAlgorithms.size(); i++) {
 			checkBoxes[i] = new GCheckBox(discoveredAlgorithms.get(i).getName());
@@ -130,7 +135,7 @@ public class SampleTableProvider extends ComponentProviderAdapter implements Opt
 
 	private Component buildTablePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(3, 3, 3, 3));
 
 		model = new SampleTableModel(plugin);
 		filterTable = new GFilterTable<>(model);

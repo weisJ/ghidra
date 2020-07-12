@@ -24,8 +24,8 @@ import java.util.Objects;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDLabel;
 import ghidra.graph.viewer.vertex.AbstractVisualVertex;
@@ -156,7 +156,8 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 
 		// calculate the needed size
 		layeredPane = new JLayeredPane();
-		Border border = createDebugBorder(new LineBorder(Color.YELLOW.darker(), 1));
+		Border border =
+			createDebugBorder(GhidraBorderFactory.createLineBorder(Color.YELLOW.darker(), 1));
 		layeredPane.setBorder(border);
 
 		updateLayeredPaneSize();
@@ -173,7 +174,7 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 		if (useDebugBorders) {
 			return border;
 		}
-		return BorderFactory.createEmptyBorder();
+		return GhidraBorderFactory.createEmptyBorder();
 	}
 
 	private void buildFullShape() {
@@ -246,7 +247,7 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 		compactShape = (Double) vertexShape.clone();
 		vertexImageLabel.setIcon(new ImageIcon(image));
 
-		Border border = createDebugBorder(new LineBorder(Color.PINK, 1));
+		Border border = createDebugBorder(GhidraBorderFactory.createLineBorder(Color.PINK, 1));
 		vertexImageLabel.setBorder(border);
 	}
 
@@ -295,7 +296,7 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 
 	private void addNameLabel() {
 
-		Border border = createDebugBorder(new LineBorder(Color.GREEN, 1));
+		Border border = createDebugBorder(GhidraBorderFactory.createLineBorder(Color.GREEN, 1));
 		nameLabel.setBorder(border);
 
 		// assume the vertex label has been bounded

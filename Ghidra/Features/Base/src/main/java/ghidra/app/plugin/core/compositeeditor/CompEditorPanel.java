@@ -25,15 +25,18 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.fieldpanel.support.FieldSelection;
 import docking.widgets.label.GDLabel;
 import ghidra.app.plugin.core.compositeeditor.BitFieldPlacementComponent.BitAttributes;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Category;
 import ghidra.program.model.data.Composite;
 import ghidra.program.model.data.Composite.AlignmentType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataUtilities;
 import ghidra.util.HelpLocation;
 import ghidra.util.InvalidNameException;
 import ghidra.util.exception.DuplicateNameException;
@@ -221,7 +224,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		JPanel bitViewPanel = new JPanel(new PairLayout(0, 5));
 
 		JPanel labelPanel = new JPanel(new VerticalLayout(7));
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(7, 5, 0, 0));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(7, 5, 0, 0));
 		JLabel byteOffsetLabel = new JLabel("Byte Offset:", SwingConstants.RIGHT);
 		labelPanel.add(byteOffsetLabel);
 		labelPanel.add(new JLabel("Component Bits:", SwingConstants.RIGHT));
@@ -268,7 +271,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 
 		addFieldListeners();
 
-		infoPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
+		infoPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 0, 5));
 
 		return infoPanel;
 	}
@@ -431,7 +434,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		refreshGUIMinimumAlignmentType();
 
 		minimumAlignmentPanel = new JPanel(new GridBagLayout());
-		minimumAlignmentPanel.setBorder(BorderFactory.createTitledBorder("align( minimum )"));
+		minimumAlignmentPanel.setBorder(GhidraBorderFactory.createTitledBorder("align( minimum )"));
 		if (helpManager != null) {
 			helpManager.registerHelp(minimumAlignmentPanel, new HelpLocation(
 				provider.getHelpTopic(), provider.getHelpName() + "_" + "AlignMinimum"));
@@ -613,7 +616,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		packingGroup.add(byValuePackingButton);
 
 		packingPanel = new JPanel(new GridBagLayout());
-		packingPanel.setBorder(BorderFactory.createTitledBorder("pack( maximum )"));
+		packingPanel.setBorder(GhidraBorderFactory.createTitledBorder("pack( maximum )"));
 		if (helpManager != null) {
 			helpManager.registerHelp(packingPanel, new HelpLocation(provider.getHelpTopic(),
 				provider.getHelpName() + "_" + "PackMaximum"));

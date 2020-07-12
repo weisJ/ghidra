@@ -28,6 +28,7 @@ import javax.swing.*;
 import org.apache.commons.lang3.StringUtils;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDHtmlLabel;
 import docking.widgets.table.columnfilter.ColumnBasedTableFilter;
 import docking.widgets.table.columnfilter.ColumnFilterSaveManager;
@@ -115,8 +116,8 @@ public class ColumnFilterArchiveDialog<R> extends DialogComponentProvider {
 
 	private JComponent buildFilterList() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder(
-			BorderFactory.createEmptyBorder(19, 0, 0, 5), "Filter Names"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder(
+			GhidraBorderFactory.createEmptyBorder(19, 0, 0, 5), "Filter Names"));
 
 		jList = new JList<>();
 		jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -150,8 +151,8 @@ public class ColumnFilterArchiveDialog<R> extends DialogComponentProvider {
 
 	private Component buildPreviewPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder(
-			BorderFactory.createEmptyBorder(19, 0, 26, 5), "Preview"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder(
+			GhidraBorderFactory.createEmptyBorder(19, 0, 26, 5), "Preview"));
 
 		previewLabel = new GDHtmlLabel();
 		previewLabel.setVerticalAlignment(SwingConstants.TOP);

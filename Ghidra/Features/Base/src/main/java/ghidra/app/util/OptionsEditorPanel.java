@@ -16,27 +16,33 @@
 package ghidra.app.util;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import org.apache.commons.collections4.map.LazyMap;
 
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GLabel;
 import docking.widgets.textfield.IntegerTextField;
 import ghidra.app.util.opinion.AbstractLibrarySupportLoader;
 import ghidra.app.util.opinion.LibraryPathsDialog;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.util.exception.AssertException;
-import ghidra.util.layout.*;
+import ghidra.util.layout.PairLayout;
+import ghidra.util.layout.TwoColumnPairLayout;
+import ghidra.util.layout.VerticalLayout;
 
 /**
  * Editor Panel for displaying and editing options associated with importing or exporting. It takes
@@ -57,7 +63,7 @@ public class OptionsEditorPanel extends JPanel {
 	public OptionsEditorPanel(List<Option> options, AddressFactoryService addressFactoryService) {
 		super(new VerticalLayout(5));
 		this.addressFactoryService = addressFactoryService;
-		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		columns = options.size() > MAX_PER_COLUMN ? 2 : 1;
 
 		Map<String, List<Option>> optionGroupMap = organizeByGroup(options);
@@ -87,10 +93,10 @@ public class OptionsEditorPanel extends JPanel {
 			buttonPanel.add(buildSelectAll(list));
 			buttonPanel.add(buildDeselectAll(list));
 			wrapperPanel.add(buttonPanel, BorderLayout.SOUTH);
-			Border etchedBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
-			Border marginBorder = BorderFactory.createEmptyBorder(10, 0, 10, 10);
-			panel.setBorder(BorderFactory.createCompoundBorder(etchedBorder, marginBorder));
-			buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+			Border etchedBorder = GhidraBorderFactory.createEtchedBorder();
+			Border marginBorder = GhidraBorderFactory.createEmptyBorder(10, 0, 10, 10);
+			panel.setBorder(GhidraBorderFactory.createCompoundBorder(etchedBorder, marginBorder));
+			buttonPanel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 0, 0, 0));
 			return wrapperPanel;
 		}
 
@@ -140,9 +146,9 @@ public class OptionsEditorPanel extends JPanel {
 
 	private Border createBorder(String group) {
 		if (group != null) {
-			return BorderFactory.createTitledBorder(group);
+			return GhidraBorderFactory.createTitledBorder(group);
 		}
-		return BorderFactory.createEmptyBorder(10, 10, 10, 10);
+		return GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10);
 	}
 
 	private Map<String, List<Option>> organizeByGroup(List<Option> options) {

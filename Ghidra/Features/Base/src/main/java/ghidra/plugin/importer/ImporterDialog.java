@@ -31,6 +31,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.combobox.GhidraComboBox;
@@ -38,20 +39,33 @@ import docking.widgets.dialogs.MultiLineMessageDialog;
 import docking.widgets.label.GLabel;
 import docking.widgets.list.GListCellRenderer;
 import ghidra.app.services.ProgramManager;
-import ghidra.app.util.*;
+import ghidra.app.util.AddressFactoryService;
+import ghidra.app.util.Option;
+import ghidra.app.util.OptionValidator;
+import ghidra.app.util.OptionsDialog;
 import ghidra.app.util.bin.ByteProvider;
-import ghidra.app.util.opinion.*;
-import ghidra.formats.gfilesystem.*;
+import ghidra.app.util.opinion.LoadSpec;
+import ghidra.app.util.opinion.Loader;
+import ghidra.app.util.opinion.LoaderMap;
+import ghidra.app.util.opinion.LoaderService;
+import ghidra.formats.gfilesystem.FSRL;
+import ghidra.formats.gfilesystem.FSUtilities;
+import ghidra.formats.gfilesystem.FileSystemService;
 import ghidra.framework.main.AppInfo;
 import ghidra.framework.main.DataTreeDialog;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectData;
+import ghidra.framework.model.ProjectDataUtils;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.store.local.LocalFileSystem;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.lang.LanguageCompilerSpecPair;
 import ghidra.program.model.lang.LanguageNotFoundException;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Msg;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
 import ghidra.util.task.TaskLauncher;
@@ -145,7 +159,7 @@ public class ImporterDialog extends DialogComponentProvider {
 
 	private JComponent buildWorkPanel() {
 		JPanel panel = new JPanel(new VerticalLayout(5));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(buildMainPanel());
 		panel.add(buildButtonPanel());
 		return panel;
@@ -153,7 +167,7 @@ public class ImporterDialog extends DialogComponentProvider {
 
 	private Component buildMainPanel() {
 		JPanel panel = new JPanel(new PairLayout(5, 5));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(new GLabel("Format: ", SwingConstants.RIGHT));
 		panel.add(buildLoaderChooser());
 		panel.add(new GLabel("Language: ", SwingConstants.RIGHT));
@@ -280,7 +294,7 @@ public class ImporterDialog extends DialogComponentProvider {
 
 		helpButton.addActionListener(e -> showSupportedImportFormats());
 		panel.add(helpButton);
-		panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 2));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 2));
 		return panel;
 	}
 

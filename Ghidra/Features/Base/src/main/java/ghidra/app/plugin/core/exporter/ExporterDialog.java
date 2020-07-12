@@ -15,11 +15,13 @@
  */
 package ghidra.app.plugin.core.exporter;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.*;
@@ -27,6 +29,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.checkbox.GCheckBox;
@@ -45,7 +48,10 @@ import ghidra.framework.preferences.Preferences;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
 import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
@@ -135,7 +141,7 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 
 	private JComponent buildWorkPanel() {
 		JPanel panel = new JPanel(new VerticalLayout(5));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(buildMainPanel());
 		panel.add(buildButtonPanel());
 		return panel;
@@ -143,7 +149,7 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 
 	private Component buildButtonPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 0, 10));
 		JPanel innerPanel = new JPanel(new VerticalLayout(5));
 		innerPanel.add(buildOptionsButton());
 		panel.add(buildSelectionCheckboxPanel(), BorderLayout.WEST);
@@ -188,7 +194,7 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 
 	private Component buildMainPanel() {
 		JPanel panel = new JPanel(new PairLayout(5, 5));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(new GLabel("Format: ", SwingConstants.RIGHT));
 		panel.add(buildFormatChooser());
 		panel.add(new GLabel("Output File: ", SwingConstants.RIGHT));

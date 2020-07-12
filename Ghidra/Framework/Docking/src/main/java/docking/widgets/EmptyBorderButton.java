@@ -20,10 +20,10 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.docking.util.DockingWindowsLookAndFeelUtils;
 import resources.ResourceManager;
 
@@ -39,20 +39,22 @@ public class EmptyBorderButton extends JButton {
 	/**
 	 * A raised beveled border.
 	 */
-	public static final Border RAISED_BUTTON_BORDER = BorderFactory.createCompoundBorder(
-		BorderFactory.createRaisedBevelBorder(), BorderFactory.createEmptyBorder(1, 1, 1, 1));
+	public static final Border RAISED_BUTTON_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createRaisedBevelBorder(),
+		GhidraBorderFactory.createEmptyBorder(1, 1, 1, 1));
 
 	/**
 	 * An empty border.
 	 */
-	public static final Border NO_BUTTON_BORDER = new EmptyBorder(
+	public static final Border NO_BUTTON_BORDER = GhidraBorderFactory.createEmptyBorder(
 		RAISED_BUTTON_BORDER.getBorderInsets(new JButton()));
 
 	/**
 	 * A lowered border beveled border.
 	 */
-	public static final Border LOWERED_BUTTON_BORDER = BorderFactory.createCompoundBorder(
-		BorderFactory.createLoweredBevelBorder(), BorderFactory.createEmptyBorder(1, 1, 1, 1));
+	public static final Border LOWERED_BUTTON_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createLoweredBevelBorder(),
+		GhidraBorderFactory.createEmptyBorder(1, 1, 1, 1));
 
 	/**
 	 * Construct a new EmptyBorderButton.

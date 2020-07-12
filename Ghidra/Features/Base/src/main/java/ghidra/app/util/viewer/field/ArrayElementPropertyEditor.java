@@ -15,17 +15,16 @@
  */
 package ghidra.app.util.viewer.field;
 
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyEditorSupport;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDLabel;
 import docking.widgets.textfield.IntegerTextField;
@@ -87,8 +86,9 @@ public class ArrayElementPropertyEditor extends PropertyEditorSupport
 				firePropertyChange();
 			}
 		});
-		panel.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createEmptyBorder(10, 0, 10, 0), new TitledBorder("Grouping")));
+		panel.setBorder(GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createEmptyBorder(10, 0, 10, 0),
+			GhidraBorderFactory.createTitledBorder("Grouping")));
 
 		return panel;
 	}
@@ -101,7 +101,7 @@ public class ArrayElementPropertyEditor extends PropertyEditorSupport
 		textField.setEnabled(true);
 
 		JPanel textFieldPanel = new JPanel();
-		textFieldPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+		textFieldPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 0, 0));
 
 		elementsLabel = new GDLabel(labelText);
 		textFieldPanel.add(elementsLabel);

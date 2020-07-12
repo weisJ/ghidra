@@ -23,6 +23,7 @@ import java.beans.PropertyChangeListener;
 import javax.swing.*;
 
 import docking.GenericHeader;
+import docking.border.GhidraBorderFactory;
 import ghidra.graph.viewer.VisualVertex;
 import ghidra.util.MathUtilities;
 
@@ -56,7 +57,7 @@ public class DockingVisualVertex extends AbstractVisualVertex {
 		textArea.setPreferredSize(new Dimension(200, 50));
 		textArea.setBackground(Color.YELLOW.darker());
 		textArea.setCaretColor(Color.PINK);
-		textArea.setBorder(BorderFactory.createRaisedBevelBorder());
+		textArea.setBorder(GhidraBorderFactory.createRaisedBevelBorder());
 		textArea.setLineWrap(true);
 
 		PropertyChangeListener[] listeners = textArea.getPropertyChangeListeners();

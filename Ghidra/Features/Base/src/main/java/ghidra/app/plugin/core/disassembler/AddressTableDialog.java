@@ -26,6 +26,7 @@ import javax.swing.event.DocumentListener;
 import docking.ActionContext;
 import docking.DialogComponentProvider;
 import docking.action.DockingAction;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
@@ -39,7 +40,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.util.ProgramSelection;
 import ghidra.util.HelpLocation;
-import ghidra.util.table.*;
+import ghidra.util.table.GhidraTable;
+import ghidra.util.table.GhidraThreadedTablePanel;
+import ghidra.util.table.SelectionNavigationAction;
 import ghidra.util.table.actions.MakeProgramSelectionAction;
 import ghidra.util.task.Task;
 
@@ -92,7 +95,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 		// right panel for populating results and selecting tables to disassemble
 		JPanel resultsPanel = new JPanel(new BorderLayout());
 		resultsPanel.setPreferredSize(new Dimension(600, 300));
-		resultsPanel.setBorder(BorderFactory.createTitledBorder("Possible Address Tables"));
+		resultsPanel.setBorder(GhidraBorderFactory.createTitledBorder("Possible Address Tables"));
 
 		// create right side query results table with three columns
 		resultsTablePanel = new GhidraThreadedTablePanel<>(plugin.getModel());
@@ -149,7 +152,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 
 		// search options panel   
 		JPanel searchOptionsPanel = new JPanel(new BorderLayout());
-		searchOptionsPanel.setBorder(BorderFactory.createTitledBorder("Search Options"));
+		searchOptionsPanel.setBorder(GhidraBorderFactory.createTitledBorder("Search Options"));
 
 		JLabel minLengthLabel = new GLabel("Minimum Length: ");
 		minLengthLabel.setToolTipText(
@@ -223,7 +226,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 		searchOptionsPanel.add(findPanel, BorderLayout.SOUTH);
 
 		JPanel makeOptionsPanel = new JPanel(new BorderLayout());
-		makeOptionsPanel.setBorder(BorderFactory.createTitledBorder("Make Table Options"));
+		makeOptionsPanel.setBorder(GhidraBorderFactory.createTitledBorder("Make Table Options"));
 
 		autoLabelCB = new GCheckBox("Auto Label");
 		autoLabelCB.setSelected(true);

@@ -23,6 +23,7 @@ import javax.swing.border.Border;
 import javax.swing.event.ChangeListener;
 
 import docking.DockingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ScrollableOptionsEditor;
 import docking.widgets.label.GDLabel;
 import generic.jar.ResourceFile;
@@ -56,7 +57,7 @@ public class AnalysisRecipeEditor {
 
 	private void buildNoOptionsPanel() {
 		noOptionsPanel = new JPanel(new MiddleLayout());
-		noOptionsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+		noOptionsPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 5));
 		JLabel label = new GDLabel("No options available.");
 		label.setFont(label.getFont().deriveFont(20f));
 		noOptionsPanel.add(label);
@@ -113,7 +114,7 @@ public class AnalysisRecipeEditor {
 		JSplitPane splitpane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buildDescriptionPanel(),
 			analyzerOptionsPanel);
 		splitpane.setResizeWeight(.2);
-		splitpane.setBorder(BorderFactory.createEmptyBorder(10, 6, 8, 6));
+		splitpane.setBorder(GhidraBorderFactory.createEmptyBorder(10, 6, 8, 6));
 		splitpane.setDividerLocation(0.50);
 		return splitpane;
 	}
@@ -123,10 +124,10 @@ public class AnalysisRecipeEditor {
 	 * of a titled border and a 10 pixel wide empty border.
 	 */
 	private void configureBorder(JComponent component, String title) {
-		Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+		Border emptyBorder = GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10);
 		Border titleBorder =
-			BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), title);
-		Border compoundBorder = BorderFactory.createCompoundBorder(titleBorder, emptyBorder);
+			GhidraBorderFactory.createTitledBorder(GhidraBorderFactory.createEtchedBorder(), title);
+		Border compoundBorder = GhidraBorderFactory.createCompoundBorder(titleBorder, emptyBorder);
 		component.setBorder(compoundBorder);
 	}
 
@@ -220,7 +221,7 @@ public class AnalysisRecipeEditor {
 		ScrollableOptionsEditor editorPanel =
 			new ScrollableOptionsEditor("Options For " + selectedAnalyzer.getName(), options,
 				optionNames, new EditorStateFactory());
-		editorPanel.setBorder(BorderFactory.createEmptyBorder());
+		editorPanel.setBorder(GhidraBorderFactory.createEmptyBorder());
 		analyzerOptionsPanel.add(editorPanel);
 	}
 

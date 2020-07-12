@@ -24,8 +24,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.service.graph.AttributedVertex;
 
 public class GhidraIconCache {
@@ -69,10 +69,11 @@ public class GhidraIconCache {
 		rendererLabel.setForeground(Color.black);
 		rendererLabel.setBackground(Color.white);
 		rendererLabel.setOpaque(true);
-		Border lineBorder = BorderFactory.createLineBorder((Color) Colors.getColor(vertex), 2);
-		Border marginBorder = BorderFactory.createEmptyBorder(DEFAULT_MARGIN_BORDER_SIZE,
+		Border lineBorder =
+			GhidraBorderFactory.createLineBorder((Color) Colors.getColor(vertex), 2);
+		Border marginBorder = GhidraBorderFactory.createEmptyBorder(DEFAULT_MARGIN_BORDER_SIZE,
 			DEFAULT_MARGIN_BORDER_SIZE, DEFAULT_MARGIN_BORDER_SIZE, DEFAULT_MARGIN_BORDER_SIZE);
-		rendererLabel.setBorder(new CompoundBorder(lineBorder, marginBorder));
+		rendererLabel.setBorder(GhidraBorderFactory.createCompoundBorder(lineBorder, marginBorder));
 
 		Dimension labelSize = rendererLabel.getPreferredSize();
 		rendererLabel.setSize(labelSize);

@@ -23,6 +23,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GLabel;
@@ -130,7 +131,7 @@ public class OffsetTableDialog extends DialogComponentProvider {
 
 	private JPanel buildMainPanel() {
 		JPanel panel = new JPanel(new PairLayout(10, 5));
-		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 10, 20));
 		addrInput = new AddressInput();
 		addrInput.addActionListener(new ActionListener() {
 			@Override

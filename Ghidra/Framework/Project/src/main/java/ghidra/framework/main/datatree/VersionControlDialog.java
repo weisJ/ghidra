@@ -15,14 +15,16 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
-import docking.widgets.label.*;
+import docking.widgets.label.GDLabel;
+import docking.widgets.label.GIconLabel;
+import docking.widgets.label.GLabel;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.HelpLocation;
@@ -179,7 +181,7 @@ public class VersionControlDialog extends DialogComponentProvider {
 		}
 
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 5));
 		mainPanel.add(innerPanel);
 		return mainPanel;
 	}

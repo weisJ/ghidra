@@ -15,17 +15,20 @@
  */
 package ghidra.app.plugin.core.bookmark;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GLabel;
 import ghidra.app.util.HelpTopics;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.BookmarkManager;
+import ghidra.program.model.listing.BookmarkType;
+import ghidra.program.model.listing.Program;
 import ghidra.util.HelpLocation;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
@@ -55,7 +58,7 @@ class FilterDialog extends DialogComponentProvider {
 		types = bmMgr.getBookmarkTypes();
 		buttons = new GCheckBox[types.length];
 		JPanel panel = new JPanel(new PairLayout(5, 20));
-		panel.setBorder(BorderFactory.createTitledBorder("Include Bookmark Types"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Include Bookmark Types"));
 		for (int i = 0; i < types.length; i++) {
 			buttons[i] = new GCheckBox();
 			JPanel p = new JPanel(new BorderLayout());

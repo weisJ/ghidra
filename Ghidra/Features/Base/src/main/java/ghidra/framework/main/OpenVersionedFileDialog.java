@@ -15,8 +15,7 @@
  */
 package ghidra.framework.main;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Collections;
@@ -26,8 +25,11 @@ import javax.swing.*;
 
 import docking.ActionContext;
 import docking.action.DockingActionIf;
+import docking.border.GhidraBorderFactory;
 import ghidra.framework.main.datatree.VersionHistoryPanel;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFileFilter;
+import ghidra.framework.model.DomainObject;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.preferences.Preferences;
 import ghidra.util.Msg;
@@ -110,7 +112,7 @@ public class OpenVersionedFileDialog extends DataTreeDialog {
 
 		splitPane.setDividerSize(0);
 		splitPane.setDividerLocation(1.0);
-		splitPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		splitPane.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 0));
 
 		JPanel outerPanel = new JPanel(new BorderLayout());
 		outerPanel.add(splitPane);
@@ -214,7 +216,7 @@ public class OpenVersionedFileDialog extends DataTreeDialog {
 			return false;
 		}
 
-		historyPanel.setBorder(BorderFactory.createTitledBorder("Version History"));
+		historyPanel.setBorder(GhidraBorderFactory.createTitledBorder("Version History"));
 		splitPane.setRightComponent(historyPanel);
 		historyPanel.addListSelectionListener(e -> {
 			if (e.getValueIsAdjusting()) {

@@ -15,9 +15,10 @@
  */
 package ghidra.framework.main;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,11 +27,14 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import docking.widgets.list.GList;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryServerAdapter;
 import ghidra.framework.model.ServerInfo;
 import ghidra.framework.protocol.ghidra.GhidraURL;
 import ghidra.framework.remote.GhidraServerHandle;
@@ -100,7 +104,7 @@ class RepositoryChooser extends DialogComponentProvider {
 
 		JPanel lowerPanel = new JPanel(new BorderLayout());
 		JLabel label = new GDLabel("Repository Names", SwingConstants.LEFT);
-		label.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 5));
+		label.setBorder(GhidraBorderFactory.createEmptyBorder(0, 2, 0, 5));
 		lowerPanel.add(label, BorderLayout.NORTH);
 
 		listModel = new DefaultListModel<>();
@@ -172,10 +176,11 @@ class RepositoryChooser extends DialogComponentProvider {
 	private void buildMainPanel() {
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JPanel radioButtonPanel = new JPanel(new PairLayout(5, 5));
-		radioButtonPanel.setBorder(BorderFactory.createTitledBorder("Repository Specification"));
+		radioButtonPanel
+				.setBorder(GhidraBorderFactory.createTitledBorder("Repository Specification"));
 
 		ChangeListener choiceListener = new ChangeListener() {
 			@Override

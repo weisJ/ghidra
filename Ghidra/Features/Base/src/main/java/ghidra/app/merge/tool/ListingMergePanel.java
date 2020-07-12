@@ -23,6 +23,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.fieldpanel.FieldPanel;
@@ -30,12 +31,17 @@ import docking.widgets.fieldpanel.internal.FieldPanelCoordinator;
 import docking.widgets.fieldpanel.support.BackgroundColorModel;
 import ghidra.app.merge.MergeConstants;
 import ghidra.app.nav.Navigatable;
-import ghidra.app.plugin.core.codebrowser.hover.*;
+import ghidra.app.plugin.core.codebrowser.hover.DataTypeListingHover;
+import ghidra.app.plugin.core.codebrowser.hover.FunctionNameListingHover;
+import ghidra.app.plugin.core.codebrowser.hover.ReferenceListingHover;
+import ghidra.app.plugin.core.codebrowser.hover.TruncatedTextListingHover;
 import ghidra.app.services.*;
 import ghidra.app.util.viewer.field.RegisterFieldFactory;
 import ghidra.app.util.viewer.format.FieldHeaderComp;
 import ghidra.app.util.viewer.format.FormatManager;
-import ghidra.app.util.viewer.listingpanel.*;
+import ghidra.app.util.viewer.listingpanel.EmptyListingModel;
+import ghidra.app.util.viewer.listingpanel.ListingModel;
+import ghidra.app.util.viewer.listingpanel.ListingPanel;
 import ghidra.app.util.viewer.multilisting.AddressTranslator;
 import ghidra.app.util.viewer.multilisting.MultiListingLayoutModel;
 import ghidra.app.util.viewer.util.AddressIndexMap;
@@ -44,7 +50,9 @@ import ghidra.framework.model.DomainObjectListener;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.ServiceProviderDecorator;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.symbol.ExternalLocation;
@@ -183,12 +191,12 @@ public class ListingMergePanel extends JPanel
 			new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, titlePanels[LATEST], titlePanels[MY]);
 		splitPane.setResizeWeight(0.5);
 		splitPane.setDividerSize(4);
-		splitPane.setBorder(BorderFactory.createEmptyBorder());
+		splitPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 		splitPane =
 			new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, splitPane, titlePanels[ORIGINAL]);
 		splitPane.setResizeWeight(0.6666);
 		splitPane.setDividerSize(4);
-		splitPane.setBorder(BorderFactory.createEmptyBorder());
+		splitPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, titlePanels[RESULT], splitPane);
 		splitPane.setResizeWeight(0.5);
 		splitPane.setDividerSize(4);
@@ -622,7 +630,7 @@ class LockComponent extends GCheckBox {
 	LockComponent() {
 		super(unlock);
 		setToolTipText("Lock/Unlock with other views");
-		setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 0));
+		setBorder(GhidraBorderFactory.createEmptyBorder(0, 2, 0, 0));
 		setSelectedIcon(lock);
 		setSelected(true);
 	}
@@ -641,7 +649,7 @@ class LockComponent extends GCheckBox {
 //	private static final Icon unlock = ResourceManager.loadImage("images/unlock.gif");
 //	LockComponent() {
 //		super(unlock);
-//		setBorder(BorderFactory.createEmptyBorder(0,2,0,2));
+//		setBorder(GhidraBorderFactory.createEmptyBorder(0,2,0,2));
 //		setSelectedIcon(lock);		
 //		setSelected(true);
 //		addActionListener(new ActionListener() {

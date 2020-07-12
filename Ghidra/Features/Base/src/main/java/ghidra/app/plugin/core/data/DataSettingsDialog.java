@@ -20,11 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.dialogs.StringChoices;
 import docking.widgets.table.AbstractSortedTableModel;
@@ -40,7 +40,9 @@ import ghidra.util.HelpLocation;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.table.GhidraTable;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 
 public class DataSettingsDialog extends DialogComponentProvider {
 
@@ -202,7 +204,7 @@ public class DataSettingsDialog extends DialogComponentProvider {
 
 	private JPanel buildWorkPanel() {
 		JPanel workPanel = new JPanel(new BorderLayout());
-		workPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		workPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		settingsTableModel = new SettingsTableModel(settingsDefs);
 		settingsTableModel.addTableModelListener(e -> appliedSettings = false);

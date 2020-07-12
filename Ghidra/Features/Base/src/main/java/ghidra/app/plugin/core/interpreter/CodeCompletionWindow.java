@@ -21,9 +21,9 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListDataListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.list.GListCellRenderer;
 import generic.util.WindowUtilities;
 import ghidra.app.plugin.core.console.CodeCompletion;
@@ -453,7 +453,7 @@ class CodeCompletionListCellRenderer extends GListCellRenderer<CodeCompletion> {
 			}
 		}
 		else {
-			border = new EmptyBorder(1, 1, 1, 1);
+			border = GhidraBorderFactory.createEmptyBorder(1, 1, 1, 1);
 		}
 		component.setBorder(border);
 

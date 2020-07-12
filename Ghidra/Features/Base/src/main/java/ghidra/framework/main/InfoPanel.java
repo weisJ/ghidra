@@ -25,12 +25,19 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.View;
 
 import docking.DockingUtils;
-import docking.widgets.*;
-import docking.widgets.label.*;
+import docking.border.GhidraBorderFactory;
+import docking.widgets.HyperlinkComponent;
+import docking.widgets.MultiLineLabel;
+import docking.widgets.PopupWindow;
+import docking.widgets.label.GDLabel;
+import docking.widgets.label.GHtmlLabel;
+import docking.widgets.label.GIconLabel;
 import generic.util.WindowUtilities;
 import ghidra.framework.Application;
 import ghidra.framework.ApplicationProperties;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.layout.VerticalLayout;
 import resources.ResourceManager;
 import utilities.util.FileUtilities;
@@ -75,7 +82,7 @@ class InfoPanel extends JPanel {
 	private Component buildTextPanel() {
 
 		JPanel panel = new JPanel(new VerticalLayout(10));
-		panel.setBorder(BorderFactory.createEmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));
 		panel.setBackground(bgColor);
 
 		if (Application.isTestBuild()) {
@@ -150,7 +157,7 @@ class InfoPanel extends JPanel {
 
 	private Component createSouthPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(4, 0, 4, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(4, 0, 4, 0));
 		ImageIcon cloudRevImage = ResourceManager.loadImage(CLOUD_REV_FILENAME);
 		if (cloudRevImage != null) {
 			JLabel cloudRevLabel = new GIconLabel(cloudRevImage);

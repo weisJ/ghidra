@@ -21,30 +21,51 @@ import static ghidra.feature.vt.gui.plugin.VTPlugin.UNFILTERED_ICON;
 import static ghidra.feature.vt.gui.util.VTOptionDefines.*;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.*;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
-import docking.*;
+import docking.ActionContext;
+import docking.DockingWindowManager;
+import docking.WindowPosition;
+import docking.border.GhidraBorderFactory;
 import docking.help.HelpService;
 import docking.widgets.table.*;
 import docking.widgets.table.threaded.ThreadedTableModel;
 import ghidra.feature.vt.api.impl.VTChangeManager;
 import ghidra.feature.vt.api.impl.VersionTrackingChangeRecord;
-import ghidra.feature.vt.api.main.*;
+import ghidra.feature.vt.api.main.VTMarkupItem;
+import ghidra.feature.vt.api.main.VTMatch;
+import ghidra.feature.vt.api.main.VTSession;
 import ghidra.feature.vt.gui.actions.*;
 import ghidra.feature.vt.gui.editors.MatchTagCellEditor;
-import ghidra.feature.vt.gui.filters.*;
+import ghidra.feature.vt.gui.filters.AncillaryFilterDialogComponentProvider;
+import ghidra.feature.vt.gui.filters.Filter;
 import ghidra.feature.vt.gui.filters.Filter.FilterEditingStatus;
-import ghidra.feature.vt.gui.plugin.*;
+import ghidra.feature.vt.gui.filters.FilterDialogModel;
+import ghidra.feature.vt.gui.filters.FilterStatusListener;
+import ghidra.feature.vt.gui.plugin.VTController;
+import ghidra.feature.vt.gui.plugin.VTControllerListener;
+import ghidra.feature.vt.gui.plugin.VTPlugin;
+import ghidra.feature.vt.gui.plugin.VersionTrackingPluginPackage;
 import ghidra.feature.vt.gui.util.*;
-import ghidra.feature.vt.gui.util.AbstractVTMatchTableModel.*;
-import ghidra.framework.model.*;
+import ghidra.feature.vt.gui.util.AbstractVTMatchTableModel.DestinationLabelTableColumn;
+import ghidra.feature.vt.gui.util.AbstractVTMatchTableModel.SourceLabelTableColumn;
+import ghidra.feature.vt.gui.util.AbstractVTMatchTableModel.StatusTableColumn;
+import ghidra.feature.vt.gui.util.AbstractVTMatchTableModel.TagTableColumn;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.DomainObjectChangeRecord;
+import ghidra.framework.model.DomainObjectChangedEvent;
 import ghidra.framework.options.Options;
 import ghidra.framework.options.SaveState;
 import ghidra.framework.plugintool.ComponentProviderAdapter;
@@ -337,7 +358,7 @@ public class VTMatchTableProvider extends ComponentProviderAdapter
 		JPanel parentPanel = new JPanel(new BorderLayout());
 
 		JPanel innerPanel = new JPanel(new HorizontalLayout(4));
-		innerPanel.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 4));
+		innerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 4, 0, 4));
 
 		JComponent nameFilterPanel = createTextFilterPanel();
 		parentPanel.add(nameFilterPanel, BorderLayout.CENTER);

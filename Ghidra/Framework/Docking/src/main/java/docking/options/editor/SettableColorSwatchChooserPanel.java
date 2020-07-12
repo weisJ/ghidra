@@ -16,14 +16,17 @@
 package docking.options.editor;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.Border;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GHtmlLabel;
 import docking.widgets.label.GLabel;
 import ghidra.util.layout.VerticalLayout;
@@ -118,8 +121,9 @@ public class SettableColorSwatchChooserPanel extends AbstractColorChooserPanel {
 		recentSwatchListener = new RecentSwatchListener();
 		recentSwatchPanel.addMouseListener(recentSwatchListener);
 
-		Border border =
-			new CompoundBorder(new LineBorder(Color.black), new LineBorder(Color.white));
+		Border border = GhidraBorderFactory.createCompoundBorder(
+			GhidraBorderFactory.createLineBorder(Color.black),
+			GhidraBorderFactory.createLineBorder(Color.white));
 		swatchPanel.setBorder(border);
 		gbc.weightx = 1.0;
 		gbc.gridwidth = 2;

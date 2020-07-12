@@ -24,10 +24,14 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GLabel;
 import ghidra.app.services.Analyzer;
-import ghidra.framework.analysis.*;
+import ghidra.framework.analysis.AnalysisPhase;
+import ghidra.framework.analysis.AnalysisRecipe;
+import ghidra.framework.analysis.AnalysisRecipeEditor;
+import ghidra.framework.analysis.GhidraScriptAnalyzerAdapter;
 
 public class AnalyzerListPanel extends JPanel {
 
@@ -44,7 +48,7 @@ public class AnalyzerListPanel extends JPanel {
 		this.recipe = recipe;
 		this.relevantPhase = phase;
 
-		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JScrollPane jScrollPane = new JScrollPane(buildAnalyzerList());
 		jScrollPane.setColumnHeaderView(buildHeader());
@@ -133,8 +137,8 @@ public class AnalyzerListPanel extends JPanel {
 	private Component buildHeader() {
 		JPanel panel = new JPanel(new BorderLayout());
 		//	panel.setBackground(HEADER_COLOR);
-		//panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+		//panel.setBorder(GhidraBorderFactory.createLineBorder(Color.GRAY));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 0, 10, 0));
 		panel.add(new GLabel("ANALYZERS", SwingConstants.CENTER), BorderLayout.CENTER);
 		panel.add(buildPhaseHeader(), BorderLayout.EAST);
 		return panel;
@@ -142,7 +146,7 @@ public class AnalyzerListPanel extends JPanel {
 
 	private Component buildPhaseHeader() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(6, 0, 0, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(6, 0, 0, 0));
 //		panel.add(new GLabel("START", SwingConstants.CENTER), BorderLayout.NORTH);
 		panel.add(new GLabel("PHASE", SwingConstants.CENTER), BorderLayout.SOUTH);
 		Dimension dim = panel.getPreferredSize();

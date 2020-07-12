@@ -25,11 +25,14 @@ import javax.swing.border.TitledBorder;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDLabel;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import resources.ResourceManager;
 
 /**
@@ -204,7 +207,7 @@ public class WizardManager extends DialogComponentProvider implements WizardPane
 		currJPanel.setMinimumSize(panelSize);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+		scrollPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 		scrollPane.setPreferredSize(panelSize);
 		scrollPane.setMinimumSize(panelSize);
 
@@ -226,8 +229,9 @@ public class WizardManager extends DialogComponentProvider implements WizardPane
 
 		JPanel titlePanel = new JPanel();
 		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
-		titlePanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
-			BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		titlePanel.setBorder(
+			GhidraBorderFactory.createCompoundBorder(GhidraBorderFactory.createEtchedBorder(),
+				GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		titlePanel.add(titleLabel);
 		titlePanel.add(Box.createHorizontalGlue());
 		titlePanel.add(helpButton);
@@ -461,8 +465,8 @@ if (!visitedMap.containsKey(currWizPanel)) {
 		scrollPane.setBackground(panel.getBackground());
 
 		if (scrollPane.getVerticalScrollBar().isShowing()) {
-			TitledBorder titledBorder =
-				new TitledBorder(BorderFactory.createEmptyBorder(), "(scroll for more options)");
+			TitledBorder titledBorder = GhidraBorderFactory.createTitledBorder(
+				GhidraBorderFactory.createEmptyBorder(), "(scroll for more options)");
 
 			Font font = titledBorder.getTitleFont();
 			if (font == null) {
@@ -478,7 +482,7 @@ if (!visitedMap.containsKey(currWizPanel)) {
 			scrollPane.setBorder(titledBorder);
 		}
 		else {
-			scrollPane.setBorder(BorderFactory.createEmptyBorder());
+			scrollPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 		}
 	}
 

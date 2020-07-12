@@ -15,10 +15,12 @@
  */
 package ghidra.graph.visualization;
 
-import static org.jungrapht.visualization.renderers.BiModalRenderer.*;
+import static org.jungrapht.visualization.renderers.BiModalRenderer.LIGHTWEIGHT;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ItemEvent;
 import java.awt.geom.Point2D;
 import java.util.*;
 import java.util.List;
@@ -28,23 +30,35 @@ import java.util.stream.Collectors;
 import javax.swing.*;
 
 import org.jgrapht.Graph;
-import org.jungrapht.visualization.*;
+import org.jungrapht.visualization.MultiLayerTransformer;
+import org.jungrapht.visualization.RenderContext;
+import org.jungrapht.visualization.SatelliteVisualizationViewer;
+import org.jungrapht.visualization.VisualizationViewer;
 import org.jungrapht.visualization.annotations.MultiSelectedVertexPaintable;
 import org.jungrapht.visualization.annotations.SingleSelectedVertexPaintable;
 import org.jungrapht.visualization.control.*;
-import org.jungrapht.visualization.decorators.*;
+import org.jungrapht.visualization.decorators.EdgeShape;
+import org.jungrapht.visualization.decorators.EllipseShapeFunction;
+import org.jungrapht.visualization.decorators.IconShapeFunction;
 import org.jungrapht.visualization.layout.algorithms.LayoutAlgorithm;
 import org.jungrapht.visualization.layout.model.LayoutModel;
 import org.jungrapht.visualization.layout.model.Point;
-import org.jungrapht.visualization.renderers.*;
+import org.jungrapht.visualization.renderers.JLabelVertexLabelRenderer;
+import org.jungrapht.visualization.renderers.LightweightVertexRenderer;
+import org.jungrapht.visualization.renderers.ModalRenderer;
 import org.jungrapht.visualization.renderers.Renderer;
 import org.jungrapht.visualization.selection.MutableSelectedState;
-import org.jungrapht.visualization.transform.*;
+import org.jungrapht.visualization.transform.Lens;
+import org.jungrapht.visualization.transform.LensSupport;
+import org.jungrapht.visualization.transform.MutableTransformer;
 import org.jungrapht.visualization.transform.shape.MagnifyImageLensSupport;
 import org.jungrapht.visualization.transform.shape.MagnifyShapeTransformer;
 
 import docking.ActionContext;
-import docking.action.builder.*;
+import docking.action.builder.ActionBuilder;
+import docking.action.builder.MultiStateActionBuilder;
+import docking.action.builder.ToggleActionBuilder;
+import docking.border.GhidraBorderFactory;
 import docking.menu.ActionState;
 import ghidra.framework.plugintool.Plugin;
 import ghidra.framework.plugintool.PluginTool;
@@ -315,7 +329,7 @@ public class DefaultGraphDisplay implements GraphDisplay {
 		satelliteViewer.getRenderContext().setVertexFillPaintFunction(Colors::getColor);
 		satelliteViewer.scaleToLayout();
 		satelliteViewer.getRenderContext().setVertexLabelFunction(n -> null);
-		satelliteViewer.getComponent().setBorder(BorderFactory.createEtchedBorder());
+		satelliteViewer.getComponent().setBorder(GhidraBorderFactory.createEtchedBorder());
 		return satelliteViewer;
 	}
 

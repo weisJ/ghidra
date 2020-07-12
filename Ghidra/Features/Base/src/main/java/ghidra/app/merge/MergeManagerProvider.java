@@ -22,10 +22,13 @@ import javax.swing.*;
 
 import docking.ActionContext;
 import docking.WindowPosition;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.util.image.ToolIconURL;
 import docking.widgets.OptionDialog;
-import docking.widgets.label.*;
+import docking.widgets.label.GDLabel;
+import docking.widgets.label.GIconLabel;
+import docking.widgets.label.GLabel;
 import ghidra.app.context.ListingActionContext;
 import ghidra.app.merge.tool.ListingMergePanel;
 import ghidra.app.nav.Navigatable;
@@ -206,7 +209,7 @@ class MergeManagerProvider extends ComponentProviderAdapter {
 		conflictPanel = new JPanel(cardLayout);
 
 		mainPanel.setLayout(new BorderLayout(0, 10));
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		nameLabel = new GDLabel("Merge Programs", SwingConstants.LEFT);
 
 		JPanel iconPanel = new JPanel();

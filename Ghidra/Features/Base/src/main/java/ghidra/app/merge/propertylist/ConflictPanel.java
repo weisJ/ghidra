@@ -15,13 +15,14 @@
  */
 package ghidra.app.merge.propertylist;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDLabel;
@@ -50,7 +51,7 @@ class ConflictPanel extends JPanel {
 
 	ConflictPanel(ChangeListener listener) {
 		super(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder("Resolve Property Name Conflict"));
+		setBorder(GhidraBorderFactory.createTitledBorder("Resolve Property Name Conflict"));
 		create();
 		this.listener = listener;
 	}
@@ -65,7 +66,7 @@ class ConflictPanel extends JPanel {
 		}
 
 		if (info.isTypeMatch()) {
-			setBorder(BorderFactory.createTitledBorder(
+			setBorder(GhidraBorderFactory.createTitledBorder(
 				"Resolve Type Mismatch for Property " + info.getDisplayedPropertyName()));
 
 			latestRB.setText("Use type '" + info.getLatestTypeString() + "', value = '" +
@@ -79,7 +80,7 @@ class ConflictPanel extends JPanel {
 		}
 		else {
 
-			setBorder(BorderFactory.createTitledBorder(
+			setBorder(GhidraBorderFactory.createTitledBorder(
 				"Resolve Property Conflict for " + info.getDisplayedPropertyName()));
 
 			latestRB.setText(
@@ -133,12 +134,12 @@ class ConflictPanel extends JPanel {
 	private void create() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		propertyGroupLabel = new GDLabel("Property Group:  ");
 
 		JPanel namePanel = new JPanel(new BorderLayout());
-		namePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 10, 5));
+		namePanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 10, 5));
 		namePanel.add(propertyGroupLabel);
 
 		latestRB = new GRadioButton("Use " + MergeConstants.LATEST_TITLE);

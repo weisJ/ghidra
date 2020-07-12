@@ -15,29 +15,31 @@
  */
 package docking.widgets.filechooser;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import docking.border.GhidraBorderFactory;
 
 public class FileChooserToggleButton extends JToggleButton {
 	private static final long serialVersionUID = 1L;
 
-    static final Border RAISED_BORDER = BorderFactory.createCompoundBorder(
-				BorderFactory.createRaisedBevelBorder(),
-				BorderFactory.createEmptyBorder(1,1,1,1));
+	static final Border RAISED_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createRaisedBevelBorder(),
+		GhidraBorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-    static final Border NO_BORDER = new EmptyBorder(RAISED_BORDER.getBorderInsets(new JButton()));
+	static final Border NO_BORDER =
+		GhidraBorderFactory.createEmptyBorder(RAISED_BORDER.getBorderInsets(new JButton()));
 
-    static final Border LOWERED_BORDER = BorderFactory.createCompoundBorder(
-				BorderFactory.createLoweredBevelBorder(),
-				BorderFactory.createEmptyBorder(1,1,1,1));
+	static final Border LOWERED_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createLoweredBevelBorder(),
+		GhidraBorderFactory.createEmptyBorder(1, 1, 1, 1));
 
 	public FileChooserToggleButton(String text) {
 		super(text);

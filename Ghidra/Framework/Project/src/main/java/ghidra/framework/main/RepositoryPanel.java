@@ -15,17 +15,23 @@
  */
 package ghidra.framework.main;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GDLabel;
 import docking.widgets.list.GList;
-import docking.wizard.*;
+import docking.wizard.AbstractWizardJPanel;
+import docking.wizard.PanelManager;
+import docking.wizard.WizardManager;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.util.HelpLocation;
 import ghidra.util.NamingUtilities;
@@ -52,7 +58,7 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 	public RepositoryPanel(PanelManager panelManager, String serverName, String[] repositoryNames,
 			boolean readOnlyServerAccess) {
 		super(new BorderLayout(5, 10));
-		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.panelManager = panelManager;
 		this.serverName = serverName;
 		buildMainPanel(repositoryNames, readOnlyServerAccess);
@@ -146,14 +152,14 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 
 	private JPanel createListPanel(String[] repositoryNames) {
 		JPanel panel = new JPanel(new VerticalLayout(5));
-		panel.setBorder(BorderFactory.createTitledBorder("Choose Existing Repository"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Choose Existing Repository"));
 		existingRepButton = new GRadioButton("Existing Repository", (repositoryNames.length > 0));
 		existingRepButton.setEnabled(repositoryNames.length > 0);
 		buttonGroup.add(existingRepButton);
 
 		JPanel innerPanel = new JPanel(new BorderLayout());
 		JLabel label = new GDLabel("Repository Names", SwingConstants.LEFT);
-		label.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 5));
+		label.setBorder(GhidraBorderFactory.createEmptyBorder(0, 2, 0, 5));
 		innerPanel.add(label, BorderLayout.NORTH);
 
 		listModel = new DefaultListModel<>();
@@ -174,7 +180,7 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 	private JPanel createNamePanel() {
 		JPanel namePanel = new JPanel();
 		namePanel.setLayout(new VerticalLayout(5));
-		namePanel.setBorder(BorderFactory.createTitledBorder("Create Repository"));
+		namePanel.setBorder(GhidraBorderFactory.createTitledBorder("Create Repository"));
 
 		createRepButton = new GRadioButton("Create Repository", !existingRepButton.isSelected());
 		buttonGroup.add(createRepButton);

@@ -142,15 +142,15 @@ rootProject.assembleDistribution {
  *  Task to compile language files using the sleigh compiler.
  *
  *****************************************************************************************/
-task sleighCompile (type: JavaExec) {
+task sleighCompile {
 	dependsOn saveSleighArgs
 	group = rootProject.GHIDRA_GROUP
 	description "  Compiles all the sleigh languages.    [gradle/processorProject.gradle]\n"
-	 
+
 	// define standard parameters for JavaExec
 	classpath configurations.sleighConfig
 	main = 'ghidra.pcodeCPort.slgh_compile.SleighCompile'
-	
+
 	// Delay adding the directory argument until the first part of the execution phase, so
 	// that any extra args added by a project override will be added to the arg list before
 	// these arguments.
@@ -163,8 +163,8 @@ task sleighCompile (type: JavaExec) {
 		args '-a'
 		args './data/languages'
 	}
-	
-	jvmArgs '-Xmx2048M'	
+
+	jvmArgs '-Xmx2048M'
 }
 
 // The task that copies the common files to the distribution folder must depend on

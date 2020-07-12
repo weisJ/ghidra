@@ -15,8 +15,7 @@
  */
 package docking.widgets;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +23,16 @@ import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
-import docking.widgets.dialogs.*;
+import docking.widgets.dialogs.InputDialog;
+import docking.widgets.dialogs.InputWithChoicesDialog;
+import docking.widgets.dialogs.MultiLineInputDialog;
 import docking.widgets.label.GHtmlLabel;
 import docking.widgets.label.GIconLabel;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
 import ghidra.util.exception.AssertException;
 
 /**
@@ -257,7 +261,7 @@ public class OptionDialog extends DialogComponentProvider {
 	private void buildMainPanel(String message, int messageType, Icon icon,
 			DialogRememberOption rememberOptionChoice) {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JPanel messagePanel = buildMessagePanel(message, messageType, icon);
 		panel.add(messagePanel, BorderLayout.CENTER);
@@ -282,7 +286,7 @@ public class OptionDialog extends DialogComponentProvider {
 		rememberOptionCheckBox = new GCheckBox(rememberOptionChoice.getDescription());
 
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 0, 0, 0));
 		panel.add(rememberOptionCheckBox, BorderLayout.SOUTH);
 		return panel;
 	}
@@ -374,7 +378,7 @@ public class OptionDialog extends DialogComponentProvider {
 			JLabel messageLabel = new GHtmlLabel(dialogMessage);
 			messageLabel.setName(MESSAGE_COMPONENT_NAME);
 			JPanel panel = new JPanel(new BorderLayout());
-			panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+			panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 			panel.add(messageLabel);
 			return panel;
 		}

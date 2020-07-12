@@ -15,8 +15,7 @@
  */
 package ghidra.app.plugin.core.clear;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,7 @@ import java.util.List;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.checkbox.GHtmlCheckBox;
 import docking.widgets.label.GLabel;
@@ -244,7 +244,7 @@ public class ClearDialog extends DialogComponentProvider {
 		lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
 		JSeparator separator = new JSeparator();
 
-		lowerPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 5, 10));
+		lowerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 5, 10));
 
 		lowerPanel.add(separator);
 		lowerPanel.add(buttonPanel);

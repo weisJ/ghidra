@@ -15,12 +15,12 @@
  */
 package docking.widgets.dialogs;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GHtmlLabel;
@@ -108,11 +108,11 @@ public class InputWithChoicesDialog extends DialogComponentProvider {
 
 		// The main panel to be returned
 		JPanel workPanel = new JPanel(new BorderLayout());
-		workPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		workPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		// COMBO BOX PANEL
 		JLabel messageLabel = new GHtmlLabel(labelText);
-		messageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+		messageLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 5, 0));
 		combo = createComboBox(optionValues, initialValue);
 
 		JPanel dataPanel = new JPanel(new BorderLayout());

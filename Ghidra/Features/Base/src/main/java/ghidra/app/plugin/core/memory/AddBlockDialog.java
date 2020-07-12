@@ -19,9 +19,13 @@ import java.awt.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
@@ -30,7 +34,9 @@ import docking.widgets.label.GLabel;
 import docking.widgets.textfield.IntegerTextField;
 import ghidra.app.plugin.core.memory.AddBlockModel.InitializedType;
 import ghidra.app.plugin.core.misc.RegisterField;
-import ghidra.app.util.*;
+import ghidra.app.util.AddressInput;
+import ghidra.app.util.HelpTopics;
+import ghidra.app.util.PluginConstants;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.database.mem.FileBytes;
 import ghidra.program.model.address.Address;
@@ -115,7 +121,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 	 */
 	private JComponent buildWorkPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10));
 		panel.add(buildMainPanel(), BorderLayout.NORTH);
 		panel.add(buildVariablePanel(), BorderLayout.CENTER);
 		return panel;
@@ -132,7 +138,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 
 	private Component buildBasicInfoPanel() {
 		JPanel panel = new JPanel(new PairLayout(4, 10, 150));
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 7, 4, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 7, 4, 5));
 
 		panel.add(new GLabel("Block Name:", SwingConstants.RIGHT));
 		panel.add(buildNameField());
@@ -174,7 +180,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 		overlayCB.addActionListener(e -> model.setOverlay(overlayCB.isSelected()));
 
 		JPanel panel = new JPanel(new HorizontalLayout(10));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 30, 20, 30));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 30, 20, 30));
 		panel.add(readCB);
 		panel.add(writeCB);
 		panel.add(executeCB);
@@ -186,7 +192,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 
 	private Component buildTypesPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder("Block Types"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Block Types"));
 
 		MemoryBlockType[] items = new MemoryBlockType[] { MemoryBlockType.DEFAULT,
 			MemoryBlockType.BIT_MAPPED, MemoryBlockType.BYTE_MAPPED };
@@ -200,7 +206,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 	private Component buildVariablePanel() {
 		typeCardLayout = new CardLayout();
 		viewPanel = new JPanel(typeCardLayout);
-		viewPanel.setBorder(BorderFactory.createEtchedBorder());
+		viewPanel.setBorder(GhidraBorderFactory.createEtchedBorder());
 
 		viewPanel.add(buildMappedPanel(), MAPPED);
 		viewPanel.add(buildUnmappedPanel(), UNMAPPED);
@@ -260,7 +266,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 		initialValueField.setChangeListener(e -> initialValueChanged());
 
 		JPanel panel = new JPanel(new PairLayout(4, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 7, 4, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 7, 4, 5));
 		panel.add(initialValueLabel);
 		panel.add(initialValueField);
 		return panel;
@@ -268,7 +274,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 
 	private Component buildFileBytesPanel() {
 		JPanel panel = new JPanel(new PairLayout(5, 5));
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 7, 4, 5));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 7, 4, 5));
 
 		panel.add(new GLabel("File Bytes:"));
 		panel.add(buildFileBytesCombo());
@@ -492,7 +498,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 		panel.add(new GLabel("Mapping Ratio:"));
 		panel.add(schemePanel);
 		
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		return panel;
 	}
 

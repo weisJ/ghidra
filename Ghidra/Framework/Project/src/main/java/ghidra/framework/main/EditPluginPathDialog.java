@@ -25,11 +25,11 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.filechooser.GhidraFileChooserMode;
@@ -317,7 +317,7 @@ class EditPluginPathDialog extends DialogComponentProvider {
 		pluginPathListPanel.add(scrollListPanel, BorderLayout.CENTER);
 		pluginPathListPanel.add(listButtonPanel, BorderLayout.EAST);
 
-		pluginPathListPanel.setBorder(new TitledBorder("User Plugin Paths"));
+		pluginPathListPanel.setBorder(GhidraBorderFactory.createTitledBorder("User Plugin Paths"));
 
 		// set tooltips after adding all components to get around swing
 		// tooltip text problem where the text is obscured by a component

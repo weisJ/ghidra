@@ -15,7 +15,7 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.Msg;
@@ -83,7 +84,7 @@ public class ChangedFilesDialog extends DialogComponentProvider {
 	}
 	private JPanel buildMainPanel() {
         JPanel outerPanel = new JPanel(new BorderLayout());
-        outerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 0, 5));
 
 		filePanel = new DomainFilesPanel(fileList, "Changed Files");
 		outerPanel.add(filePanel, BorderLayout.CENTER);

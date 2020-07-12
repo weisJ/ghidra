@@ -16,7 +16,10 @@
 package ghidra.app.util.viewer.listingpanel;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +27,11 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import docking.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.DockingUtils;
 import docking.action.*;
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.menu.ActionState;
@@ -40,25 +46,37 @@ import docking.widgets.fieldpanel.support.ViewerPosition;
 import ghidra.GhidraOptions;
 import ghidra.app.nav.Navigatable;
 import ghidra.app.plugin.core.codebrowser.MarkerServiceBackgroundColorModel;
-import ghidra.app.plugin.core.codebrowser.hover.*;
+import ghidra.app.plugin.core.codebrowser.hover.DataTypeListingHover;
+import ghidra.app.plugin.core.codebrowser.hover.FunctionNameListingHover;
+import ghidra.app.plugin.core.codebrowser.hover.ReferenceListingHover;
+import ghidra.app.plugin.core.codebrowser.hover.TruncatedTextListingHover;
 import ghidra.app.plugin.core.marker.MarkerManager;
 import ghidra.app.services.*;
 import ghidra.app.util.HighlightProvider;
 import ghidra.app.util.SymbolPath;
 import ghidra.app.util.viewer.format.*;
 import ghidra.app.util.viewer.util.*;
-import ghidra.framework.options.*;
+import ghidra.framework.options.OptionsChangeListener;
+import ghidra.framework.options.SaveState;
+import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.ServiceProviderDecorator;
 import ghidra.framework.plugintool.util.OptionsService;
 import ghidra.program.model.address.*;
 import ghidra.program.model.correlate.HashedFunctionAddressCorrelation;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.mem.MemoryBlock;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.program.util.*;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 import resources.Icons;
@@ -1845,7 +1863,7 @@ public class ListingCodeComparisonPanel
 			titlePanels[RIGHT]);
 		splitPane.setResizeWeight(0.5);
 		splitPane.setDividerSize(4);
-		splitPane.setBorder(BorderFactory.createEmptyBorder());
+		splitPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 		add(splitPane, BorderLayout.CENTER);
 	}
 

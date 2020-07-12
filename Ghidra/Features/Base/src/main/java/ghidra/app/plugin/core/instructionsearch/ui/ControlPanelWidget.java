@@ -15,12 +15,12 @@
  */
 package ghidra.app.plugin.core.instructionsearch.ui;
 
-import java.awt.Component;
-import java.awt.FlowLayout;
+import java.awt.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.border.*;
+import javax.swing.*;
+import javax.swing.border.Border;
+
+import docking.border.GhidraBorderFactory;
 
 /**
  * Abstract class to be used as the base for any widgets that need to be shown in the
@@ -38,9 +38,9 @@ public abstract class ControlPanelWidget extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		setAlignmentX(Component.LEFT_ALIGNMENT);
 
-		TitledBorder componentBorder = new TitledBorder(title);
-		Border margin = new EmptyBorder(5, 5, 5, 5);
-		setBorder(new CompoundBorder(componentBorder, margin));
+		Border componentBorder = GhidraBorderFactory.createTitledBorder(title);
+		Border margin = GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5);
+		setBorder(GhidraBorderFactory.createCompoundBorder(componentBorder, margin));
 
 		this.add(createContent());
 	}

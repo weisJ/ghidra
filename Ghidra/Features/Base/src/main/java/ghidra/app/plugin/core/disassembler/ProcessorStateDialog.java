@@ -15,8 +15,7 @@
  */
 package ghidra.app.plugin.core.disassembler;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigInteger;
@@ -25,6 +24,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GLabel;
 import ghidra.app.util.bean.FixedBitSizeValueField;
@@ -59,7 +59,7 @@ public class ProcessorStateDialog extends DialogComponentProvider {
 		addCancelButton();
 
 		JPanel workPanel = new JPanel(new PairLayout(4, 4));
-		workPanel.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
+		workPanel.setBorder(GhidraBorderFactory.createEmptyBorder(6, 6, 6, 6));
 		fields = new FixedBitSizeValueField[registerList.size()];
 		for (int i = 0; i < fields.length; i++) {
 			Register register = registerList.get(i);

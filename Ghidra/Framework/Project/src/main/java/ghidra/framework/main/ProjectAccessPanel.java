@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.list.GListCellRenderer;
@@ -181,7 +182,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 	protected void createMainPanel(String[] knownUsers, boolean anonymousServerAccessAllowed) {
 
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10));
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
 
 		knownUsersPanel = new KnownUsersPanel(Arrays.asList(knownUsers));
@@ -196,7 +197,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 
 		if (anonymousServerAccessAllowed) {
 			anonymousAccessCB = new GCheckBox("Allow Anonymous Access", origAnonymousAccessEnabled);
-			anonymousAccessCB.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
+			anonymousAccessCB.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 0, 0));
 			add(anonymousAccessCB, BorderLayout.SOUTH);
 		}
 	}
@@ -348,10 +349,10 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 			table.setSelectionBackground(SELECTION_BG_COLOR);
 			table.setSelectionForeground(SELECTION_FG_COLOR);
 			table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			table.setBorder(BorderFactory.createEmptyBorder());
+			table.setBorder(GhidraBorderFactory.createEmptyBorder());
 
 			JScrollPane sp = new JScrollPane(table);
-			sp.setBorder(BorderFactory.createTitledBorder("Project Users"));
+			sp.setBorder(GhidraBorderFactory.createTitledBorder("Project Users"));
 			sp.setBackground(getBackground());
 			add(sp, BorderLayout.CENTER);
 
@@ -508,7 +509,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 			userList.setCellRenderer(new UserListCellRenderer());
 
 			JScrollPane sp = new JScrollPane(userList);
-			sp.setBorder(BorderFactory.createTitledBorder("Known Users"));
+			sp.setBorder(GhidraBorderFactory.createTitledBorder("Known Users"));
 			sp.setOpaque(false);
 
 			// Set the minimum dimensions of the scroll pane so we can't collapse it.

@@ -16,13 +16,16 @@
 package ghidra.app.script;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GDLabel;
 import generic.util.WindowUtilities;
@@ -74,7 +77,7 @@ public class AskDialog<T> extends DialogComponentProvider {
 		};
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		label = new GDLabel(message);
 		panel.add(label, BorderLayout.WEST);

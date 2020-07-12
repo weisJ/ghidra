@@ -16,12 +16,15 @@
  */
 package ghidra.app.merge.util;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.app.merge.MergeConstants;
 
 /**
@@ -69,9 +72,9 @@ public class ConflictCountPanel extends JPanel {
 
 	private void create() {
 		
-		setBorder(BorderFactory.createTitledBorder("Current Conflict"));
+		setBorder(GhidraBorderFactory.createTitledBorder("Current Conflict"));
 		textPane = new JTextPane();
-		textPane.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 0));
+		textPane.setBorder(GhidraBorderFactory.createEmptyBorder(10, 5, 10, 0));
 		textPane.setEditable(false);
 		add(textPane);
 		

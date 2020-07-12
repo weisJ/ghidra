@@ -15,14 +15,17 @@
  */
 package ghidra.app.merge.listing;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDHtmlLabel;
 import ghidra.app.merge.util.ConflictUtility;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
 import ghidra.util.HTMLUtilities;
 
 /**
@@ -58,7 +61,7 @@ public class ConflictInfoPanel extends JPanel {
 	private void create() {
 
 		setLayout(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder("Resolve Current Conflict"));
+		setBorder(GhidraBorderFactory.createTitledBorder("Resolve Current Conflict"));
 
 		westLabel = new GDHtmlLabel("<html></html>");
 		eastLabel = new GDHtmlLabel("<html></html>");

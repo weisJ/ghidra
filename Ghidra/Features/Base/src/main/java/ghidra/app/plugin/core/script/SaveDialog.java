@@ -15,11 +15,12 @@
  */
 package ghidra.app.plugin.core.script;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -27,12 +28,16 @@ import javax.swing.event.ListSelectionListener;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.MultiLineLabel;
 import docking.widgets.label.GLabel;
 import docking.widgets.list.ListPanel;
 import generic.jar.ResourceFile;
 import generic.util.Path;
-import ghidra.app.script.*;
+import ghidra.app.script.GhidraScriptConstants;
+import ghidra.app.script.GhidraScriptProvider;
+import ghidra.app.script.GhidraScriptUtil;
+import ghidra.app.script.ScriptInfo;
 import ghidra.util.HelpLocation;
 
 public class SaveDialog extends DialogComponentProvider implements ListSelectionListener {
@@ -66,7 +71,7 @@ public class SaveDialog extends DialogComponentProvider implements ListSelection
 		JPanel namePanel = buildNamePanel();
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		if (paths.size() != 0) {
 			panel.add(pathPanel, BorderLayout.CENTER);
 			panel.add(namePanel, BorderLayout.SOUTH);

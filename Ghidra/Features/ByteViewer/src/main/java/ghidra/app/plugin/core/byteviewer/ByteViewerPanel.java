@@ -21,18 +21,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
-import docking.widgets.fieldpanel.*;
+import docking.widgets.fieldpanel.FieldPanel;
+import docking.widgets.fieldpanel.Layout;
+import docking.widgets.fieldpanel.LayoutModel;
 import docking.widgets.fieldpanel.field.EmptyTextField;
 import docking.widgets.fieldpanel.field.Field;
 import docking.widgets.fieldpanel.listener.IndexMapper;
 import docking.widgets.fieldpanel.listener.LayoutModelListener;
 import docking.widgets.fieldpanel.support.SingleRowLayout;
 import docking.widgets.fieldpanel.support.ViewerPosition;
-import docking.widgets.indexedscrollpane.*;
+import docking.widgets.indexedscrollpane.IndexScrollListener;
+import docking.widgets.indexedscrollpane.IndexedScrollPane;
+import docking.widgets.indexedscrollpane.IndexedScrollable;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.app.plugin.core.format.*;
@@ -880,7 +888,7 @@ public class ByteViewerPanel extends JPanel implements TableColumnModelListener,
 			panel.add(element);
 		}
 		panel.add(Box.createHorizontalStrut(10));
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 0, 5, 0));
 		return panel;
 	}
 

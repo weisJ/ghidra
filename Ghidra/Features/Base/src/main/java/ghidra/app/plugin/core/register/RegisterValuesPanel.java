@@ -19,25 +19,37 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractSortedTableModel;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import ghidra.app.cmd.register.SetRegisterCmd;
 import ghidra.app.events.ProgramSelectionPluginEvent;
-import ghidra.app.services.*;
+import ghidra.app.services.GoToService;
+import ghidra.app.services.MarkerService;
+import ghidra.app.services.MarkerSet;
 import ghidra.framework.cmd.Command;
 import ghidra.framework.cmd.CompoundCmd;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.ProgramContext;
-import ghidra.program.util.*;
+import ghidra.program.util.CombinedAddressRangeIterator;
+import ghidra.program.util.ProgramLocation;
+import ghidra.program.util.ProgramSelection;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.table.ProgramTableModel;
 
@@ -493,7 +505,7 @@ class RegisterValueRenderer extends GTableCellRenderer {
 	private Color defaultColor = Color.LIGHT_GRAY;
 
 	RegisterValueRenderer(JTable table) {
-		setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+		setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 0));
 		setFont(new Font("monospaced", Font.PLAIN, 12));
 	}
 

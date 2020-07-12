@@ -15,13 +15,15 @@
  */
 package ghidra.plugin.importer;
 
-import java.awt.Component;
-import java.util.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.app.util.opinion.LoadSpec;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.lang.LanguageCompilerSpecPair;
@@ -71,7 +73,7 @@ public class ImporterLanguageDialog extends DialogComponentProvider {
 		languagePanel.setRecommendedLcsPairsList(new ArrayList<LanguageCompilerSpecPair>());
 		languagePanel.setShowAllLcsPairs(false);
 		languagePanel.setBorder(
-			BorderFactory.createTitledBorder(" Select Language and Compiler Specification "));
+			GhidraBorderFactory.createTitledBorder(" Select Language and Compiler Specification "));
 		languagePanel.addSelectionListener(new LcsSelectionListener() {
 			@Override
 			public void valueChanged(LcsSelectionEvent e) {

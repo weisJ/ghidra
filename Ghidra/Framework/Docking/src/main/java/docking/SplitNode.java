@@ -15,15 +15,16 @@
  */
 package docking;
 
-import ghidra.util.Msg;
-
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 
 import org.jdom.Element;
+
+import docking.border.GhidraBorderFactory;
+import ghidra.util.Msg;
 
 /**
  * Node for managing a JSplitPane view of two component trees.
@@ -98,7 +99,7 @@ class SplitNode extends Node {
 			JComponent comp2 = child2.getComponent();
 			if (comp1 != null && comp2 != null) {
 				splitPane = new SplitPanel(this, comp1, comp2, isHorizontal);
-				splitPane.setBorder(BorderFactory.createEmptyBorder());
+				splitPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 				if (splitPaneSize != null) {
 					splitPane.setSize(splitPaneSize);
 					splitPane.setDividerPosition(dividerPosition);

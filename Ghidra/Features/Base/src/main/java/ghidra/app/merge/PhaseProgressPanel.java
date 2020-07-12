@@ -15,13 +15,13 @@
  */
 package ghidra.app.merge;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GIconLabel;
 import resources.ResourceManager;
@@ -98,7 +98,7 @@ public class PhaseProgressPanel extends JPanel {
 
 		progressMessagePanel = new JPanel(new BorderLayout());
 		messageIcon = new GIconLabel(INFORM_ICON);
-		messageIcon.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+		messageIcon.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 0, 5));
 		messageLabel = new GDLabel(DEFAULT_INFO);
 		progressMessagePanel.add(messageIcon, BorderLayout.WEST);
 		progressMessagePanel.add(messageLabel, BorderLayout.CENTER);

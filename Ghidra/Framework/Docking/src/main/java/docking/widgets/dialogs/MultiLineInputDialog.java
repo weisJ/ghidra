@@ -23,6 +23,7 @@ import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.DockingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.framework.OperatingSystem;
@@ -73,7 +74,7 @@ public class MultiLineInputDialog extends DialogComponentProvider {
 
 		JLabel messageLabel = new GDLabel();
 		messageLabel.setText(messageText);
-		messageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+		messageLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 5, 0));
 
 		String metaKeyText = "Control";
 		OperatingSystem OS = Platform.CURRENT_PLATFORM.getOperatingSystem();
@@ -104,7 +105,7 @@ public class MultiLineInputDialog extends DialogComponentProvider {
 		iconPanel.add(separatorPanel, BorderLayout.EAST);
 
 		JPanel workPanel = new JPanel(new BorderLayout());
-		workPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		workPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		workPanel.add(iconPanel, BorderLayout.WEST);
 		workPanel.add(dataPanel, BorderLayout.CENTER);
 

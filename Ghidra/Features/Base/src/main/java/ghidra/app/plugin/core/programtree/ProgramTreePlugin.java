@@ -15,29 +15,46 @@
  */
 package ghidra.app.plugin.core.programtree;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.tree.TreePath;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.ToggleDockingAction;
+import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import ghidra.app.CorePluginPackage;
-import ghidra.app.cmd.module.*;
+import ghidra.app.cmd.module.CreateDefaultTreeCmd;
+import ghidra.app.cmd.module.DeleteTreeCmd;
+import ghidra.app.cmd.module.RenameTreeCmd;
 import ghidra.app.events.ProgramActivatedPluginEvent;
 import ghidra.app.events.TreeSelectionPluginEvent;
 import ghidra.app.plugin.PluginCategoryNames;
 import ghidra.app.plugin.ProgramPlugin;
-import ghidra.app.services.*;
+import ghidra.app.services.GoToService;
+import ghidra.app.services.ProgramManager;
+import ghidra.app.services.ProgramTreeService;
+import ghidra.app.services.ViewManagerService;
 import ghidra.app.util.PluginConstants;
 import ghidra.framework.model.DomainObject;
-import ghidra.framework.options.*;
-import ghidra.framework.plugintool.*;
+import ghidra.framework.options.OptionsChangeListener;
+import ghidra.framework.options.SaveState;
+import ghidra.framework.options.ToolOptions;
+import ghidra.framework.plugintool.PluginEvent;
+import ghidra.framework.plugintool.PluginInfo;
+import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.PluginStatus;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.ProgramFragment;
+import ghidra.program.model.listing.ProgramModule;
 import ghidra.program.util.GroupPath;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.HTMLUtilities;
@@ -896,7 +913,7 @@ public class ProgramTreePlugin extends ProgramPlugin
 			getTool().setStatusInfo("No views exist.");
 		}
 		else {
-			popup.setBorder(new BevelBorder(BevelBorder.RAISED));
+			popup.setBorder(GhidraBorderFactory.createRaisedBevelBorder());
 			if (button != null) {
 				popup.show(button, button.getX() - button.getWidth(), button.getY());
 			}

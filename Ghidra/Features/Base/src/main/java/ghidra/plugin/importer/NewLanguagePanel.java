@@ -16,18 +16,23 @@
 package ghidra.plugin.importer;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDLabel;
 import ghidra.program.model.lang.*;
 import ghidra.program.util.DefaultLanguageService;
-import ghidra.util.table.*;
+import ghidra.util.table.GhidraTable;
+import ghidra.util.table.GhidraTableCellRenderer;
+import ghidra.util.table.GhidraTableFilterPanel;
 
 public class NewLanguagePanel extends JPanel {
 	private static final String DEFAULT_DESCRIPTION_TEXT = " ";
@@ -105,7 +110,7 @@ public class NewLanguagePanel extends JPanel {
 		};
 
 		JPanel descriptionPanel = new JPanel();
-		Border titledBorder = BorderFactory.createTitledBorder("Description");
+		Border titledBorder = GhidraBorderFactory.createTitledBorder("Description");
 		descriptionPanel.setBorder(titledBorder);
 		descriptionPanel.setLayout(new BorderLayout());
 		descriptionPanel.add(descriptionLabel, BorderLayout.CENTER);

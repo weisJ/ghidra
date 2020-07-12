@@ -25,6 +25,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
+import docking.border.GhidraBorderFactory;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.filechooser.GhidraFileChooserMode;
@@ -68,7 +69,7 @@ class SelectProjectPanel extends AbstractWizardJPanel {
 		super(new BorderLayout());
 		this.panelManager = panelManager;
 		buildMainPanel();
-		setBorder(BorderFactory.createEmptyBorder(80, 80, 0, 80));
+		setBorder(GhidraBorderFactory.createEmptyBorder(80, 80, 0, 80));
 	}
 
 	/* (non Javadoc)

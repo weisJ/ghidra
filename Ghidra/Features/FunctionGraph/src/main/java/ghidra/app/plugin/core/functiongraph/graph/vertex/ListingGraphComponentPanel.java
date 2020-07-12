@@ -19,7 +19,9 @@
 package ghidra.app.plugin.core.functiongraph.graph.vertex;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ import docking.ActionContext;
 import docking.GenericHeader;
 import docking.action.DockingAction;
 import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.fieldpanel.FieldPanel;
 import docking.widgets.fieldpanel.Layout;
 import docking.widgets.fieldpanel.field.Field;
@@ -50,7 +53,9 @@ import ghidra.app.util.viewer.util.AddressIndexMap;
 import ghidra.app.util.viewer.util.FieldNavigator;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.ServiceListener;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.Symbol;
 import ghidra.program.model.symbol.SymbolTable;
@@ -134,7 +139,7 @@ public class ListingGraphComponentPanel extends AbstractGraphComponentPanel {
 		add(listingPanel, BorderLayout.CENTER);
 
 		BevelBorder beveledBorder =
-			(BevelBorder) BorderFactory.createBevelBorder(BevelBorder.RAISED,
+			(BevelBorder) GhidraBorderFactory.createBevelBorder(BevelBorder.RAISED,
 				new Color(225, 225, 225), new Color(155, 155, 155), new Color(96, 96, 96),
 				new Color(0, 0, 0));
 		setBorder(beveledBorder);
@@ -224,7 +229,7 @@ public class ListingGraphComponentPanel extends AbstractGraphComponentPanel {
 
 		JPanel headerPanel = new JPanel(new BorderLayout());
 		headerPanel.add(tooltipTitleLabel);
-		headerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		headerPanel.setBorder(GhidraBorderFactory.createLineBorder(Color.BLACK));
 
 		panel.add(headerPanel, BorderLayout.NORTH);
 		panel.add(previewListingPanel, BorderLayout.CENTER);
@@ -506,7 +511,7 @@ public class ListingGraphComponentPanel extends AbstractGraphComponentPanel {
 			// This is an unusual case.   For now, do something reasonable.
 			String side = isDestinationVertex ? "end" : "start";
 			toolTipComponent = new GDLabel("Unable to find address for edge " + side + ": " + edge);
-			toolTipComponent.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+			toolTipComponent.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 0, 10));
 			if (previewListingPanel != null) {
 				previewListingPanel = null;
 			}

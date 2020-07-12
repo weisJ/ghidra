@@ -22,6 +22,7 @@ import javax.swing.*;
 import javax.swing.table.TableColumn;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.table.*;
@@ -242,7 +243,7 @@ public class PluginInstallerDialog extends DialogComponentProvider {
 			defaultFont = getFont();
 			boldFont = new Font(defaultFont.getName(), defaultFont.getStyle() | Font.BOLD,
 				defaultFont.getSize());
-			setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+			setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 0, 0));
 		}
 
 		@Override

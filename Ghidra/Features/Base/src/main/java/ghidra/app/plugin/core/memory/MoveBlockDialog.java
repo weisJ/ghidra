@@ -15,16 +15,19 @@
  */
 package ghidra.app.plugin.core.memory;
 
-import java.awt.Cursor;
+import java.awt.*;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.app.cmd.memory.MoveBlockListener;
 import ghidra.app.cmd.memory.MoveBlockTask;
-import ghidra.app.util.*;
+import ghidra.app.util.AddressInput;
+import ghidra.app.util.HelpTopics;
+import ghidra.app.util.PluginConstants;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
@@ -136,7 +139,7 @@ public class MoveBlockDialog extends DialogComponentProvider implements MoveBloc
 
 	private JPanel buildMainPanel() {
 		JPanel panel = new JPanel(new PairLayout(5, 20, 150));
-		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 20, 20));
 		blockNameLabel = new GDLabel(".text");
 		blockNameLabel.setName("blockName"); // name components for junits
 

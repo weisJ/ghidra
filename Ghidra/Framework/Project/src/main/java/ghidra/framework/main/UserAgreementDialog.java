@@ -23,6 +23,7 @@ import javax.swing.text.html.HTMLEditorKit;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.framework.DockingApplicationConfiguration;
 import docking.framework.DockingApplicationLayout;
 import docking.widgets.label.GDLabel;
@@ -60,10 +61,10 @@ public class UserAgreementDialog extends DialogComponentProvider {
 		Font font = new Font("Default", Font.PLAIN, 16);
 		JPanel panel = new JPanel(new BorderLayout());
 		JLabel label = new GDLabel("Ghidra User Agreement", SwingConstants.CENTER);
-		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		label.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 10, 0));
 		label.setFont(font.deriveFont(Font.ITALIC, 22f));
 		panel.add(label, BorderLayout.NORTH);
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 40, 40, 40));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 40, 40, 40));
 		JEditorPane editorPane = new JEditorPane();
 		editorPane.setEditorKit(new HTMLEditorKit());
 		editorPane.setMargin(new Insets(10, 10, 10, 10));
@@ -75,7 +76,7 @@ public class UserAgreementDialog extends DialogComponentProvider {
 		JScrollPane scrollPane = new JScrollPane(editorPane);
 		panel.add(scrollPane, BorderLayout.CENTER);
 		JPanel checkBoxPanel = new JPanel(new VerticalLayout(10));
-		checkBoxPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 10));
+		checkBoxPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 0, 10));
 		panel.add(checkBoxPanel, BorderLayout.SOUTH);
 		return panel;
 	}

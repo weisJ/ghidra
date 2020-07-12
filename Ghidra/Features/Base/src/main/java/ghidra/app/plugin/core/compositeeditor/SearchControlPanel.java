@@ -18,11 +18,11 @@ package ghidra.app.plugin.core.compositeeditor;
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GLabel;
 import resources.ResourceManager;
@@ -48,9 +48,9 @@ public class SearchControlPanel extends JPanel {
 		add(textField, BorderLayout.CENTER);
 		add(buildButtonPanel(), BorderLayout.EAST);
 
-		Border bevel = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
-		Border spacer = BorderFactory.createEmptyBorder(4, 10, 5, 10);
-		setBorder(BorderFactory.createCompoundBorder(bevel, spacer));
+		Border bevel = GhidraBorderFactory.createLoweredBevelBorder();
+		Border spacer = GhidraBorderFactory.createEmptyBorder(4, 10, 5, 10);
+		setBorder(GhidraBorderFactory.createCompoundBorder(bevel, spacer));
 
 		textField.addActionListener(e -> search(true));
 		textField.setToolTipText(

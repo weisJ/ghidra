@@ -23,7 +23,9 @@ import java.util.List;
 
 import javax.swing.*;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.filechooser.GhidraFileChooser;

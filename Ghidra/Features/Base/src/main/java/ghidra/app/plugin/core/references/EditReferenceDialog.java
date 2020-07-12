@@ -18,13 +18,14 @@ package ghidra.app.plugin.core.references;
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.jdom.Element;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
@@ -119,7 +120,8 @@ public class EditReferenceDialog extends DialogComponentProvider {
 		topPanel.add(instrPanel, BorderLayout.NORTH);
 
 		JPanel refTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		refTypePanel.setBorder(new TitledBorder(new EtchedBorder(), "Type of Reference"));
+		refTypePanel.setBorder(GhidraBorderFactory
+				.createTitledBorder(GhidraBorderFactory.createEtchedBorder(), "Type of Reference"));
 		ChangeListener refChoiceListener = new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
@@ -155,7 +157,7 @@ public class EditReferenceDialog extends DialogComponentProvider {
 
 		topPanel.add(refTypePanel, BorderLayout.CENTER);
 
-		Border panelBorder = new EmptyBorder(5, 10, 5, 10);
+		Border panelBorder = GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10);
 		memRefPanel = new EditMemoryReferencePanel(plugin);
 		memRefPanel.setBorder(panelBorder);
 		extRefPanel = new EditExternalReferencePanel(plugin);
@@ -169,7 +171,7 @@ public class EditReferenceDialog extends DialogComponentProvider {
 		bottomPanel = new JPanel(bottomPanelLayout);
 		bottomPanel.setFocusCycleRoot(true);
 		bottomPanel.setPreferredSize(new Dimension(PREFERRED_PANEL_WIDTH, PREFERRED_PANEL_HEIGHT));
-		bottomPanel.setBorder(new EmptyBorder(0, 2, 0, 2));
+		bottomPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 2, 0, 2));
 
 		bottomPanel.add(memRefPanel, memRefPanel.getName());
 		bottomPanel.add(extRefPanel, extRefPanel.getName());

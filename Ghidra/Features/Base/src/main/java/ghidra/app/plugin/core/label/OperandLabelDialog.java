@@ -18,6 +18,7 @@ package ghidra.app.plugin.core.label;
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GDLabel;
 import ghidra.app.cmd.label.AddLabelCmd;
@@ -58,7 +59,7 @@ public class OperandLabelDialog extends DialogComponentProvider {
 	 */
 	protected JPanel buildMainPanel() {
 		JPanel mainPanel = new JPanel(new PairLayout(5, 5));
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		label = new GDLabel("Label: ");
 

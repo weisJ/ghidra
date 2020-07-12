@@ -20,6 +20,7 @@ import java.awt.event.ItemListener;
 
 import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.wizard.AbstractWizardJPanel;
 import docking.wizard.PanelManager;
@@ -49,7 +50,7 @@ class ProjectTypePanel extends AbstractWizardJPanel {
 
 	private void buildPanel() {
 		JPanel innerPanel = new JPanel(new VerticalLayout(10));
-		innerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		innerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 20, 20));
 		ItemListener listener = new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -72,7 +73,7 @@ class ProjectTypePanel extends AbstractWizardJPanel {
 		innerPanel.add(nonSharedRB);
 		innerPanel.add(sharedRB);
 		JPanel outerPanel = new JPanel();
-		outerPanel.setBorder(BorderFactory.createEmptyBorder());
+		outerPanel.setBorder(GhidraBorderFactory.createEmptyBorder());
 		outerPanel.add(innerPanel);
 		add(outerPanel);
 	}

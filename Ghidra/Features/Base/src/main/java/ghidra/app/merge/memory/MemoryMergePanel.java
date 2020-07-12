@@ -15,13 +15,13 @@
  */
 package ghidra.app.merge.memory;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
+import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import ghidra.app.merge.MergeConstants;
 import ghidra.app.merge.ProgramMultiUserMergeManager;
@@ -80,7 +80,7 @@ class MemoryMergePanel extends JPanel {
 	void setConflictInfo(int conflictIndex, String panelID, String title, String latestStr,
 			String myStr, String origStr) {
 		countPanel.updateCount(conflictIndex, totalConflicts);
-		cardPanel.setBorder(BorderFactory.createTitledBorder(title));
+		cardPanel.setBorder(GhidraBorderFactory.createTitledBorder(title));
 		if (panelID == COMMENT_PANEL_ID) {
 			cardLayout.show(cardPanel, COMMENT_PANEL_ID);
 			currentPanel = commentPanel;
@@ -109,7 +109,7 @@ class MemoryMergePanel extends JPanel {
 
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);
-		cardPanel.setBorder(BorderFactory.createTitledBorder("Resolve Block Conflict"));
+		cardPanel.setBorder(GhidraBorderFactory.createTitledBorder("Resolve Block Conflict"));
 		ChangeListener listener = new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {

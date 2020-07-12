@@ -15,13 +15,14 @@
  */
 package ghidra.app.merge.datatypes;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
@@ -47,7 +48,7 @@ class CategoryConflictPanel extends JPanel {
 
 	CategoryConflictPanel(String title, ChangeListener listener) {
 		super(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder(title));
+		setBorder(GhidraBorderFactory.createTitledBorder(title));
 		create();
 		this.listener = listener;
 	}
@@ -85,13 +86,13 @@ class CategoryConflictPanel extends JPanel {
 	private void create() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		categoryLabel = new GDLabel("CategoryName");
 		categoryLabel.setForeground(MergeConstants.CONFLICT_COLOR);
 
 		JPanel labelPanel = new JPanel();
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 0, 10, 0));
 		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.X_AXIS));
 		labelPanel.add(new GLabel("Category: "));
 		labelPanel.add(Box.createHorizontalStrut(5));

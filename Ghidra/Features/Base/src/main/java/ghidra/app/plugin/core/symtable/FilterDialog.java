@@ -18,7 +18,9 @@ package ghidra.app.plugin.core.symtable;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -26,13 +28,18 @@ import org.jdom.Element;
 
 import docking.ComponentProvider;
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GHtmlLabel;
 import docking.widgets.label.GIconLabel;
 import ghidra.app.util.HelpTopics;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.util.*;
-import ghidra.util.layout.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.MessageType;
+import ghidra.util.layout.HorizontalLayout;
+import ghidra.util.layout.MiddleLayout;
+import ghidra.util.layout.VerticalLayout;
 import resources.ResourceManager;
 
 public class FilterDialog extends DialogComponentProvider {
@@ -129,7 +136,7 @@ public class FilterDialog extends DialogComponentProvider {
 		mainPanel.add(filterPanel);
 		mainPanel.add(advancedFilterCheckbox);
 		mainPanel.add(buildResetPanel());
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 5, 0, 5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 5, 0, 5));
 		return mainPanel;
 	}
 
@@ -154,7 +161,7 @@ public class FilterDialog extends DialogComponentProvider {
 			cb.setToolTipText(HTMLUtilities.toHTML(filter.getFilterDescription(sourceName)));
 			panel.add(cb);
 		}
-		panel.setBorder(BorderFactory.createTitledBorder("Symbol Source"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Symbol Source"));
 		return panel;
 	}
 
@@ -175,9 +182,9 @@ public class FilterDialog extends DialogComponentProvider {
 				"symbol types are disabled.")));
 
 		JPanel filtersPanel = new JPanel(new GridLayout(0, 2));
-//		Border outer = BorderFactory.createEmptyBorder(0,40,0,0);
-//		Border inner = BorderFactory.createTitledBorder("Advanced Filters");
-		filtersPanel.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));
+//		Border outer = GhidraBorderFactory.createEmptyBorder(0,40,0,0);
+//		Border inner = GhidraBorderFactory.createTitledBorder("Advanced Filters");
+		filtersPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 40, 0, 0));
 		String[] filterNames = filter.getAdvancedFilterNames();
 		for (String filterName : filterNames) {
 			JCheckBox cb = new GCheckBox(filterName);
@@ -187,7 +194,7 @@ public class FilterDialog extends DialogComponentProvider {
 			filtersPanel.add(cb);
 		}
 		advancedFilterPanel = new JPanel(new VerticalLayout(10));
-		advancedFilterPanel.setBorder(BorderFactory.createTitledBorder("Advanced Filters"));
+		advancedFilterPanel.setBorder(GhidraBorderFactory.createTitledBorder("Advanced Filters"));
 		advancedFilterPanel.add(filtersPanel);
 		advancedFilterPanel.add(infoPanel);
 		return advancedPanel;
@@ -195,7 +202,7 @@ public class FilterDialog extends DialogComponentProvider {
 
 	private Component buildTypesPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder("Symbol Types"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Symbol Types"));
 		panel.add(buildLabelTypesPanel("Label Symbols", filter.getLabelTypeFilterNames()),
 			BorderLayout.WEST);
 		panel.add(buildLabelTypesPanel("Non-label Symbols", filter.getNonLabelTypeFilterNames()),
@@ -206,7 +213,7 @@ public class FilterDialog extends DialogComponentProvider {
 
 	private Component buildLabelTypesPanel(String title, String[] filterNames) {
 		JPanel panel = new JPanel(new VerticalLayout(0));
-		panel.setBorder(BorderFactory.createTitledBorder(title));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder(title));
 		for (String filterName : filterNames) {
 			JCheckBox cb = new GCheckBox(filterName);
 			cb.setName(filterName);
@@ -242,7 +249,7 @@ public class FilterDialog extends DialogComponentProvider {
 		b2.addActionListener(e -> setTypeFiltersActive(false));
 		innerPanel.add(b1);
 		innerPanel.add(b2);
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 0, 5, 0));
 		return panel;
 
 	}

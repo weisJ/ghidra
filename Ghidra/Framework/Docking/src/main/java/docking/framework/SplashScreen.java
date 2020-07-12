@@ -20,9 +20,11 @@ import java.awt.event.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 
-import docking.*;
+import docking.DockingFrame;
+import docking.DockingWindowManager;
+import docking.HiddenDockingFrame;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import generic.util.WindowUtilities;
@@ -297,7 +299,7 @@ public class SplashScreen extends JWindow {
 
 	private Component createContentPanel() {
 		JPanel contentPanel = new JPanel(new BorderLayout());
-		contentPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		contentPanel.setBorder(GhidraBorderFactory.createRaisedBevelBorder());
 		contentPanel.add(createInfoComponent(), BorderLayout.CENTER);
 		contentPanel.add(createStatusComponent(), BorderLayout.SOUTH);
 		return contentPanel;
@@ -324,7 +326,7 @@ public class SplashScreen extends JWindow {
 		}
 		titleLabel.setForeground(foregroundColor);
 		titlePanel.add(titleLabel, BorderLayout.CENTER);
-		titlePanel.setBorder(BorderFactory.createEmptyBorder(2, 10, 2, 10));
+		titlePanel.setBorder(GhidraBorderFactory.createEmptyBorder(2, 10, 2, 10));
 		return titlePanel;
 	}
 
@@ -333,7 +335,7 @@ public class SplashScreen extends JWindow {
 		statusLabel = new GDLabel(" Loading...");
 		statusLabel.setFont(f);
 
-		statusLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 2, 10));
+		statusLabel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 10, 2, 10));
 		statusLabel.setBackground(DEFAULT_BACKGROUND_COLOR);
 		statusLabel.setOpaque(true);
 		return statusLabel;

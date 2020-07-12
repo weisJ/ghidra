@@ -16,7 +16,9 @@
 package ghidra.bitpatterns.gui;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
 
@@ -26,6 +28,7 @@ import javax.swing.tree.TreePath;
 import docking.ActionContext;
 import docking.action.DockingAction;
 import docking.action.MenuData;
+import docking.border.GhidraBorderFactory;
 import docking.tool.ToolConstants;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.label.GLabel;
@@ -217,7 +220,7 @@ public class FunctionBitPatternsMainProvider extends ComponentProviderAdapter
 		BoxLayout controlLayout = new BoxLayout(controlPanel, BoxLayout.Y_AXIS);
 		controlPanel.setLayout(controlLayout);
 		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		infoPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		JPanel buttonPanel = new JPanel();
 		FlowLayout buttonPanelLayout = new FlowLayout(FlowLayout.CENTER);
 		buttonPanel.setLayout(buttonPanelLayout);

@@ -15,14 +15,13 @@
  */
 package ghidra.app.plugin.core.scalartable;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.help.HelpService;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GLabel;
@@ -142,7 +141,7 @@ public class ScalarSearchDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(new TitledBorder("Search Scope"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Search Scope"));
 
 		searchSelectionRadioButton = new GRadioButton("Search Selection");
 		searchAllRadioButton = new GRadioButton("Search All");
@@ -257,7 +256,7 @@ public class ScalarSearchDialog extends DialogComponentProvider {
 			helpService.registerHelp(this, help);
 
 			setLayout(new BorderLayout());
-			setBorder(new TitledBorder("Search Type"));
+			setBorder(GhidraBorderFactory.createTitledBorder("Search Type"));
 
 			searchAllScalars = new GRadioButton("Scalars in Range:");
 			searchAScalar = new GRadioButton("Specific Scalar:");

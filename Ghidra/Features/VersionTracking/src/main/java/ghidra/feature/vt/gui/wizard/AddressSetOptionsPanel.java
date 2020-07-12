@@ -17,11 +17,13 @@ package ghidra.feature.vt.gui.wizard;
 
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.JCheckBox;
+import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
-import docking.wizard.*;
+import docking.wizard.AbstractMageJPanel;
+import docking.wizard.WizardPanelDisplayability;
+import docking.wizard.WizardState;
 import ghidra.feature.vt.api.main.VTProgramCorrelatorAddressRestrictionPreference;
 import ghidra.feature.vt.api.main.VTProgramCorrelatorFactory;
 import ghidra.program.model.address.AddressSetView;
@@ -35,7 +37,7 @@ public class AddressSetOptionsPanel extends AbstractMageJPanel<VTWizardStateKey>
 	private JCheckBox showAddressSetPanelsCheckbox;
 
 	public AddressSetOptionsPanel() { //
-		setBorder(BorderFactory.createEmptyBorder(40, 40, 0, 0));
+		setBorder(GhidraBorderFactory.createEmptyBorder(40, 40, 0, 0));
 
 		excludeCheckbox = new GCheckBox("Exclude accepted matches", false);
 		String excludeAcceptedTooltip = "This option will cause the correlator algorithm " +

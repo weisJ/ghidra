@@ -22,6 +22,7 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDLabel;
 import ghidra.app.services.Analyzer;
@@ -36,16 +37,18 @@ public class AnalyzerPanel extends JPanel {
 	/**
 	 * A raised beveled border that works with a white background.
 	 */
-	private static final Border RAISED_BUTTON_BORDER = BorderFactory.createCompoundBorder(
-		BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, Color.DARK_GRAY),
-		BorderFactory.createEmptyBorder(1, 1, 1, 1));
+	private static final Border RAISED_BUTTON_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY,
+			Color.DARK_GRAY),
+		GhidraBorderFactory.createEmptyBorder(1, 1, 1, 1));
 
 	/**
 	 * A lowered beveled border that works with a white background.
 	 */
-	private static final Border LOWERED_BUTTON_BORDER = BorderFactory.createCompoundBorder(
-		BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.LIGHT_GRAY, Color.DARK_GRAY),
-		BorderFactory.createEmptyBorder(1, 1, 1, 1));
+	private static final Border LOWERED_BUTTON_BORDER = GhidraBorderFactory.createCompoundBorder(
+		GhidraBorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.LIGHT_GRAY,
+			Color.DARK_GRAY),
+		GhidraBorderFactory.createEmptyBorder(1, 1, 1, 1));
 
 	public static final Icon DELAYED_ICON = ResourceManager.loadImage("images/ledyellow.png");
 	public static final Icon DISABLED_ICON = ResourceManager.loadImage("images/ledred.png");
@@ -78,7 +81,7 @@ public class AnalyzerPanel extends JPanel {
 	private Component buildInfoPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setOpaque(false);
-		panel.setBorder(BorderFactory.createEtchedBorder());
+		panel.setBorder(GhidraBorderFactory.createEtchedBorder());
 
 		panel.add(buildCheckboxAndIconPanel(), BorderLayout.WEST);
 		panel.add(buildLabelPanel(), BorderLayout.CENTER);
@@ -89,7 +92,7 @@ public class AnalyzerPanel extends JPanel {
 	private Component buildCheckboxAndIconPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setOpaque(false);
-		panel.setBorder(BorderFactory.createEmptyBorder(2, 10, 2, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(2, 10, 2, 10));
 		enabledCheckbox = new GCheckBox();
 		enabledCheckbox.addActionListener(
 			e -> recipe.setAnalyzerEnablement(analyzer, enabledCheckbox.isSelected()));
@@ -99,7 +102,7 @@ public class AnalyzerPanel extends JPanel {
 
 		iconLabel = new GDLabel();
 		updateIconLabel();
-		iconLabel.setBorder(BorderFactory.createEmptyBorder(2, 15, 2, 5));
+		iconLabel.setBorder(GhidraBorderFactory.createEmptyBorder(2, 15, 2, 5));
 		panel.add(iconLabel, BorderLayout.EAST);
 
 		return panel;
@@ -107,8 +110,8 @@ public class AnalyzerPanel extends JPanel {
 
 	private Component buildLabelPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-//		panel.setBorder(BorderFactory.createEtchedBorder());
-		panel.setBorder(BorderFactory.createEmptyBorder(4, 10, 2, 5));
+//		panel.setBorder(GhidraBorderFactory.createEtchedBorder());
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(4, 10, 2, 5));
 		panel.setOpaque(false);
 
 		analyzerNameLabel = new GDLabel(analyzer.getName());
@@ -131,9 +134,9 @@ public class AnalyzerPanel extends JPanel {
 
 	private Component buildPhasePanel() {
 		phasePanel = new JPanel(new MiddleLayout());
-		Border empty = BorderFactory.createEmptyBorder(0, 20, 0, 20);
-		Border etched = BorderFactory.createEtchedBorder();
-		phasePanel.setBorder(BorderFactory.createCompoundBorder(etched, empty));
+		Border empty = GhidraBorderFactory.createEmptyBorder(0, 20, 0, 20);
+		Border etched = GhidraBorderFactory.createEtchedBorder();
+		phasePanel.setBorder(GhidraBorderFactory.createCompoundBorder(etched, empty));
 		phasePanel.setOpaque(false);
 		phasePanel.setPreferredSize(new Dimension(60, 0));
 		phaseLabel = new GDLabel("");

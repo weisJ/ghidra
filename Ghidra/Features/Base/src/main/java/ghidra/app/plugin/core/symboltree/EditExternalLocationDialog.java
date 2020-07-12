@@ -15,15 +15,13 @@
  */
 package ghidra.app.plugin.core.symboltree;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.ExternalLocation;
@@ -105,7 +103,7 @@ public class EditExternalLocationDialog extends DialogComponentProvider {
 
 	private JComponent buildMainPanel() {
 
-		Border panelBorder = new EmptyBorder(5, 10, 5, 10);
+		Border panelBorder = GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10);
 		if (externalLocation != null) {
 			extLocPanel = new EditExternalLocationPanel(externalLocation); // Edit
 		}

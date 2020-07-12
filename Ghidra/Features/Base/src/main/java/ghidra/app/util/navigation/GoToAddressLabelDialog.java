@@ -28,13 +28,17 @@ import javax.swing.event.HyperlinkListener;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.tool.ToolConstants;
 import docking.widgets.HyperlinkComponent;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GhidraComboBox;
 import ghidra.GhidraOptions;
 import ghidra.app.nav.Navigatable;
-import ghidra.app.services.*;
+import ghidra.app.services.GoToOverrideService;
+import ghidra.app.services.GoToService;
+import ghidra.app.services.GoToServiceListener;
+import ghidra.app.services.QueryData;
 import ghidra.app.util.HelpTopics;
 import ghidra.framework.options.Options;
 import ghidra.framework.options.SaveState;
@@ -223,7 +227,7 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 		inner.add(includeDynamicBox, gbc);
 
 		mainPanel = new JPanel(new BorderLayout());
-		Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 0, 5);
+		Border emptyBorder = GhidraBorderFactory.createEmptyBorder(5, 5, 0, 5);
 		mainPanel.setBorder(emptyBorder);
 		mainPanel.add(inner, BorderLayout.NORTH);
 

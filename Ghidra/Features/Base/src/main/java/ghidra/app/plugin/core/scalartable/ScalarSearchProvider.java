@@ -15,14 +15,16 @@
  */
 package ghidra.app.plugin.core.scalartable;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
-import docking.*;
+import docking.ActionContext;
+import docking.DockingWindowManager;
+import docking.WindowPosition;
+import docking.border.GhidraBorderFactory;
 import docking.help.HelpService;
 import docking.widgets.label.GLabel;
 import docking.widgets.table.GTableFilterPanel;
@@ -36,7 +38,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.scalar.Scalar;
 import ghidra.program.util.ProgramSelection;
 import ghidra.util.HelpLocation;
-import ghidra.util.table.*;
+import ghidra.util.table.GhidraTable;
+import ghidra.util.table.GhidraThreadedTablePanel;
+import ghidra.util.table.SelectionNavigationAction;
 import ghidra.util.table.actions.DeleteTableRowAction;
 import ghidra.util.table.actions.MakeProgramSelectionAction;
 import resources.ResourceManager;
@@ -270,7 +274,7 @@ public class ScalarSearchProvider extends ComponentProviderAdapter {
 	private class RangeFilterPanel extends JPanel {
 
 		RangeFilterPanel() {
-			Border lowerBorder = BorderFactory.createLoweredBevelBorder();
+			Border lowerBorder = GhidraBorderFactory.createLoweredBevelBorder();
 
 			setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 

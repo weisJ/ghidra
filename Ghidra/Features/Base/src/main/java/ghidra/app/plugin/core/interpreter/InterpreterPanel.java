@@ -17,7 +17,10 @@ package ghidra.app.plugin.core.interpreter;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.swing.*;
@@ -25,12 +28,15 @@ import javax.swing.text.*;
 
 import docking.DockingUtils;
 import docking.actions.KeyBindingUtils;
+import docking.border.GhidraBorderFactory;
 import generic.util.WindowUtilities;
 import ghidra.app.plugin.core.console.CodeCompletion;
 import ghidra.framework.options.OptionsChangeListener;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 
 public class InterpreterPanel extends JPanel implements OptionsChangeListener {
 
@@ -124,7 +130,7 @@ public class InterpreterPanel extends JPanel implements OptionsChangeListener {
 		outputTextPane = new JTextPane();
 		outputTextPane.setName("Interpreter Output Display");
 		outputScrollPane = new JScrollPane(outputTextPane);
-		outputScrollPane.setBorder(BorderFactory.createEmptyBorder());
+		outputScrollPane.setBorder(GhidraBorderFactory.createEmptyBorder());
 		promptTextPane = new JTextPane();
 		inputTextPane = new JTextPane();
 		inputTextPane.setName("Interpreter Input Field");

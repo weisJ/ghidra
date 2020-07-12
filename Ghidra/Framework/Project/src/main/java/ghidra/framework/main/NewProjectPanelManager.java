@@ -15,17 +15,23 @@
  */
 package ghidra.framework.main;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
-import docking.wizard.*;
-import ghidra.framework.client.*;
-import ghidra.framework.model.*;
+import docking.border.GhidraBorderFactory;
+import docking.wizard.PanelManager;
+import docking.wizard.WizardManager;
+import docking.wizard.WizardPanel;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
+import ghidra.framework.client.RepositoryServerAdapter;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ProjectManager;
+import ghidra.framework.model.ServerInfo;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.remote.User;
@@ -65,7 +71,7 @@ class NewProjectPanelManager implements PanelManager {
 	private String statusMessage;
 	private PluginTool tool;
 
-	final static Border EMPTY_BORDER = BorderFactory.createEmptyBorder(80, 120, 0, 120);
+	final static Border EMPTY_BORDER = GhidraBorderFactory.createEmptyBorder(80, 120, 0, 120);
 
 	NewProjectPanelManager(FrontEndTool tool) {
 		projectTypePanel = new ProjectTypePanel(this);

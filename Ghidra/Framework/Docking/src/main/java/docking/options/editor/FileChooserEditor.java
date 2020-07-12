@@ -15,8 +15,7 @@
  */
 package docking.options.editor;
 
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.beans.PropertyEditorSupport;
 import java.io.File;
@@ -27,6 +26,7 @@ import javax.swing.event.DocumentListener;
 
 import org.apache.commons.lang3.StringUtils;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.filechooser.GhidraFileChooser;
 
 /**
@@ -114,7 +114,7 @@ public class FileChooserEditor extends PropertyEditorSupport {
 			add(textField);
 			add(Box.createHorizontalStrut(5));
 			add(browseButton);
-			setBorder(BorderFactory.createEmptyBorder());
+			setBorder(GhidraBorderFactory.createEmptyBorder());
 			textField.addActionListener(e -> FileChooserEditor.this.firePropertyChange());
 			textField.getDocument().addDocumentListener(new TextListener());
 

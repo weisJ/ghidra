@@ -32,16 +32,23 @@ import docking.KeyEntryTextField;
 import docking.action.DockingActionIf;
 import docking.action.KeyBindingData;
 import docking.actions.KeyBindingUtils;
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.tool.util.DockingToolConstants;
-import docking.widgets.*;
+import docking.widgets.EmptyBorderButton;
+import docking.widgets.MultiLineLabel;
+import docking.widgets.OptionDialog;
 import docking.widgets.label.GIconLabel;
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractSortedTableModel;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableFilterPanel;
 import ghidra.framework.options.Options;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.ReservedKeyBindings;
+import ghidra.util.Swing;
 import ghidra.util.exception.AssertException;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
@@ -236,7 +243,7 @@ public class KeyBindingsPanel extends JPanel {
 		statusLabel = new JTextPane();
 		statusLabel.setEnabled(false);
 		DockingUtils.setTransparent(statusLabel);
-		statusLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 5));
+		statusLabel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 0, 5));
 		statusLabel.setContentType("text/html"); // render any HTML we find in descriptions
 
 		// make sure the label gets enough space
@@ -287,7 +294,7 @@ public class KeyBindingsPanel extends JPanel {
 				"To remove a key binding, select an action and\n" +
 				"press <Enter> or <Backspace>");
 		JPanel labelPanel = new JPanel();
-		labelPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 0));
+		labelPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 0, 0));
 		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));
@@ -297,7 +304,7 @@ public class KeyBindingsPanel extends JPanel {
 
 		// the default panel is the panel that holds left-hand side label
 		defaultPanel.add(labelPanel, BorderLayout.NORTH);
-		defaultPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+		defaultPanel.setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 
 		// the info panel is the holds the right-hand label and is inside of
 		// a scroll pane

@@ -23,16 +23,22 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.event.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellEditor;
 
-import docking.*;
+import docking.DialogComponentProvider;
+import docking.DockingUtils;
+import docking.UndoRedoKeeper;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GLabel;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import generic.util.WindowUtilities;
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.app.util.ToolTipUtils;
@@ -42,7 +48,10 @@ import ghidra.program.model.data.DataType;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.symbol.ExternalLocation;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.MessageType;
+import ghidra.util.Swing;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
 import resources.ResourceManager;
@@ -165,7 +174,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 
 	private JComponent buildMainPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(buildPreview(), BorderLayout.NORTH);
 		panel.add(buildCenterPanel(), BorderLayout.CENTER);
 		return panel;
@@ -173,7 +182,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 
 	private JComponent buildCenterPanel() {
 		centerPanel = new JPanel(new BorderLayout());
-		centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+		centerPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 0, 10, 0));
 		centerPanel.add(buildAttributePanel(), BorderLayout.NORTH);
 		centerPanel.add(buildTable(), BorderLayout.CENTER);
 		centerPanel.add(buildBottomPanel(), BorderLayout.SOUTH);
@@ -183,16 +192,16 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 	private Component buildBottomPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 
-		Border b = BorderFactory.createEmptyBorder(0, 0, 0, 0);
+		Border b = GhidraBorderFactory.createEmptyBorder(0, 0, 0, 0);
 
 		JComponent callFixupField = createCallFixupComboPanel();
-		callFixupField.setBorder(BorderFactory.createTitledBorder(b, "Call Fixup:"));
+		callFixupField.setBorder(GhidraBorderFactory.createTitledBorder(b, "Call Fixup:"));
 		panel.add(callFixupField, BorderLayout.WEST);
 
 		Function thunkedFunction = model.getFunction().getThunkedFunction(false);
 		if (thunkedFunction != null) {
 			JPanel thunkedPanel = createThunkedFunctionTextPanel(thunkedFunction);
-			thunkedPanel.setBorder(BorderFactory.createTitledBorder(b, "Thunked Function:"));
+			thunkedPanel.setBorder(GhidraBorderFactory.createTitledBorder(b, "Thunked Function:"));
 			panel.add(thunkedPanel, BorderLayout.CENTER); // provide as much space as possible
 		}
 		else {
@@ -206,9 +215,10 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 		JTextField thunkedText = new JTextField(thunkedFunction.getName(true));
 		thunkedText.setEditable(false);
 		DockingUtils.setTransparent(thunkedText);
-		CompoundBorder border =
-			BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.GRAY),
-				BorderFactory.createEmptyBorder(0, 5, 0, 5));
+		Border border =
+			GhidraBorderFactory.createCompoundBorder(
+				GhidraBorderFactory.createLineBorder(Color.GRAY),
+				GhidraBorderFactory.createEmptyBorder(0, 5, 0, 5));
 		thunkedText.setBorder(border);
 		thunkedText.setForeground(Color.BLUE);
 		thunkedPanel.add(thunkedText);
@@ -226,7 +236,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 		scroll.getViewport().setBackground(new Color(0, 0, 0, 0)); // transparent
 		scroll.getViewport().setBackground(Color.WHITE);
 		previewPanel.add(scroll, BorderLayout.CENTER);
-		previewPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+		previewPanel.setBorder(GhidraBorderFactory.createLoweredBevelBorder());
 		scroll.getViewport().addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -311,14 +321,14 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 
 	private Component buildAttributePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 15, 15));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 15, 15));
 
 		JPanel leftPanel = new JPanel(new PairLayout(4, 8));
 		leftPanel.add(new GLabel("Function Name:"));
 		leftPanel.add(createNameField());
 		leftPanel.add(new GLabel("Calling Convention"));
 		leftPanel.add(createCallingConventionCombo());
-		leftPanel.setBorder(BorderFactory.createEmptyBorder(14, 0, 0, 10));
+		leftPanel.setBorder(GhidraBorderFactory.createEmptyBorder(14, 0, 0, 10));
 
 		panel.add(leftPanel, BorderLayout.CENTER);
 		panel.add(buildTogglePanel(), BorderLayout.EAST);
@@ -343,7 +353,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 			e -> model.setUseCustomizeStorage(storageCheckBox.isSelected()));
 		panel.add(noReturnCheckBox);
 		panel.add(storageCheckBox);
-		panel.setBorder(BorderFactory.createTitledBorder("Function Attributes:"));
+		panel.setBorder(GhidraBorderFactory.createTitledBorder("Function Attributes:"));
 
 		return panel;
 	}
@@ -382,7 +392,8 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 
 	private Component buildTable() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(),
+		panel.setBorder(
+			GhidraBorderFactory.createTitledBorder(GhidraBorderFactory.createEmptyBorder(),
 			"Function Variables"));
 
 		paramTableModel = new ParameterTableModel(model);
@@ -405,7 +416,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 
 	private Component buildButtonPanel() {
 		JPanel panel = new JPanel(new VerticalLayout(5));
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 		addButton = new JButton(ADD_ICON);
 		removeButton = new JButton(REMOVE_ICON);
 		upButton = new JButton(UP_ICON);

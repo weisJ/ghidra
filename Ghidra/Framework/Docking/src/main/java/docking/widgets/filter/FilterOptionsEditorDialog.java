@@ -15,17 +15,17 @@
  */
 package docking.widgets.filter;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import docking.DialogComponentProvider;
 import docking.DisabledComponentLayerFactory;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.InlineComponentTitledPanel;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.checkbox.GCheckBox;
@@ -34,7 +34,9 @@ import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;
 import docking.widgets.list.GListCellRenderer;
 import ghidra.util.HelpLocation;
-import ghidra.util.layout.*;
+import ghidra.util.layout.HorizontalLayout;
+import ghidra.util.layout.PairLayout;
+import ghidra.util.layout.VerticalLayout;
 
 /**
  * Dialog that allows the user to select options related to table filtering. It consists
@@ -94,7 +96,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 
 	private JComponent createMainPanel() {
 		JPanel panel = new JPanel(new VerticalLayout(3));
-		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 		filterStrategyPanel = new FilterStrategyPanel();
 		panel.add(filterStrategyPanel);
@@ -147,7 +149,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 
 		private void createPanel() {
 			setLayout(new PairLayout(2, 2));
-			setBorder(BorderFactory.createTitledBorder("Text Filter Strategy"));
+			setBorder(GhidraBorderFactory.createTitledBorder("Text Filter Strategy"));
 			ButtonGroup buttonGroup = new ButtonGroup();
 			GRadioButton startsWithButton = new GRadioButton("Starts With");
 			GRadioButton containsButton = new GRadioButton("Contains");
@@ -266,7 +268,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 
 		private void createPanel() {
 			this.setLayout(new HorizontalLayout(6));
-			setBorder(BorderFactory.createEmptyBorder(10, 4, 0, 4));
+			setBorder(GhidraBorderFactory.createEmptyBorder(10, 4, 0, 4));
 
 			caseSensitiveCheckbox = new GCheckBox("Case Sensitive");
 			caseSensitiveCheckbox.setToolTipText(
@@ -308,7 +310,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 
 		private void createPanel() {
 			this.setLayout(new HorizontalLayout(6));
-			setBorder(BorderFactory.createEmptyBorder(10, 4, 10, 4));
+			setBorder(GhidraBorderFactory.createEmptyBorder(10, 4, 10, 4));
 
 			invertCheckbox = new GCheckBox("Invert Filter");
 			invertCheckbox.setToolTipText("<html>" +
@@ -340,7 +342,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 		public MultiTermPanel() {
 
 			super(new GCheckBox("Enable Multi-Term Filtering", true),
-				BorderFactory.createEtchedBorder());
+				GhidraBorderFactory.createEtchedBorder());
 
 			enableCheckbox = (JCheckBox) getTitleComponent();
 			enableCheckbox.addActionListener(e -> setOptionsEnabled(enableCheckbox.isSelected()));
@@ -451,7 +453,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 			optionsPanel.add(label);
 			optionsPanel.add(buttonGroupPanel);
 
-			optionsPanel.setBorder(new EmptyBorder(0, 22, 0, 0));
+			optionsPanel.setBorder(GhidraBorderFactory.createEmptyBorder(0, 22, 0, 0));
 
 			outerPanel.add(optionsPanel);
 			add(outerPanel);

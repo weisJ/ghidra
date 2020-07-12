@@ -15,15 +15,14 @@
  */
 package ghidra.framework.main;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.OptionDialog;
@@ -31,17 +30,28 @@ import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import docking.wizard.WizardManager;
 import ghidra.app.util.GenericHelpTopics;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.data.ConvertFileSystem;
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ServerInfo;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.remote.User;
-import ghidra.framework.store.local.*;
-import ghidra.util.*;
+import ghidra.framework.store.local.IndexedLocalFileSystem;
+import ghidra.framework.store.local.IndexedV1LocalFileSystem;
+import ghidra.framework.store.local.LocalFileSystem;
+import ghidra.framework.store.local.MangledLocalFileSystem;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 import resources.ResourceManager;
 
 /**
@@ -92,8 +102,8 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		connectionButton.setContentAreaFilled(false);
 		connectionButton.setSelected(isConnected);
 		connectionButton.setBorder(
-			isConnected ? BorderFactory.createBevelBorder(BevelBorder.LOWERED)
-					: BorderFactory.createBevelBorder(BevelBorder.RAISED));
+			isConnected ? GhidraBorderFactory.createLoweredBevelBorder()
+					: GhidraBorderFactory.createRaisedBevelBorder());
 		updateConnectButtonToolTip();
 		if (isConnected) {
 			try {
@@ -109,7 +119,7 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 	private JPanel buildMainPanel() {
 
 		JPanel mainPanel = new JPanel(new VerticalLayout(20));
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
+		mainPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 5, 10, 5));
 		mainPanel.add(buildInfoPanel());
 		mainPanel.add(buildRepositoryInfoPanel());
 		mainPanel.add(buildButtonPanel());
@@ -122,10 +132,10 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		File dir = project.getProjectLocator().getProjectDir();
 
 		JPanel outerPanel = new JPanel(new BorderLayout());
-		outerPanel.setBorder(BorderFactory.createTitledBorder("Project Location"));
+		outerPanel.setBorder(GhidraBorderFactory.createTitledBorder("Project Location"));
 
 		JPanel infoPanel = new JPanel(new PairLayout(5, 10));
-		infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		infoPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JLabel dirLabel = new GLabel("Directory Location:", SwingConstants.RIGHT);
 		dirLabel.setToolTipText("Directory where your project files reside.");
@@ -224,10 +234,10 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		}
 
 		JPanel outerPanel = new JPanel(new BorderLayout());
-		outerPanel.setBorder(BorderFactory.createTitledBorder("Repository Info"));
+		outerPanel.setBorder(GhidraBorderFactory.createTitledBorder("Repository Info"));
 
 		JPanel panel = new JPanel(new PairLayout(5, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		panel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 10, 5, 10));
 
 		JLabel sLabel = new GDLabel("Server Name:", SwingConstants.RIGHT);
 		panel.add(sLabel);
@@ -257,15 +267,15 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		connectionButton.setContentAreaFilled(false);
 		connectionButton.setSelected(isConnected);
 		connectionButton.setBorder(
-			isConnected ? BorderFactory.createBevelBorder(BevelBorder.LOWERED)
-					: BorderFactory.createBevelBorder(BevelBorder.RAISED));
+			isConnected ? GhidraBorderFactory.createLoweredBevelBorder()
+					: GhidraBorderFactory.createRaisedBevelBorder());
 		updateConnectButtonToolTip();
 		HelpService help = Help.getHelpService();
 		help.registerHelp(connectionButton,
 			new HelpLocation(GenericHelpTopics.FRONT_END, "ConnectToServer"));
 
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-		buttonPanel.setBorder(BorderFactory.createEmptyBorder());
+		buttonPanel.setBorder(GhidraBorderFactory.createEmptyBorder());
 		buttonPanel.add(connectionButton);
 		panel.add(buttonPanel);
 

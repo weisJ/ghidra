@@ -15,19 +15,26 @@
  */
 package ghidra.app.plugin.core.cparser;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.DialogComponentProvider;
+import docking.TaskScheduler;
+import docking.action.DockingAction;
+import docking.action.MenuData;
+import docking.action.ToolBarData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.dialogs.InputDialog;
@@ -148,14 +155,14 @@ class ParseDialog extends DialogComponentProvider {
 		comboBox.addItemListener(comboItemListener);
 
 		JPanel cPanel = new JPanel(new BorderLayout());
-		cPanel.setBorder(BorderFactory.createTitledBorder("Parse Configuration"));
+		cPanel.setBorder(GhidraBorderFactory.createTitledBorder("Parse Configuration"));
 		cPanel.add(comboBox);
 		JPanel comboPanel = new JPanel(new BorderLayout());
-		comboPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		comboPanel.setBorder(GhidraBorderFactory.createEmptyBorder(5, 5, 5, 5));
 		comboPanel.add(cPanel);
 
 		pathPanel = new PathnameTablePanel(null, true, false);
-		pathPanel.setBorder(BorderFactory.createTitledBorder("Source files to parse"));
+		pathPanel.setBorder(GhidraBorderFactory.createTitledBorder("Source files to parse"));
 		String importDir = Preferences.getProperty(LAST_IMPORT_C_DIRECTORY);
 		if (importDir == null) {
 			importDir = Preferences.getProperty(Preferences.LAST_IMPORT_DIRECTORY);
@@ -176,7 +183,7 @@ class ParseDialog extends DialogComponentProvider {
 		tableModel.addTableModelListener(tableListener);
 
 		JPanel optionsPanel = new JPanel(new BorderLayout());
-		optionsPanel.setBorder(BorderFactory.createTitledBorder("Parse Options"));
+		optionsPanel.setBorder(GhidraBorderFactory.createTitledBorder("Parse Options"));
 
 		// create options field
 		// initialize it with windows options

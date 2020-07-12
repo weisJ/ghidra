@@ -20,9 +20,12 @@ import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.util.HelpLocation;
 
 public class SelectColumnsDialog extends DialogComponentProvider {
@@ -62,7 +65,7 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 				new ColumnSelectorStringRenderer());
 		}
 
-		ghidraTable.setBorder(BorderFactory.createEtchedBorder());
+		ghidraTable.setBorder(GhidraBorderFactory.createEtchedBorder());
 		Dimension size = new Dimension(400, 500);
 		setPreferredSize(size.width, size.height);
 		setRememberSize(true);

@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.memory;
 
-import java.awt.Cursor;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,11 +24,14 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GLabel;
 import ghidra.app.plugin.core.misc.RegisterField;
 import ghidra.app.util.AddressInput;
 import ghidra.app.util.HelpTopics;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressOverflowException;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.util.HelpLocation;
@@ -105,7 +108,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 	 */
 	private JPanel create() {
 		JPanel panelOne = new JPanel(new PairLayout(5, 5, 150));
-		panelOne.setBorder(BorderFactory.createTitledBorder("Block to Split"));
+		panelOne.setBorder(GhidraBorderFactory.createTitledBorder("Block to Split"));
 		blockOneNameField = new JTextField(10);
 		blockOneNameField.setName("BlockOneName");
 		blockOneStartField = new JTextField(10);
@@ -127,7 +130,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 		panelOne.add(blockOneLengthField);
 
 		JPanel panelTwo = new JPanel(new PairLayout(5, 5, 150));
-		panelTwo.setBorder(BorderFactory.createTitledBorder("New Block"));
+		panelTwo.setBorder(GhidraBorderFactory.createTitledBorder("New Block"));
 		blockTwoNameField = new JTextField(10);
 		blockTwoNameField.setName("BlockTwoName");
 		blockTwoStart = new AddressInput();

@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -28,11 +27,15 @@ import javax.swing.table.TableCellEditor;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.table.AbstractSortedTableModel;
 import docking.widgets.table.GTable;
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.BooleanSettingsDefinition;
+import ghidra.docking.settings.EnumSettingsDefinition;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.AssertException;
 
@@ -79,7 +82,7 @@ public class SettingsDialog extends DialogComponentProvider {
 
 	private JPanel buildWorkPanel() {
 		JPanel workPanel = new JPanel(new BorderLayout());
-		workPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		workPanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		settingsTableModel = new SettingsTableModel();
 		settingsTable = new GTable(settingsTableModel);

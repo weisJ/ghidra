@@ -15,8 +15,10 @@
  */
 package ghidra.app.util.viewer.util;
 
-import java.awt.Color;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -24,13 +26,16 @@ import javax.swing.border.Border;
 import docking.ActionContext;
 import docking.ComponentProvider;
 import docking.action.DockingAction;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.fieldpanel.FieldPanel;
 import docking.widgets.fieldpanel.internal.FieldPanelCoordinator;
 import ghidra.app.plugin.core.functioncompare.FunctionComparisonPanel;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.address.AddressSetView;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Program;
 import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.classfinder.ExtensionPoint;
 
@@ -54,8 +59,9 @@ public abstract class CodeComparisonPanel<T extends FieldPanelCoordinator> exten
 	protected static final int RIGHT = 1;
 	private static final Color BUBBLE_GUM_PINK_COLOR = new Color(0xff, 0xa5, 0xa5);
 	protected static final Border FOCUS_BORDER =
-		BorderFactory.createMatteBorder(3, 3, 3, 3, BUBBLE_GUM_PINK_COLOR);
-	protected static final Border NON_FOCUS_BORDER = BorderFactory.createEmptyBorder(3, 3, 3, 3);
+		GhidraBorderFactory.createMatteBorder(3, 3, 3, 3, BUBBLE_GUM_PINK_COLOR);
+	protected static final Border NON_FOCUS_BORDER =
+		GhidraBorderFactory.createEmptyBorder(3, 3, 3, 3);
 	protected static final AddressSetView EMPTY_ADDRESS_SET = new AddressSet();
 
 	protected String owner;

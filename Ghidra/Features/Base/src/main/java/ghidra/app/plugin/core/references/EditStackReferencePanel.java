@@ -15,17 +15,22 @@
  */
 package ghidra.app.plugin.core.references;
 
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GLabel;
 import ghidra.app.cmd.function.CallDepthChangeInfo;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.RefTypeFactory;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.StackReference;
 import ghidra.util.layout.PairLayout;
 
 class EditStackReferencePanel extends EditReferencePanel {
@@ -55,7 +60,7 @@ class EditStackReferencePanel extends EditReferencePanel {
 
 	private void buildPanel() {
 		setLayout(new PairLayout(10, 10, 160));
-		setBorder(new EmptyBorder(0, 5, 5, 5));
+		setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 5, 5));
 
 		stackOffset = new JTextField();
 

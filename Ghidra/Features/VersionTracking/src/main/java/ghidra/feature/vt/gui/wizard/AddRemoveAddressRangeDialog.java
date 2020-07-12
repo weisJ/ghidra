@@ -15,11 +15,12 @@
  */
 package ghidra.feature.vt.gui.wizard;
 
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.*;
 
 import docking.DialogComponentProvider;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
 import ghidra.app.util.AddressInput;
 import ghidra.app.util.HelpTopics;
@@ -61,7 +62,7 @@ public class AddRemoveAddressRangeDialog extends DialogComponentProvider {
 
 	private JPanel createAddressRangePanel() {
 		addressRangePanel = new JPanel();
-		addressRangePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
+		addressRangePanel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 0, 0));
 		addressRangePanel.setLayout(new PairLayout(5, 5));
 
 		minLabel = new GDLabel("Minimum:");

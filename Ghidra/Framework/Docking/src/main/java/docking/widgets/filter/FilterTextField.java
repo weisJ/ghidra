@@ -22,6 +22,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import docking.border.GhidraBorderFactory;
 import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
@@ -101,7 +102,7 @@ public class FilterTextField extends JPanel {
 				return ps;
 			}
 		};
-		layeredPane.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+		layeredPane.setBorder(GhidraBorderFactory.createEmptyBorder(2, 2, 2, 2));
 		layeredPane.add(textField, BASE_COMPONENT_LAYER);
 		layeredPane.add(clearLabel, HOVER_COMPONENT_LAYER);
 		clearLabel.setVisible(false);

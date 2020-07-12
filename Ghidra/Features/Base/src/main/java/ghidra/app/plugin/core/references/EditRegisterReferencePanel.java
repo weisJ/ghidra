@@ -15,17 +15,24 @@
  */
 package ghidra.app.plugin.core.references;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Set;
+import java.util.TreeSet;
 
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.combobox.GhidraComboBox;
 import docking.widgets.label.GLabel;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.RefTypeFactory;
+import ghidra.program.model.symbol.Reference;
 import ghidra.util.layout.PairLayout;
 
 class EditRegisterReferencePanel extends EditReferencePanel {
@@ -53,7 +60,7 @@ class EditRegisterReferencePanel extends EditReferencePanel {
 
 	private void buildPanel() {
 		setLayout(new PairLayout(10, 10, 160));
-		setBorder(new EmptyBorder(0, 5, 5, 5));
+		setBorder(GhidraBorderFactory.createEmptyBorder(0, 5, 5, 5));
 
 		regList = new GhidraComboBox<>();
 

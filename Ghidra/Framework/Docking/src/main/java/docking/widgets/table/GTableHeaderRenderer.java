@@ -21,11 +21,17 @@ import java.awt.geom.Rectangle2D;
 import java.text.AttributedString;
 
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
+import docking.border.GhidraBorderFactory;
 import docking.widgets.label.GDLabel;
-import resources.*;
+import resources.Icons;
+import resources.MultiIcon;
+import resources.ResourceManager;
 import resources.icons.EmptyIcon;
 import resources.icons.TranslateIcon;
 
@@ -188,10 +194,12 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 	private void setOuterBorder(CustomPaddingBorder border, int column) {
 		if (paintAquaHeaders()) {
 			if (column == 0) {
-				customBorder.setOuterBorder(new NoSidesLineBorder(Color.GRAY));
+				customBorder.setOuterBorder(
+					GhidraBorderFactory.createMatteBorder(1, 0, 1, 0, Color.GRAY));
 				return;
 			}
-			customBorder.setOuterBorder(new NoRightSideLineBorder(Color.GRAY));
+			customBorder
+					.setOuterBorder(GhidraBorderFactory.createMatteBorder(1, 1, 1, 0, Color.GRAY));
 		}
 		else {
 			customBorder.setOuterBorder(UIManager.getBorder("TableHeader.cellBorder"));
@@ -318,9 +326,9 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 
 	private Border createOSSpecificBorder() {
 		if (paintAquaHeaders()) {
-			return new EmptyBorder(1, 2, 1, 2);
+			return GhidraBorderFactory.createEmptyBorder(1, 2, 1, 2);
 		}
-		return new EmptyBorder(0, 2, 0, 2);
+		return GhidraBorderFactory.createEmptyBorder(0, 2, 0, 2);
 	}
 
 //==================================================================================================
@@ -334,32 +342,6 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 
 		void setOuterBorder(Border border) {
 			outsideBorder = border;
-		}
-	}
-
-	private class NoRightSideLineBorder extends LineBorder {
-		NoRightSideLineBorder(Color color) {
-			super(color);
-		}
-
-		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-			// take advantage of our clipping by telling our parent to paint at a point that will
-			// be clipped
-			super.paintBorder(c, g, x, y, width + 1, height);
-		}
-	}
-
-	private class NoSidesLineBorder extends LineBorder {
-		NoSidesLineBorder(Color color) {
-			super(color);
-		}
-
-		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-			// take advantage of our clipping by telling our parent to paint at a point that will
-			// be clipped
-			super.paintBorder(c, g, x - 1, y, width + 5, height);
 		}
 	}
 

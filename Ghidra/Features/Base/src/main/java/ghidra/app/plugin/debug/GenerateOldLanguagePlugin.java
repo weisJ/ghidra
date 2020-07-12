@@ -15,16 +15,17 @@
  */
 package ghidra.app.plugin.debug;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -34,6 +35,7 @@ import docking.ActionContext;
 import docking.DialogComponentProvider;
 import docking.action.DockingAction;
 import docking.action.MenuData;
+import docking.border.GhidraBorderFactory;
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
 import ghidra.app.DeveloperPluginPackage;
@@ -41,12 +43,17 @@ import ghidra.app.plugin.PluginCategoryNames;
 import ghidra.app.util.bean.SelectLanguagePanel;
 import ghidra.framework.Application;
 import ghidra.framework.main.FrontEndable;
-import ghidra.framework.plugintool.*;
+import ghidra.framework.plugintool.Plugin;
+import ghidra.framework.plugintool.PluginInfo;
+import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.PluginStatus;
 import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.lang.*;
 import ghidra.program.model.listing.IncompatibleLanguageException;
-import ghidra.program.util.*;
+import ghidra.program.util.DefaultLanguageService;
+import ghidra.program.util.LanguageTranslatorAdapter;
+import ghidra.program.util.LanguageTranslatorFactory;
+import ghidra.program.util.OldLanguageFactory;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import ghidra.util.filechooser.ExtensionFileFilter;
@@ -145,7 +152,7 @@ public class GenerateOldLanguagePlugin extends Plugin implements FrontEndable {
 			selectLangPanel.setShowVersion(true);
 
 			panel = new JPanel(new BorderLayout());
-			panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+			panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 			panel.add(selectLangPanel, BorderLayout.CENTER);
 			addWorkPanel(panel);
 
@@ -253,7 +260,7 @@ public class GenerateOldLanguagePlugin extends Plugin implements FrontEndable {
 			// TODO: add translator options
 
 			panel = new JPanel(new BorderLayout());
-			panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+			panel.setBorder(GhidraBorderFactory.createEmptyBorder(10, 10, 10, 10));
 			panel.add(selectLangPanel, BorderLayout.CENTER);
 			addWorkPanel(panel);
 

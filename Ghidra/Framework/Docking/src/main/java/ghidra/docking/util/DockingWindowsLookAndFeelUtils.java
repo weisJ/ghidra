@@ -15,15 +15,22 @@
  */
 package ghidra.docking.util;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.util.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.plaf.ComponentUI;
 
+import com.github.weisj.darklaf.DarkLaf;
+
+import docking.border.DarklafBorderProvider;
+import docking.border.DefaultBorderProvider;
+import docking.border.GhidraBorderFactory;
 import ghidra.docking.util.painting.GRepaintManager;
 import ghidra.framework.OperatingSystem;
 import ghidra.framework.Platform;
@@ -130,6 +137,7 @@ public class DockingWindowsLookAndFeelUtils {
 				installGlobalFontSizeOverride();
 				installCustomLookAndFeelActions();
 				installPopupMenuSettingsOverride();
+				installBorderProvider();
 			}
 			catch (Exception exc) {
 				Msg.error(DockingWindowsLookAndFeelUtils.class,
@@ -227,6 +235,17 @@ public class DockingWindowsLookAndFeelUtils {
 		// Java 1.6 UI consumes MousePressed event when dismissing popup menu
 		// which prevents application components from getting this event.
 		UIManager.put("PopupMenu.consumeEventOnClose", Boolean.FALSE);
+	}
+
+	private static void installBorderProvider() {
+		// The default borders look out of place when using Darklaf.
+		LookAndFeel lookAndFeel = UIManager.getLookAndFeel();
+		if (lookAndFeel instanceof DarkLaf) {
+			GhidraBorderFactory.setBorderProvider(new DarklafBorderProvider());
+		}
+		else {
+			GhidraBorderFactory.setBorderProvider(new DefaultBorderProvider());
+		}
 	}
 
 	private static void installGlobalFontSizeOverride() {
